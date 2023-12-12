@@ -10,7 +10,7 @@ Niko Suoniemi <niko@tamperelainen.org>
 
 ## App URL
 
-TBD
+Alpha version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Technology
 
@@ -20,7 +20,7 @@ TBD
 
 ## Releases
 
-TBD
+* v0.1.0          Initial version
 
 ## Licence
 
