@@ -19,6 +19,7 @@ export function Route(api) {
         }
         let json = await request.http(api.uri, 'POST', query, api.key)
         if (json) {
+            document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             this.tree.innerHTML =
                 `<h1>${rid} ${json.data.route.longName}</h1>
                 <table></table>`

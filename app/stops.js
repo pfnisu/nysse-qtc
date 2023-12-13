@@ -27,6 +27,7 @@ export function Stops(api) {
             }
             let json = await request.http(api.uri, 'POST', query, api.key)
             if (json) {
+                document.title = `${sid} ${json.data.stop.name} | ${document.title}`
                 this.tree.innerHTML =
                     `<h1>${sid} ${json.data.stop.name}</h1>
                     <table></table>`
