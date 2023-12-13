@@ -23,13 +23,12 @@ nav a {
     color:#61dafb;
     text-align:center;
     text-decoration:none;
-    cursor:pointer;
 }
 nav a:hover {
     background:#61dafb;
     color:#282c34;
 }
-nav a:active, nav a:hover.active,.active {
+nav a:active,nav a:hover.active,.active {
     background:#fff;
     color:#282c34;
 }
@@ -47,18 +46,38 @@ h1 {
     border-bottom:1px solid #484c54;
     font-size:1.3em;
 }
+main a {
+    border-radius:6px;
+    padding:4px;
+    color:#484c54;
+}
+main a:active,main a:hover {
+    background:#61dafb;
+    color:#282c34;
+}
 th {
-    text-align:right;
     min-width:2em;
+    border-radius:6px;
+    padding:4px;
+    background:#484c54;
+    color:#61dafb;
+    text-align:right;
 }
 input,button {
-    margin-right:4px;
     border:1px solid #484c54;
     border-radius:6px;
-    padding:8px 4px;
+    padding:8px;
     font-size:1em;
 }
+input {
+    width:100%;
+    border-right:0;
+    padding-right:4em;
+}
 button {
+    width:4em;
+    margin-left:-4em;
+    border-radius:0 6px 6px 0;
     background:#f6f5f4;
 }
 input:focus,button:hover {
@@ -67,11 +86,6 @@ input:focus,button:hover {
 }
 button:active {
     box-shadow:inset 1px 1px 1px #484c54;
-}
-canvas {
-    width:100%;
-    border-radius:6px;
-    background:#f6f5f4;
 }
 @media (min-width:640px) {
     nav a {
@@ -82,6 +96,9 @@ canvas {
         width:80%;
         max-width:960px;
         margin:0 auto 8px;
+    }
+    input {
+        width:auto;
     }
 }
 @media (max-width:640px) {
