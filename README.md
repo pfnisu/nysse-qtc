@@ -14,12 +14,14 @@ Alpha version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Technology
 
-* Frontend
-    * Vanilla Web Standards
-    * Bundled with esbuild
+* Serverless architecture
+* Vanilla Web Standards
+* Bundled with esbuild
+* GraphQL for API communication
 
 ## Releases
 
+* v0.2.0          Search functionality
 * v0.1.0          Initial version
 
 ## Licence
