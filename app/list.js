@@ -27,7 +27,7 @@ export function List(listen) {
             for (const route of json.data.routes)
                 content.innerHTML += 
                     `<tr>
-                        <th>${route.shortName}</th>
+                        <th class="route">${route.shortName}</th>
                         <td>
                             <a href="#p=0;route=${route.shortName}">
                                 ${route.longName}

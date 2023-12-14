@@ -48,22 +48,25 @@ h1 {
 }
 main a {
     border-radius:6px;
-    padding:4px;
-    color:#484c54;
+    padding:8px;
+    color:#282c34;
 }
 main a:active,main a:hover {
     background:#61dafb;
-    color:#282c34;
 }
-th {
+th.route,th.stop {
     min-width:2em;
     border-radius:6px;
-    padding:4px;
-    background:#484c54;
-    color:#61dafb;
+    padding:8px;
+    background:#61dafb;
+    color:#282c34;
     text-align:center;
 }
-input,button {
+th.stop {
+    background:#484c54;
+    color:#61dafb;
+}
+input,button,#home {
     border:1px solid #484c54;
     border-radius:6px;
     padding:8px;
@@ -74,17 +77,23 @@ input {
     border-right:0;
     padding-right:4em;
 }
-button {
+button,#home {
+    background:#f6f5f4;
+}
+button#search {
     width:4em;
     margin-left:-4em;
     border-radius:0 6px 6px 0;
-    background:#f6f5f4;
 }
-input:focus,button:hover {
+#home {
+    float:right;
+    text-decoration:none;
+}
+input:focus,button:hover,#home:hover {
     outline:2px solid #61dafb;
     box-shadow:0 0 8px #61dafb;
 }
-button:active {
+button:active,#home:active {
     box-shadow:inset 1px 1px 1px #484c54;
 }
 @media (min-width:640px) {

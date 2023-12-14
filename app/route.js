@@ -29,7 +29,7 @@ export function Route() {
                 const sid = stop.gtfsId.split(':')[1]
                 content.innerHTML += 
                     `<tr>
-                        <td>${sid}</td>
+                        <th class="stop">${sid}</th>
                         <td><a href="#p=1;stop=${sid}">${stop.name}</a></td>
                     </tr>`
             }

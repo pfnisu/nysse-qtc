@@ -47,7 +47,7 @@ export function Stops() {
                     content.innerHTML +=
                         `<tr>
                             <td>${time.toUTCString().split(' ')[4]}</td>
-                            <th>${stop.trip.route.shortName}</th>
+                            <th class="route">${stop.trip.route.shortName}</th>
                             <td>
                                 <a href="#p=0;route=${stop.trip.route.shortName}">
                                     ${stop.trip.route.longName}
@@ -61,13 +61,13 @@ export function Stops() {
             this.tree.innerHTML =
                 `<h1>Etsi pysäkkejä nimellä tai numerolla</h1>
                 <form>
-                    <input type="text"/><button>Etsi</button>
+                    <input type="text"/><button id="search">Etsi</button>
                 </form>
                 <table></table>`
             const content = this.tree.querySelector('table')
             const search = this.tree.querySelector('input')
             search.focus()
-            this.tree.querySelector('button').addEventListener('click', async (ev) => {
+            this.tree.querySelector('#search').addEventListener('click', async (ev) => {
                 ev.preventDefault()
                 content.innerHTML = ''
                 const query = {
@@ -84,7 +84,7 @@ export function Stops() {
                         const sid = stop.gtfsId.split(':')[1]
                         content.innerHTML +=
                             `<tr>
-                                <td>${sid}</td>
+                                <th class="stop">${sid}</th>
                                 <td><a href="#p=1;stop=${sid}">${stop.name}</a></td>
                             </tr>`
                     }
