@@ -44,9 +44,13 @@ export function Stops(title) {
                 const content = this.tree.querySelector('table')
                 for (const stop of json.data.stop.stoptimesWithoutPatterns) {
                     const time = new Date(stop.scheduledArrival * 1000)
+                    const diff = Math.round((stop.realtimeArrival - stop.scheduledArrival) / 60)
                     content.innerHTML +=
                         `<tr>
-                            <td>${time.toUTCString().split(' ')[4]}</td>
+                            <td>
+                                ${time.toUTCString().substring(17, 22)}
+                                ${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}
+                            </td>
                             <th class="route">${stop.trip.route.shortName}</th>
                             <td>
                                 <a href="#p=0;route=${stop.trip.route.shortName}">
