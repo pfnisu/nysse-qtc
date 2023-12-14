@@ -8,6 +8,7 @@ html,body {
     font-size:calc(10px + 0.5vw);
 }
 nav {
+    position:relative;
     display:flex;
     flex-direction:row;
     justify-content:center;
@@ -29,10 +30,13 @@ nav a:hover {
     color:#282c34;
 }
 nav a:active,nav a:hover.active,.active {
+    position:relative;
+    z-index:1;
     background:#fff;
     color:#282c34;
 }
 main {
+    position:relative;
     margin:0 8px 8px;
     box-shadow:1px 1px 4px #484c54;
     border-radius:0 0 6px 6px;
@@ -86,7 +90,8 @@ button#search {
     border-radius:0 6px 6px 0;
 }
 #home {
-    float:right;
+    position:absolute;
+    right:1em;
     text-decoration:none;
 }
 input:focus,button:hover,#home:hover {

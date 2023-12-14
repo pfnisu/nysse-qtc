@@ -30,7 +30,7 @@ export function Stops(title) {
             if (json) {
                 document.title = `${sid} ${json.data.stop.name} | ${this.title}${title}`
                 const hid = request.cookie('home')
-                const done = '&#10003; Asetettu kotipysäkiksi'
+                const done = '&#10003; Kotipysäkki'
                 this.tree.innerHTML =
                     `<h1>${sid} ${json.data.stop.name}</h1>
                     <button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button>
