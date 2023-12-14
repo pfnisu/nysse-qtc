@@ -2,7 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
-export function Stops() {
+export function Stops(title) {
     ui.init(this, 'Pysäkit')
 
     this.compose = async () => {
@@ -28,7 +28,7 @@ export function Stops() {
             }
             let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
-                document.title = `${sid} ${json.data.stop.name} | ${document.title}`
+                document.title = `${sid} ${json.data.stop.name} | ${this.title}${title}`
                 const hid = request.cookie('home')
                 const done = '&#10003; Asetettu kotipysäkiksi'
                 this.tree.innerHTML =
