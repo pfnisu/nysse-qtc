@@ -1,7 +1,8 @@
 import ui from './lib/ui.js'
 import request from './lib/request.js'
+import env from '../.env.js'
 
-export function Stops(api) {
+export function Stops() {
     ui.init(this, 'Pysäkit')
 
     this.compose = async () => {
@@ -25,7 +26,7 @@ export function Stops(api) {
                     }
                 }`
             }
-            let json = await request.http(api.uri, 'POST', query, api.key)
+            let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
                 document.title = `${sid} ${json.data.stop.name} | ${document.title}`
                 this.tree.innerHTML =
@@ -66,7 +67,7 @@ export function Stops(api) {
                         }
                     }`
                 }
-                let json = await request.http(api.uri, 'POST', query, api.key)
+                let json = await request.http(env.uri, 'POST', query, env.key)
                 if (json) {
                     for (const stop of json.data.stops) {
                         const sid = stop.gtfsId.split(':')[1]

@@ -1,7 +1,8 @@
 import ui from './lib/ui.js'
 import request from './lib/request.js'
+import env from '../.env.js'
 
-export function Route(api) {
+export function Route() {
     ui.init(this, 'route')
 
     this.compose = async () => {
@@ -17,7 +18,7 @@ export function Route(api) {
                 }
             }`
         }
-        let json = await request.http(api.uri, 'POST', query, api.key)
+        let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
             document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             this.tree.innerHTML =
