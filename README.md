@@ -2,7 +2,7 @@
 
 ## App description
 
-Fast UI for checking stop timetables and arrival estimates of Tampere public transport routes.
+Fast UI for checking stop timetables and arrival estimates of Tampere public transport routes. Uses public data from <https://digitransit.fi/> API.
 
 ## Author
 
@@ -21,6 +21,7 @@ Alpha version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
+* v0.3.0          Home stop feature, UI improvements
 * v0.2.0          Search functionality
 * v0.1.0          Initial version
 
