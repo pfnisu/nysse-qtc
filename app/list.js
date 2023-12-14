@@ -2,7 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
-export function List() {
+export function List(listen) {
     ui.init(this, 'list', false)
 
     this.compose = async () => {
@@ -15,8 +15,11 @@ export function List() {
             }`
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
+        const hid = request.cookie('home')
+        const home = hid ? `<a id="home" href="#p=1;stop=${hid}">Näytä kotipysäkki</a>` : ''
         this.tree.innerHTML =
             `<h1>Tampereen seudun joukkoliikenteen linjat</h1>
+            ${home}
             <table></table>`
         const content = this.tree.querySelector('table')
         if (json) {
@@ -32,4 +35,6 @@ export function List() {
                         </td>`
         } else content.innerHTML = '<td>Yhteysvirhe...</td>'
     }
+
+    listen(() => this.compose())
 }

@@ -29,20 +29,31 @@ export function Stops() {
             let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
                 document.title = `${sid} ${json.data.stop.name} | ${document.title}`
+                const hid = request.cookie('home')
+                const done = '&#10003; Asetettu kotipysäkiksi'
                 this.tree.innerHTML =
                     `<h1>${sid} ${json.data.stop.name}</h1>
+                    <button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button>
                     <table></table>`
+                this.tree.querySelector('#home').addEventListener('click', async (ev) => {
+                    ev.preventDefault()
+                    request.cookie('home', sid)
+                    ev.target.innerHTML = done
+                    this.notify()
+                })
                 const content = this.tree.querySelector('table')
                 for (const stop of json.data.stop.stoptimesWithoutPatterns) {
                     const time = new Date(stop.scheduledArrival * 1000)
                     content.innerHTML +=
-                        `<tr><td>${time.toUTCString().split(' ')[4]}</td>
-                        <th>${stop.trip.route.shortName}</th>
-                        <td>
-                            <a href="#p=0;route=${stop.trip.route.shortName}">
-                                ${stop.trip.route.longName}
-                            </a>
-                        </td>`
+                        `<tr>
+                            <td>${time.toUTCString().split(' ')[4]}</td>
+                            <th>${stop.trip.route.shortName}</th>
+                            <td>
+                                <a href="#p=0;route=${stop.trip.route.shortName}">
+                                    ${stop.trip.route.longName}
+                                </a>
+                            </td>
+                        </tr>`
                 }
             } else this.tree.innerHTML = '<h1>Yhteysvirhe...</h1>'
         } else {
