@@ -16,10 +16,10 @@ export function Stops(title) {
                         stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 20) {
                             scheduledArrival
                             realtimeArrival
+                            headsign
                             trip {
                                 route {
                                     shortName
-                                    longName
                                 }
                             }
                         }
@@ -54,7 +54,7 @@ export function Stops(title) {
                             <th class="route">${stop.trip.route.shortName}</th>
                             <td>
                                 <a href="#p=0;route=${stop.trip.route.shortName}">
-                                    ${stop.trip.route.longName}
+                                    ${stop.headsign}
                                 </a>
                             </td>
                         </tr>`
