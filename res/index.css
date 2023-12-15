@@ -58,13 +58,16 @@ main a {
 main a:active,main a:hover {
     background:#61dafb;
 }
-th.route,th.stop {
+th.route,th.stop,td.diff {
     min-width:2em;
     border-radius:6px;
     padding:8px;
+    background:#f6f5f4;
+    text-align:center;
+}
+th.route {
     background:#61dafb;
     color:#282c34;
-    text-align:center;
 }
 th.stop {
     background:#484c54;
