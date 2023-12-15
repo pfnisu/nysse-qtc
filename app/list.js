@@ -32,7 +32,8 @@ export function List(listen) {
                             <a href="#p=0;route=${route.shortName}">
                                 ${route.longName}
                             </a>
-                        </td>`
+                        </td>
+                    </tr>`
         } else content.innerHTML = '<td>Yhteysvirhe...</td>'
     }
 
