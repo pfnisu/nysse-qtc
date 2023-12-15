@@ -8,6 +8,7 @@ export function Stops(title) {
     this.compose = async () => {
         const sid = request.hash('stop')
         if (sid) {
+            // Compose stop UI every 30 sec
             this.interval = 30000
             const query = {
                 'query': `{ stop(id: "tampere:${sid}") {` +
@@ -26,6 +27,7 @@ export function Stops(title) {
                     ev.preventDefault()
                     request.cookie('home', sid)
                     ev.target.innerHTML = done
+                    // Notify listeners when home stop is set
                     this.notify()
                 })
                 const content = this.tree.querySelector('table')
@@ -41,6 +43,7 @@ export function Stops(title) {
                 }
             } else this.tree.innerHTML = '<h1>Yhteysvirhe...</h1>'
         } else {
+            // Compose search UI only on demand
             this.interval = 0
             this.tree.innerHTML =
                 '<h1>Etsi pysäkkejä nimellä tai numerolla</h1>' +

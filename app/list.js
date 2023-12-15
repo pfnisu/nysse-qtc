@@ -24,5 +24,6 @@ export function List(listen) {
         } else content.innerHTML = '<td>Yhteysvirhe...</td>'
     }
 
+    // Listen for home stop change -notification from Stops
     listen(() => this.compose())
 }
