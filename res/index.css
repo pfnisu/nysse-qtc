@@ -50,7 +50,7 @@ h1 {
     border-bottom:1px solid #484c54;
     font-size:1.3em;
 }
-main a {
+main a,th {
     border-radius:6px;
     padding:8px;
     color:#282c34;
@@ -58,14 +58,12 @@ main a {
 main a:active,main a:hover {
     background:#61dafb;
 }
-th.route,th.stop,td.diff {
+th.route,th.stop,th.diff {
     min-width:2em;
-    border-radius:6px;
-    padding:8px;
     background:#f6f5f4;
     text-align:center;
 }
-th.route {
+th.route,th.zone {
     background:#61dafb;
     color:#282c34;
 }
