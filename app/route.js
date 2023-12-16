@@ -8,7 +8,7 @@ export function Route() {
     this.compose = async () => {
         const rid = request.hash(this.title)
         const query = {
-            'query': `{ route(id: "tampere:${rid}") { longName stops { gtfsId name } } }`
+            'query': `{ route(id: "tampere:${rid}") { longName stops { gtfsId name zoneId } } }`
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
@@ -19,7 +19,7 @@ export function Route() {
             for (const stop of json.data.route.stops) {
                 const sid = stop.gtfsId.split(':')[1]
                 content.innerHTML += 
-                    `<tr><th class="stop">${sid}</th>` +
+                    `<tr><th class="zone">${stop.zoneId}</th><th class="stop">${sid}</th>` +
                         `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
             }
         } else this.tree.innerHTML = '<h1>Yhteysvirhe...</h1>'
