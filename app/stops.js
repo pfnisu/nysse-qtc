@@ -59,6 +59,10 @@ export function Stops(title) {
                 }
                 let json = await request.http(env.uri, 'POST', query, env.key)
                 if (json) {
+                    // Sort results 1st by zone, 2nd by stop
+                    json.data.stops.sort((a, b) =>
+                        a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
+                            a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
                     for (const stop of json.data.stops) {
                         const sid = stop.gtfsId.split(':')[1]
                         content.innerHTML +=
