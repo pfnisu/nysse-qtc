@@ -55,21 +55,32 @@ main a,th {
     padding:8px;
     color:#282c34;
 }
-main a:active,main a:hover {
-    background:#61dafb;
+main a:active,main a:hover,span.route {
+    background:#cff3fd;
 }
-th.route,th.stop,th.diff {
-    min-width:2em;
+tbody[id] tr:nth-child(odd) th,tbody[id] tr:nth-child(odd) td,th.diff {
+    border-radius:6px;
     background:#f6f5f4;
+}
+.route,th.stop,th.diff {
+    min-width:3em;
     text-align:center;
 }
-th.route,th.zone {
+.route,th.zone {
+    border-radius:6px;
     background:#61dafb;
     color:#282c34;
 }
 th.stop {
     background:#484c54;
     color:#61dafb;
+}
+td,a {
+    box-decoration-break:clone;
+}
+td p,span.route {
+    display:inline-block;
+    margin:1px;
 }
 input,button,#home {
     border:1px solid #484c54;
