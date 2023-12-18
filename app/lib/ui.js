@@ -27,7 +27,7 @@ export default {
         }
         for (const v of views) v.root = root
         // Change view when hash changes
-        window.addEventListener('hashchange', setView)
+        if (views.length > 1) window.addEventListener('hashchange', setView)
         setView()
     },
 
