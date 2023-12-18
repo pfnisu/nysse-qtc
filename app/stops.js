@@ -62,9 +62,9 @@ export function Stops(title) {
                 })
 
                 this.tree.innerHTML +=
-                    '<h1>Pysäkkiaikataulu ma-pe</h1><table><tbody id="mon"></tbody></table>' +
-                    '<h1>Pysäkkiaikataulu la</h1><table><tbody id="sat"></tbody></table>' +
-                    '<h1>Pysäkkiaikataulu su</h1><table><tbody id="sun"></tbody></table>'
+                    '<h1>Maanantai-perjantai</h1><table><tbody id="mon"></tbody></table>' +
+                    '<h1>Lauantai</h1><table><tbody id="sat"></tbody></table>' +
+                    '<h1>Sunnuntai</h1><table><tbody id="sun"></tbody></table>'
                 timetable(json.data.stop.mon, this.tree.querySelector('#mon'))
                 timetable(json.data.stop.sat, this.tree.querySelector('#sat'))
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun'))
