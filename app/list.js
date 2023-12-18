@@ -13,8 +13,8 @@ export function List(listen) {
         const hid = request.cookie('home')
         const home = hid ? `<a id="home" href="#p=1;stop=${hid}">Näytä kotipysäkki</a>` : ''
         this.tree.innerHTML =
-            `<h1>Tampereen seudun joukkoliikenteen linjat</h1>${home}<table></table>`
-        const content = this.tree.querySelector('table')
+            `<h2>Tampereen seudun joukkoliikenteen linjat</h2>${home}<table><tbody></tbody></table>`
+        const content = this.tree.querySelector('tbody')
         if (json) {
             json.data.routes.sort((a, b) => parseInt(a.shortName) - parseInt(b.shortName))
             for (const route of json.data.routes)

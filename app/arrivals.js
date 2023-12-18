@@ -30,6 +30,6 @@ export function Arrivals() {
                         `<td><a href="#p=0;route=${stop.trip.route.shortName}">` +
                             `${stop.headsign}</a></td></tr>`
             }
-        } else this.tree.innerHTML = '<h1>Yhteysvirhe...</h1>'
+        } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
     }
 }

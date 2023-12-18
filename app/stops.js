@@ -51,7 +51,7 @@ export function Stops(title) {
                 const hid = request.cookie('home')
                 const done = '&#10003; Kotipysäkki'
                 this.tree.innerHTML =
-                    `<h1>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h1>` +
+                    `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
                     `<button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button><div></div>`
                 this.tree.querySelector('#home').addEventListener('click', async (ev) => {
                     ev.preventDefault()
@@ -62,21 +62,21 @@ export function Stops(title) {
                 })
 
                 this.tree.innerHTML +=
-                    '<h1>Maanantai-perjantai</h1><table><tbody id="mon"></tbody></table>' +
-                    '<h1>Lauantai</h1><table><tbody id="sat"></tbody></table>' +
-                    '<h1>Sunnuntai</h1><table><tbody id="sun"></tbody></table>'
+                    '<h2>Maanantai-perjantai</h2><table><tbody id="mon"></tbody></table>' +
+                    '<h2>Lauantai</h2><table><tbody id="sat"></tbody></table>' +
+                    '<h2>Sunnuntai</h2><table><tbody id="sun"></tbody></table>'
                 timetable(json.data.stop.mon, this.tree.querySelector('#mon'))
                 timetable(json.data.stop.sat, this.tree.querySelector('#sat'))
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun'))
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('div'))
-            } else this.tree.innerHTML = '<h1>Yhteysvirhe...</h1>'
+            } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
         } else {
             this.tree.innerHTML =
-                '<h1>Etsi pysäkkejä nimellä tai numerolla</h1>' +
-                '<form><input type="text"/><button id="search">Etsi</button></form><table></table>'
-            const content = this.tree.querySelector('table')
+                '<h2>Etsi pysäkkejä nimellä tai numerolla</h2>' +
+                '<form><input type="text"/><button id="search">Etsi</button></form><table><tbody></tbody></table>'
+            const content = this.tree.querySelector('tbody')
             const search = this.tree.querySelector('input')
             search.focus()
             this.tree.querySelector('#search').addEventListener('click', async (ev) => {

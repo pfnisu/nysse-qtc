@@ -14,14 +14,14 @@ export function Route() {
         if (json) {
             document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             this.tree.innerHTML =
-                `<h1>${rid} ${json.data.route.longName}</h1><table></table>`
-            const content = this.tree.querySelector('table')
+                `<h2>${rid} ${json.data.route.longName}</h2><table><tbody></tbody></table>`
+            const content = this.tree.querySelector('tbody')
             for (const stop of json.data.route.stops) {
                 const sid = stop.gtfsId.split(':')[1]
                 content.innerHTML += 
                     `<tr><th class="zone">${stop.zoneId}</th><th class="stop">${sid}</th>` +
                         `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
             }
-        } else this.tree.innerHTML = '<h1>Yhteysvirhe...</h1>'
+        } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
     }
 }
