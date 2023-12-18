@@ -13,7 +13,7 @@ export function Arrivals() {
         if (!sid) return
         const query = {
             'query': `{ stop(id: "tampere:${sid}") {` +
-                'name zoneId stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10) {' +
+                'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10) {' +
                     'scheduledArrival realtimeArrival headsign trip { route { shortName } } } } }'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
