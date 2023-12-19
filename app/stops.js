@@ -7,13 +7,13 @@ export function Stops(title) {
     ui.init(this, 'Pysäkit')
     const arrivals = new Arrivals()
 
-    // Format requested day of week (Sunday = 0) as YYYYMMDD
-    const day = (index) => {
+    // Format a day offset (Sunday = 0, 7, ...) as YYYYMMDD
+    const day = (offset) => {
         let dt = new Date()
-        dt.setUTCDate(dt.getUTCDate() + (index - dt.getUTCDay()))
-        return `${dt.toJSON().split('T')[0].replaceAll('-', '')}`
+        dt.setUTCDate(dt.getUTCDate() + (offset - dt.getUTCDay()))
+        return dt.toJSON().split('T')[0].replaceAll('-', '')
     }
-    const days = { mon: day(1), sat: day(6), sun: day(7) }
+    const dates = { mon: day(1), sat: day(6), sun: day(7) }
 
     // Generate sorted timetable from route timestamps
     const timetable = (data, root) => {
@@ -45,11 +45,11 @@ export function Stops(title) {
             // Using aliases to get everything in one query
             const query = {
                 'query': `{ stop(id: "tampere:${sid}") { name zoneId ` +
-                    `mon: stoptimesForServiceDate(date: "${days.mon}") {` +
+                    `mon: stoptimesForServiceDate(date: "${dates.mon}") {` +
                         'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
-                    `sat: stoptimesForServiceDate(date: "${days.sat}") {` +
+                    `sat: stoptimesForServiceDate(date: "${dates.sat}") {` +
                         'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
-                    `sun: stoptimesForServiceDate(date: "${days.sun}") {` +
+                    `sun: stoptimesForServiceDate(date: "${dates.sun}") {` +
                         'pattern { route { shortName } } stoptimes { scheduledArrival } } } }'
             }
             let json = await request.http(env.uri, 'POST', query, env.key)
