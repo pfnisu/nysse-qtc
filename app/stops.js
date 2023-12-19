@@ -59,7 +59,10 @@ export function Stops(title) {
                 const done = '&#10003; Kotipysäkki'
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
-                    `<button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button><div></div>`
+                    `<button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button><div></div>` +
+                    '<h2>Maanantai-perjantai</h2><table id="mon"><tbody></tbody></table>' +
+                    '<h2>Lauantai</h2><table id="sat"><tbody></tbody></table>' +
+                    '<h2>Sunnuntai</h2><table id="sun"><tbody></tbody></table>'
                 this.tree.querySelector('#home').addEventListener('click', async (ev) => {
                     ev.preventDefault()
                     request.cookie('home', sid)
@@ -68,10 +71,6 @@ export function Stops(title) {
                     this.notify()
                 })
 
-                this.tree.innerHTML +=
-                    '<h2>Maanantai-perjantai</h2><table id="mon"><tbody></tbody></table>' +
-                    '<h2>Lauantai</h2><table id="sat"><tbody></tbody></table>' +
-                    '<h2>Sunnuntai</h2><table id="sun"><tbody></tbody></table>'
                 timetable(json.data.stop.mon, this.tree.querySelector('#mon>tbody'))
                 timetable(json.data.stop.sat, this.tree.querySelector('#sat>tbody'))
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
