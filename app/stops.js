@@ -69,12 +69,12 @@ export function Stops(title) {
                 })
 
                 this.tree.innerHTML +=
-                    '<h2>Maanantai-perjantai</h2><table><tbody id="mon"></tbody></table>' +
-                    '<h2>Lauantai</h2><table><tbody id="sat"></tbody></table>' +
-                    '<h2>Sunnuntai</h2><table><tbody id="sun"></tbody></table>'
-                timetable(json.data.stop.mon, this.tree.querySelector('#mon'))
-                timetable(json.data.stop.sat, this.tree.querySelector('#sat'))
-                timetable(json.data.stop.sun, this.tree.querySelector('#sun'))
+                    '<h2>Maanantai-perjantai</h2><table id="mon"><tbody></tbody></table>' +
+                    '<h2>Lauantai</h2><table id="sat"><tbody></tbody></table>' +
+                    '<h2>Sunnuntai</h2><table id="sun"><tbody></tbody></table>'
+                timetable(json.data.stop.mon, this.tree.querySelector('#mon>tbody'))
+                timetable(json.data.stop.sat, this.tree.querySelector('#sat>tbody'))
+                timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('div'))

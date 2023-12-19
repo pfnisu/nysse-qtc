@@ -58,7 +58,14 @@ main a,th {
 main a:active,main a:hover,span.route {
     background:#cff3fd;
 }
-tbody[id] tr:nth-child(odd) th,tbody[id] tr:nth-child(odd) td,th.diff {
+table[id] {
+    table-layout:fixed;
+    width:100%;
+}
+table[id] th {
+    width:min-content;
+}
+table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff {
     border-radius:6px;
     background:#f6f5f4;
 }

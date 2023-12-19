@@ -27,7 +27,7 @@ export function Arrivals() {
                     `<tr><td>${time.toUTCString().substring(17, 22)}</td>` +
                         `<th class="diff">${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
                         `<th class="route">${stop.trip.route.shortName}</th>` +
-                        `<td><a href="#p=0;route=${stop.trip.route.shortName}">` +
+                        `<td>&nbsp;&#8594;<a href="#p=0;route=${stop.trip.route.shortName}">` +
                             `${stop.headsign}</a></td></tr>`
             }
         } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
