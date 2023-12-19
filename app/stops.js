@@ -89,7 +89,8 @@ export function Stops(title) {
                 ev.preventDefault()
                 content.innerHTML = ''
                 const query = {
-                    'query': `{ stops(feeds: "tampere", name: "${search.value}") { gtfsId name zoneId } }`
+                    'query': '{ stops(feeds: "tampere", maxResults: 20, ' +
+                        `name: "${search.value}") { gtfsId name zoneId } }`
                 }
                 let json = await request.http(env.uri, 'POST', query, env.key)
                 if (json) {
