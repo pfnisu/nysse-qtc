@@ -7,6 +7,14 @@ export function Stops(title) {
     ui.init(this, 'Pysäkit')
     const arrivals = new Arrivals()
 
+    // Format requested day of week (Sunday = 0) as YYYYMMDD
+    const day = (index) => {
+        let dt = new Date()
+        dt.setUTCDate(dt.getUTCDate() + (index - dt.getUTCDay()))
+        return `${dt.toJSON().split('T')[0].replaceAll('-', '')}`
+    }
+    const days = { mon: day(1), sat: day(6), sun: day(7) }
+
     // Generate sorted timetable from route timestamps
     const timetable = (data, root) => {
         let table = new Array(24)
@@ -34,7 +42,6 @@ export function Stops(title) {
     this.compose = async () => {
         const sid = request.hash('stop')
         if (sid) {
-            const days = { sat: '20231216', sun: '20231217', mon: '20231218'  }
             // Using aliases to get everything in one query
             const query = {
                 'query': `{ stop(id: "tampere:${sid}") { name zoneId ` +
