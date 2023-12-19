@@ -10,7 +10,7 @@ Niko Suoniemi <niko@tamperelainen.org>
 
 ## App URL
 
-Alpha version deployed at: <https://nysse-qtc.onrender.com/>
+Beta version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Technology
 
@@ -21,6 +21,7 @@ Alpha version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
+* v0.5.0          Usability improvements
 * v0.4.0          Timetable feature
 * v0.3.0          Home stop feature, UI improvements
 * v0.2.0          Search functionality
