@@ -39,7 +39,6 @@ export default {
     //          Static view is composed only once.
     init: (target, title, live = true) => {
         target.title = title
-        target.listeners = []
         target.tree = document.createElement('div')
         // Replace view with updated tree
         const load = async () => {
@@ -64,13 +63,11 @@ export default {
         }
         // Subscribe to notifications from target object
         target.listen = (fn) => {
+            target.listeners ??= []
             target.listeners.push(fn)
         }
-        target.forget = (fn) => {
-            target.listeners = target.listeners.filter((el) => el !== fn)
-        }
         target.notify = (data = null) => {
-            for (const fn of target.listeners) fn(data)
+            if (target.listeners) for (const fn of target.listeners) fn(data)
         }
     }
 }
