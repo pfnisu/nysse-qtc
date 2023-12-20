@@ -3,7 +3,7 @@ import request from './lib/request.js'
 import env from '../.env.js'
 
 export function Arrivals() {
-    ui.init(this, 'arrivals')
+    ui.init(this, 'arrivals', true, 'tbody')
 
     // Compose arrival UI every 30 sec
     this.interval = 30000
@@ -18,12 +18,11 @@ export function Arrivals() {
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
-            this.tree.innerHTML = '<table><tbody></tbody></table>'
-            const content = this.tree.querySelector('tbody')
+            this.tree.innerHTML = ''
             for (const stop of json.data.stop.stoptimesWithoutPatterns) {
                 const time = new Date(stop.scheduledArrival * 1000)
                 const diff = Math.round((stop.realtimeArrival - stop.scheduledArrival) / 60)
-                content.innerHTML +=
+                this.tree.innerHTML +=
                     `<tr><td>${time.toUTCString().substring(17, 22)}</td>` +
                         `<th class="diff">${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
                         `<th class="route">${stop.trip.route.shortName}</th>` +

@@ -37,9 +37,11 @@ export default {
     // live     Optional boolean to construct a live or static view:
     //          Live view uses target.interval, default = 0 (i.e. on demand).
     //          Static view is composed only once.
-    init: (target, title, live = true) => {
+    // tag      Optional tagName to use as container element of target.tree,
+    //          default = div
+    init: (target, title, live = true, tag = 'div') => {
         target.title = title
-        target.tree = document.createElement('div')
+        target.tree = document.createElement(tag)
         // Replace view with updated tree
         const load = async () => {
             if (target.visible) target.root.replaceChildren(target.tree)

@@ -59,7 +59,7 @@ export function Stops(title) {
                 const done = '&#10003; Kotipysäkki'
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
-                    `<button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button><div></div>` +
+                    `<button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button><table></table>` +
                     '<h2>Maanantai-perjantai</h2><table id="mon"><tbody></tbody></table>' +
                     '<h2>Lauantai</h2><table id="sat"><tbody></tbody></table>' +
                     '<h2>Sunnuntai</h2><table id="sun"><tbody></tbody></table>'
@@ -76,7 +76,7 @@ export function Stops(title) {
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
 
                 // Arrivals is a live view, updating separately
-                ui.bind([arrivals], this.tree.querySelector('div'))
+                ui.bind([arrivals], this.tree.querySelector('table'))
             } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
         } else {
             this.tree.innerHTML =
