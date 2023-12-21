@@ -14,7 +14,7 @@ export default {
     bind: (views, root, nav = null, title = null) => {
         // Switch to view that matches hash
         const setView = () => {
-            for (const v of views) if (v.visible) v.stop()
+            for (const v of views) if (v.started) v.stop()
             if (nav) {
                 nav.innerHTML = views.reduce((cat, v, i) =>
                     `${cat}<a href="#${nav.id}=${i}">${v.title}</a>`, '')
@@ -38,30 +38,30 @@ export default {
     //          Live view uses target.interval, default = 0 (i.e. on demand).
     //          Static view is composed only once.
     // tag      Optional tagName to use as container element of target.tree,
-    //          default = div
+    //          default = div.
     init: (target, title, live = true, tag = 'div') => {
         target.title = title
         target.tree = document.createElement(tag)
         // Replace view with updated tree
         const load = async () => {
-            if (target.visible) target.root.replaceChildren(target.tree)
+            target.root.replaceChildren(target.tree)
             if (!target.loaded) await target.compose()
             if (!live) target.loaded = true
         }
-        // Reload logic is only spawned if view is live and visible
+        // Reload is only spawned if view is live and visible
         target.start = () => {
-            target.visible = true
+            target.started = true
             load()
             const interval = target.interval ?? 0
             if (live && interval && !target.id)
                 target.id = setInterval(() => {
-                    if (document.visibilityState === 'visible') load()
+                    if (!document.hidden && !!target.tree.offsetParent) load()
                 }, interval)
         }
         target.stop = () => {
             clearInterval(target.id)
             target.id = null
-            target.visible = null
+            target.started = null
         }
         // Subscribe to notifications from target object
         target.listen = (fn) => {
