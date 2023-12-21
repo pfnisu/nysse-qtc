@@ -20,11 +20,10 @@ export default {
                 const index = request.hash(nav.id) ?? 0
                 nav.children[index].className = 'active'
                 if (title) document.title = `${views[index].title}${title}`
-                views[index].start()
-            } else (views.find((v) => request.hash(v.title)) || views[0]).start()
+                views[index].start(root)
+            } else (views.find((v) => request.hash(v.title)) || views[0]).start(root)
             for (const v of views) if (v.started && !v.tree.offsetParent) v.stop()
         }
-        for (const v of views) v.root = root
         // Change view when hash changes
         if (views.length > 1) window.addEventListener('hashchange', setView)
         setView()
@@ -42,20 +41,20 @@ export default {
         target.title = title
         target.tree = document.createElement(tag)
         // Replace view with updated tree
-        const load = async () => {
-            target.root.replaceChildren(target.tree)
+        const load = async (root) => {
+            root.replaceChildren(target.tree)
             if (!target.loaded) await target.compose()
             if (!live) target.loaded = true
         }
         // Reload is only spawned if view is live and visible
-        target.start = () => {
+        target.start = (root) => {
             target.started = true
-            load()
+            load(root)
             const interval = target.interval ?? 0
             if (live && interval && !target.id)
                 target.id = setInterval(() => {
                     if (!target.tree.offsetParent) target.stop()
-                    else if (!document.hidden) load()
+                    else if (!document.hidden) load(root)
                 }, interval)
         }
         target.stop = () => {
