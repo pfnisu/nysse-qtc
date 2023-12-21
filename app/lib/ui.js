@@ -14,7 +14,6 @@ export default {
     bind: (views, root, nav = null, title = null) => {
         // Switch to view that matches hash
         const setView = () => {
-            for (const v of views) if (v.started) v.stop()
             if (nav) {
                 nav.innerHTML = views.reduce((cat, v, i) =>
                     `${cat}<a href="#${nav.id}=${i}">${v.title}</a>`, '')
@@ -22,8 +21,8 @@ export default {
                 nav.children[index].className = 'active'
                 if (title) document.title = `${views[index].title}${title}`
                 views[index].start()
-            } else
-                (views.find((v) => request.hash(v.title)) || views[0]).start()
+            } else (views.find((v) => request.hash(v.title)) || views[0]).start()
+            for (const v of views) if (v.started && !v.tree.offsetParent) v.stop()
         }
         for (const v of views) v.root = root
         // Change view when hash changes
@@ -55,7 +54,8 @@ export default {
             const interval = target.interval ?? 0
             if (live && interval && !target.id)
                 target.id = setInterval(() => {
-                    if (!document.hidden && !!target.tree.offsetParent) load()
+                    if (!target.tree.offsetParent) target.stop()
+                    else if (!document.hidden) load()
                 }, interval)
         }
         target.stop = () => {
