@@ -10,7 +10,6 @@ export function Arrivals() {
 
     this.compose = async () => {
         const sid = request.hash('stop')
-        if (!sid) return
         const query = {
             'query': `{ stop(id: "tampere:${sid}") {` +
                 'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10) {' +
