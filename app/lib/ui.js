@@ -21,11 +21,17 @@ export default {
                 nav.children[index].className = 'active'
                 if (title) document.title = `${views[index].title}${title}`
                 views[index].start(root)
-            } else (views.find((v) => request.hash(v.title)) || views[0]).start(root)
+            } else {
+                const v = views.find((v) => request.hash(v.title)) || views[0]
+                if (!v.started) v.start(root)
+            }
             for (const v of views) if (v.started && !v.tree.offsetParent) v.stop()
         }
         // Change view when hash changes
-        if (views.length > 1) window.addEventListener('hashchange', setView)
+        if (!views[0].ev) {
+            window.addEventListener('hashchange', setView)
+            views[0].ev = true
+        }
         setView()
     },
 
@@ -53,8 +59,7 @@ export default {
             const interval = target.interval ?? 0
             if (live && interval && !target.id)
                 target.id = setInterval(() => {
-                    if (!target.tree.offsetParent) target.stop()
-                    else if (!document.hidden) load(root)
+                    if (!document.hidden) load(root)
                 }, interval)
         }
         target.stop = () => {
