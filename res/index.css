@@ -1,11 +1,12 @@
 * {
     box-sizing:border-box;
 }
-html,body {
+html,body,button,#home a {
     margin:0;
     background:#f6f5f4;
     font-family:sans-serif;
     font-size:calc(10px + 0.5vw);
+    color:#000;
 }
 nav {
     position:relative;
@@ -50,10 +51,13 @@ h2 {
     border-bottom:1px solid #484c54;
     font-size:1.3em;
 }
-main a,th {
+main a,th,#alert p {
     border-radius:6px;
     padding:8px;
     color:#282c34;
+}
+#alert p {
+    background:#f6f5f4;
 }
 main a:active,main a:hover,span.route {
     background:#cff3fd;
@@ -89,7 +93,7 @@ td p,span.route {
     display:inline-block;
     margin:1px;
 }
-input,button,#home {
+input,button,#home a {
     border:1px solid #484c54;
     border-radius:6px;
     padding:8px;
@@ -100,9 +104,6 @@ input {
     border-right:0;
     padding-right:4em;
 }
-button,#home {
-    background:#f6f5f4;
-}
 button#search {
     width:4em;
     margin-left:-4em;
@@ -111,13 +112,17 @@ button#search {
 #home {
     position:absolute;
     right:1em;
-    text-decoration:none;
 }
-input:focus,button:hover,#home:hover {
+#home button,#home a {
+    display:inline-block;
+    text-decoration:none;
+    float:right;
+}
+input:focus,button:hover,#home a:hover {
     outline:2px solid #61dafb;
     box-shadow:0 0 8px #61dafb;
 }
-button:active,#home:active {
+button:active,#home a:active {
     box-shadow:inset 1px 1px 1px #484c54;
 }
 @media (min-width:640px) {
