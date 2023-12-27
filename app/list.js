@@ -8,7 +8,7 @@ export function List(listen) {
     this.compose = async () => {
         const query = {
             'query': '{ routes(feeds: "tampere") { shortName longName }' +
-                'alerts(feeds: "tampere") { alertDescriptionText } }'
+                'alerts(feeds: "tampere") { alertHash alertDescriptionText } }'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
@@ -20,7 +20,9 @@ export function List(listen) {
         const alerts = this.tree.querySelector('#alert')
         const content = this.tree.querySelector('tbody')
         if (json) {
-            alerts.innerHTML = json.data.alerts.reduce((cat, a) => `${cat}<p>${a.alertDescriptionText}</p>`, '')
+            // Remove duplicate alerts
+            const set = [...new Map(json.data.alerts.map(a => [a.alertHash, a])).values()]
+            alerts.innerHTML = set.reduce((cat, a) => `${cat}<p>${a.alertDescriptionText}</p>`, '')
             const show = '&#8505; Näytä tiedotteet'
             const hide = '&#10005; Sulje tiedotteet'
             const toggle = alerts.innerHTML ? `<button>${show}</button><br/>` : ''
