@@ -16,7 +16,7 @@ export function List(listen) {
         const home = hid ? `<a href="#p=1;stop=${hid}">Näytä kotipysäkki</a>` : ''
         this.tree.innerHTML =
             '<h2>Tampereen seudun joukkoliikenteen linjat</h2>' +
-            `<div${state === null ? '' : ' style="display:none"'} id="alert"></div><div id="home"></div>` +
+            `<div${state === null ? '' : ' class="hidden"'} id="alert"></div><div id="home"></div>` +
             '<table><tbody></tbody></table>'
         const alerts = this.tree.querySelector('#alert')
         const content = this.tree.querySelector('tbody')
@@ -30,9 +30,9 @@ export function List(listen) {
             this.tree.querySelector('#home').innerHTML = `${toggle}${home}`
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
                 const a = this.tree.querySelector('#alert')
-                a.style.display = a.style.display === 'none' ? '' : 'none'
-                ev.target.innerHTML = a.style.display === 'none' ? show : hide
-                request.cookie('alerts', a.style.display)
+                a.classList.toggle('hidden')
+                ev.target.innerHTML = a.classList.contains('hidden') ? show : hide
+                request.cookie('alerts', a.className)
             })
             json.data.routes.sort((a, b) => parseInt(a.shortName) - parseInt(b.shortName))
             for (const route of json.data.routes)

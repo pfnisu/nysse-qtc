@@ -56,6 +56,17 @@ main a,th,#alert p {
     padding:8px;
     color:#282c34;
 }
+#alert {
+    overflow:hidden;
+    max-height:200vh;
+    margin:0;
+    transition:max-height 1s cubic-bezier(1, 0, 0, 1);
+}
+#alert.hidden {
+    max-height:0;
+    height:fit-content;
+    transition-timing-function:cubic-bezier(0, 1, 0, 1);
+}
 #alert p {
     background:#f6f5f4;
 }
