@@ -7,13 +7,16 @@ export function Stops(title) {
     ui.init(this, 'Pysäkit')
     const arrivals = new Arrivals()
 
-    // Format a day offset (Sunday = 0, 7, ...) as YYYYMMDD
-    const day = (offset) => {
+    // Format a day offset as YYYYMMDD
+    // 0...6 = Sunday - Saturday, null = Closest weekday
+    const day = (offset = null) => {
         let dt = new Date()
-        dt.setUTCDate(dt.getUTCDate() + (offset - dt.getUTCDay()))
+        const today = dt.getUTCDay()
+        offset ??= today < 6 ? today : 8
+        dt.setUTCDate(dt.getUTCDate() + (offset - today))
         return dt.toJSON().split('T')[0].replaceAll('-', '')
     }
-    const dates = { mon: day(1), sat: day(6), sun: day(7) }
+    const dates = { mon: day(), sat: day(6), sun: day(7) }
 
     // Generate sorted timetable from route timestamps
     const timetable = (data, root) => {
