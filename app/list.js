@@ -24,7 +24,7 @@ export function List(listen) {
             // Remove duplicate alerts
             const set = [...new Map(json.data.alerts.map(a => [a.alertHash, a])).values()]
             alerts.innerHTML = set.reduce((cat, a) => `${cat}<p>${a.alertDescriptionText}</p>`, '')
-            const show = '&#8505; Näytä tiedotteet'
+            const show = 'Avaa tiedotteet'
             const hide = '&#10005; Sulje tiedotteet'
             const toggle = alerts.innerHTML ? `<button>${state === null ? hide : show}</button><br/>` : ''
             this.tree.querySelector('#home').innerHTML = `${toggle}${home}`
