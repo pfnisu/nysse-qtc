@@ -40,6 +40,7 @@ export function Stops(title) {
                 row += ` <p>${trip.minute}<span class="route">${trip.route}</span></p>`
             root.innerHTML += `${row}</td></tr>`
         }
+        root.innerHTML ||= '<tr><th>Ei vuoroja</th></tr>'
     }
 
     this.compose = async () => {

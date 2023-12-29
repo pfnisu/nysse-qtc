@@ -28,6 +28,7 @@ export function Arrivals() {
                         `<td>&nbsp;&#8594;<a href="#p=0;route=${stop.trip.route.shortName}">` +
                             `${stop.headsign}</a></td></tr>`
             }
+            this.tree.innerHTML ||= '<tr><th class="diff">Ei vuoroja vuorokauden sisään</th></tr>'
         } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
     }
 }
