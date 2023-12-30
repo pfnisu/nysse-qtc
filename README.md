@@ -21,6 +21,7 @@ Beta version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
+* v0.6.0          Alerts feature, performance improvements
 * v0.5.0          Usability improvements
 * v0.4.0          Timetable feature
 * v0.3.0          Home stop feature, UI improvements
