@@ -108,7 +108,7 @@ export function Stops(title) {
                             `<tr><th class="zone">${stop.zoneId}</th><th class="stop">${sid}</th>` +
                                 `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                     }
-                }
+                } else content.innerHTML = '<tr><td>Yhteysvirhe...</td></tr>'
             })
         }
     }

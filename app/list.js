@@ -39,7 +39,7 @@ export function List(listen) {
                 content.innerHTML += 
                     `<tr><th class="route">${route.shortName}</th>` +
                         `<td><a href="#p=0;route=${route.shortName}">${route.longName}</a></td></tr>`
-        } else content.innerHTML = '<td>Yhteysvirhe...</td>'
+        } else content.innerHTML = '<tr><td>Yhteysvirhe...</td></tr>'
     }
 
     // Listen for home stop change -notification from Stops

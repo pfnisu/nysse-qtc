@@ -29,6 +29,6 @@ export function Arrivals() {
                             `${stop.headsign}</a></td></tr>`
             }
             this.tree.innerHTML ||= '<tr><th class="diff">Ei vuoroja vuorokauden sisään</th></tr>'
-        } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
+        } else this.tree.innerHTML = '<tr><td>Yhteysvirhe...</td></tr>'
     }
 }
