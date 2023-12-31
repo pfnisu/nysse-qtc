@@ -84,15 +84,12 @@ table[id] {
     table-layout:fixed;
     width:calc(100% + 4px);
 }
-table[id] th {
-    width:min-content;
+table[id] th,th.stop,th.diff,.route {
+    width:3em;
+    text-align:center;
 }
 table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#alert p {
     background:#f6f5f4;
-}
-.route,th.stop,th.diff {
-    min-width:3em;
-    text-align:center;
 }
 td,a {
     box-decoration-break:clone;
