@@ -6,10 +6,11 @@ export default {
     //          otherwise null.
     // key      Cookie name
     // value    Get cookie value if null, else set cookie to value
-    cookie: (key, value = null) => {
+    // age      Max-age in seconds, default = 60*60*24*365
+    cookie: (key, value = null, age = 31536000) => {
         let match = ['', value]
         if (value !== null)
-            document.cookie = `${key}=${value}; SameSite=Strict`
+            document.cookie = `${key}=${value};Max-Age=${age};SameSite=Strict`
         else if (key)
             match = document.cookie.match(re(key))
         return match?.length > 1 ? match[1] : null
