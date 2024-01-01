@@ -7,8 +7,8 @@ export function List(listen) {
 
     this.compose = async () => {
         const query = {
-            'query': '{ routes(feeds: "tampere") { shortName longName }' +
-                'alerts(feeds: "tampere") { alertHash alertDescriptionText } }'
+            'query': `{ routes(feeds: "${env.feed}") { shortName longName }` +
+                `alerts(feeds: "${env.feed}") { alertHash alertDescriptionText } }`
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')

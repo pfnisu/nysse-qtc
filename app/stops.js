@@ -48,7 +48,7 @@ export function Stops(title) {
         if (sid) {
             // Using aliases to get everything in one query
             const query = {
-                'query': `{ stop(id: "tampere:${sid}") { name zoneId ` +
+                'query': `{ stop(id: "${env.feed}:${sid}") { name zoneId ` +
                     `mon: stoptimesForServiceDate(date: "${dates.mon}") {` +
                         'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
                     `sat: stoptimesForServiceDate(date: "${dates.sat}") {` +
@@ -93,7 +93,7 @@ export function Stops(title) {
                 ev.preventDefault()
                 content.innerHTML = ''
                 const query = {
-                    'query': '{ stops(feeds: "tampere", maxResults: 20, ' +
+                    'query': `{ stops(feeds: "${env.feed}", maxResults: 20, ` +
                         `name: "${search.value}") { gtfsId name zoneId } }`
                 }
                 let json = await request.http(env.uri, 'POST', query, env.key)

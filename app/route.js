@@ -8,7 +8,7 @@ export function Route() {
     this.compose = async () => {
         const rid = request.hash(this.title)
         const query = {
-            'query': `{ route(id: "tampere:${rid}") {` +
+            'query': `{ route(id: "${env.feed}:${rid}") {` +
                 'longName patterns { headsign stops { gtfsId name zoneId } } } }'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)

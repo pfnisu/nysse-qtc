@@ -11,7 +11,7 @@ export function Arrivals() {
     this.compose = async () => {
         const sid = request.hash('stop')
         const query = {
-            'query': `{ stop(id: "tampere:${sid}") {` +
+            'query': `{ stop(id: "${env.feed}:${sid}") {` +
                 'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10) {' +
                     'scheduledArrival realtimeArrival headsign trip { route { shortName } } } } }'
         }
