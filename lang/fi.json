@@ -21,6 +21,6 @@
     "dev": "Palvelun kehittäjätiedot",
     "src": "Lähdekoodi",
     "api": "Palvelu perustuu avoimeen dataan",
-    "license": "Ohjelmistolisenssi", 
+    "license": "Ohjelmistolisenssi",
     "error": "Yhteysvirhe..."
 }

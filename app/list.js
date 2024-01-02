@@ -40,6 +40,7 @@ export function List(l, listen) {
         } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 
-    // Listen for home stop change -notification from Stops
+    // Listen for home stop and lang change notifications
     listen(() => this.compose())
+    l.listen(() => this.compose())
 }

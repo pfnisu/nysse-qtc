@@ -24,6 +24,7 @@ export function Settings(l) {
                 l.str = await request.http(`lang/${ev.target.id}.json`)
                 this.title = l.str.settings
                 this.notify()
+                // Force update nav titles
                 window.dispatchEvent(new Event('hashchange'))
             }
         }, true)

@@ -112,4 +112,5 @@ export function Stops(l) {
             })
         }
     }
+    l.listen(() => this.title = l.str.stops)
 }

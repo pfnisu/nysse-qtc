@@ -8,4 +8,5 @@ export function Lines(l, listen) {
     this.compose = async () => {
         ui.bind([new List(l, listen), new Route(l)], this.tree)
     }
+    l.listen(() => this.title = l.str.lines)
 }
