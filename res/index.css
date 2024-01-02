@@ -44,7 +44,7 @@ main {
     margin:0 8px 8px;
     box-shadow:1px 1px 4px #484c54;
     border-radius:0 0 6px 6px;
-    padding:16px 1em 8px;
+    padding:16px 0.5em 8px;
     background:#fff;
 }
 main * {
@@ -58,7 +58,7 @@ table a,th,td,input,button,#alert p,#home a,.route {
     border-radius:6px;
 }
 table a,th,input,button,#alert p,#home a {
-    padding:8px;
+    padding:8px 4px;
 }
 table a,th,#alert p {
     color:#282c34;
@@ -104,16 +104,16 @@ input,button,#home a {
 input {
     width:100%;
     border-right:0;
-    padding-right:4em;
+    padding-right:5em;
 }
 button#search {
-    width:4em;
-    margin-left:-4em;
+    width:5em;
+    margin-left:-5em;
     border-radius:0 6px 6px 0;
 }
 #home {
     position:absolute;
-    right:1em;
+    right:0.5em;
 }
 #home button,#home a {
     display:block;
@@ -136,22 +136,20 @@ button:active,#home a:active {
         width:80%;
         max-width:960px;
         margin:0 auto 8px;
+        padding:16px 1em 8px;
+    }
+    table a,th,input,button,#alert p,#home a {
+        padding:8px;
     }
     input {
-        width:auto;
+        width:50%;
+    }
+    #home {
+        right:1em;
     }
 }
 @media (max-width:640px) {
     * {
         outline:none !important;
-    }
-    main {
-        padding:16px 0.5em 8px;
-    }
-    #home {
-        right:0.5em;
-    }
-    table a,th,input,button,#alert p,#home a {
-        padding:8px 4px;
     }
 }
