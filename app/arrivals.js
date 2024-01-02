@@ -2,7 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
-export function Arrivals() {
+export function Arrivals(l) {
     ui.init(this, 'arrivals', true, 'tbody')
 
     // Compose arrival UI every 30 sec
@@ -28,7 +28,7 @@ export function Arrivals() {
                         `<td>&nbsp;&#8594;<a href="#p=0;route=${stop.trip.route.shortName}">` +
                             `${stop.headsign}</a></td></tr>`
             }
-            this.tree.innerHTML ||= '<tr><th class="diff">Ei vuoroja vuorokauden sisään</th></tr>'
-        } else this.tree.innerHTML = '<tr><td>Yhteysvirhe...</td></tr>'
+            this.tree.innerHTML ||= `<tr><th class="diff">${l.str.noArrivals}</th></tr>`
+        } else this.tree.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 }

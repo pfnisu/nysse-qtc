@@ -2,7 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
-export function Route() {
+export function Route(l) {
     ui.init(this, 'route')
 
     this.compose = async () => {
@@ -26,6 +26,6 @@ export function Route() {
                             `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                 }
             }
-        } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
+        } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
 }

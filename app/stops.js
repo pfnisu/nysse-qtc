@@ -3,8 +3,8 @@ import request from './lib/request.js'
 import env from '../.env.js'
 import {Arrivals} from './arrivals.js'
 
-export function Stops(title) {
-    ui.init(this, 'Pysäkit')
+export function Stops(l) {
+    ui.init(this, l.str.stops)
     const arrivals = new Arrivals()
 
     // Format a day offset as YYYYMMDD
@@ -40,7 +40,7 @@ export function Stops(title) {
                 row += ` <p>${trip.minute}<span class="route">${trip.route}</span></p>`
             root.innerHTML += `${row}</td></tr>`
         }
-        root.innerHTML ||= '<tr><th>Ei vuoroja</th></tr>'
+        root.innerHTML ||= `<tr><th>${l.str.error}</th></tr>`
     }
 
     this.compose = async () => {
@@ -58,19 +58,18 @@ export function Stops(title) {
             }
             let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
-                document.title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name} | ${this.title}${title}`
+                document.title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name} | ${this.title}${l.str.title}`
                 const hid = request.cookie('home')
-                const done = '&#10003; Kotipysäkki'
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
-                    `<button id="home">${sid === hid ? done : 'Aseta kotipysäkiksi'}</button><table></table>` +
-                    '<h2>Maanantai-perjantai</h2><table id="mon"><tbody></tbody></table>' +
-                    '<h2>Lauantai</h2><table id="sat"><tbody></tbody></table>' +
-                    '<h2>Sunnuntai</h2><table id="sun"><tbody></tbody></table>'
+                    `<button id="home">${sid === hid ? l.str.home : l.str.setHome}</button><table></table>` +
+                    `<h2>${l.str.monFri}</h2><table id="mon"><tbody></tbody></table>` +
+                    `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
+                    `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
                 this.tree.querySelector('#home').addEventListener('click', async (ev) => {
                     ev.preventDefault()
                     request.cookie('home', sid)
-                    ev.target.innerHTML = done
+                    ev.target.innerHTML = l.str.home
                     // Notify listeners when home stop is set
                     this.notify()
                 })
@@ -81,11 +80,12 @@ export function Stops(title) {
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('table'))
-            } else this.tree.innerHTML = '<h2>Yhteysvirhe...</h2>'
+            } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
         } else {
             this.tree.innerHTML =
-                '<h2>Etsi pysäkkejä nimellä tai numerolla</h2>' +
-                '<form><input type="text"/><button id="search">Etsi</button></form><table><tbody></tbody></table>'
+                `<h2>${l.str.searchHead}</h2>` +
+                `<form><input type="text"/><button id="search">${l.str.search}</button>` +
+                '</form><table><tbody></tbody></table>'
             const content = this.tree.querySelector('tbody')
             const search = this.tree.querySelector('input')
             search.focus()
@@ -108,7 +108,7 @@ export function Stops(title) {
                             `<tr><th class="zone">${stop.zoneId}</th><th class="stop">${sid}</th>` +
                                 `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                     }
-                } else content.innerHTML = '<tr><td>Yhteysvirhe...</td></tr>'
+                } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
             })
         }
     }
