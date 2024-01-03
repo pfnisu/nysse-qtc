@@ -21,6 +21,7 @@ Beta version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
+* v0.7.0          Multilang feature
 * v0.6.0          Alerts feature, performance improvements
 * v0.5.0          Usability improvements
 * v0.4.0          Timetable feature
@@ -30,7 +31,7 @@ Beta version deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Licence
 
-Copyright (C) 2023 Niko Suoniemi <niko@tamperelainen.org>
+Copyright (C) 2023-2024 Niko Suoniemi <niko@tamperelainen.org>
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3.
 
