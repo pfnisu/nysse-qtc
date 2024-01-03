@@ -5,7 +5,7 @@ export function Settings(l) {
     ui.init(this, l.str.settings)
 
     this.compose = async () => {
-        const lang = request.cookie('lang') ?? 'fi'
+        const lang = request.cookie('lang') || 'fi'
         this.tree.innerHTML =
             '<h2>Kieli/Language</h2>' +
             `<p><button id="fi">suomi</button> <button id="en">english</button></p>` +

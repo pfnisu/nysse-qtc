@@ -8,7 +8,7 @@ import {Settings} from './settings.js'
 const l = {}
 
 const main = async () => {
-    l.str = await request.http(`lang/${request.cookie('lang') ?? 'fi'}.json`)
+    l.str = await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
     const settings = new Settings(l)
     l.listen = settings.listen
     const stops = new Stops(l)

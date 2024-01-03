@@ -26,9 +26,9 @@ export function List(l, listen) {
                 a.alertHash,
                 a.alertDescriptionTextTranslations
             ])).values()]
-            const lang = request.cookie('lang') ?? 'fi'
+            const lang = request.cookie('lang') || 'fi'
             alerts.innerHTML = set.reduce((cat, a) =>
-                `${cat}<p>${a.find((t) => t.language === lang)?.text ?? l.str.noLang}</p>`, '')
+                `${cat}<p>${a.find((t) => t.language === lang)?.text || l.str.noLang}</p>`, '')
             const toggle = alerts.innerHTML ? `<button>${state === null ? l.str.close : l.str.open}</button><br/>` : ''
             this.tree.querySelector('#home').innerHTML = `${toggle}${home}`
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
