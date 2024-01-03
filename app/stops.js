@@ -5,7 +5,7 @@ import {Arrivals} from './arrivals.js'
 
 export function Stops(l) {
     ui.init(this, l.str.stops)
-    const arrivals = new Arrivals()
+    const arrivals = new Arrivals(l)
 
     // Format a day offset as YYYYMMDD
     // 0...6 = Sunday - Saturday, null = Closest weekday
@@ -58,7 +58,7 @@ export function Stops(l) {
             }
             let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
-                document.title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name} | ${this.title}${l.str.title}`
+                document.title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name} | ${document.title}`
                 const hid = request.cookie('home')
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +

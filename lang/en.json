@@ -1,5 +1,4 @@
 {
-    "title": " | Nysse-timetables",
     "lines": "Routes",
     "stops": "Stops",
     "settings": "Settings",
@@ -16,8 +15,6 @@
     "sun": "Sunday",
     "noTrips": "No trips",
     "noArrivals": "No trips during the next 24 hours",
-    "defaults": "Restore default settings",
-    "restore": "Restore",
     "dev": "Developer info",
     "src": "Source code available at",
     "api": "App uses open data from",

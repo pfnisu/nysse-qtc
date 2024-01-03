@@ -16,6 +16,6 @@ const main = async () => {
         [new Lines(l, stops.listen), stops, settings],
         document.querySelector('main'),
         document.querySelector('nav'),
-        l.str.title)
+        ' | Nysse-qtc')
 }
 main()

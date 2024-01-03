@@ -1,5 +1,4 @@
 {
-    "title": " | Nysse-aikataulut",
     "lines": "Linjat",
     "stops": "Pysäkit",
     "settings": "Asetukset",
@@ -16,8 +15,6 @@
     "sun": "Sunnuntai",
     "noTrips": "Ei vuoroja",
     "noArrivals": "Ei vuoroja vuorokauden sisään",
-    "defaults": "Restore default settings",
-    "restore": "Restore",
     "dev": "Palvelun kehittäjätiedot",
     "src": "Lähdekoodi",
     "api": "Palvelu perustuu avoimeen dataan",
