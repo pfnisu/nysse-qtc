@@ -5,6 +5,7 @@
     "goHome": "Go to home stop",
     "open": "Expand alerts",
     "close": "&#10005; Close alerts",
+    "noLang": "No translation",
     "listHead": "Tampere area public transportation routes",
     "searchHead": "Search for stops by name or number",
     "search": "Search",

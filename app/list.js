@@ -8,7 +8,7 @@ export function List(l, listen) {
     this.compose = async () => {
         const query = {
             'query': `{ routes(feeds: "${env.feed}") { shortName longName }` +
-                `alerts(feeds: "${env.feed}") { alertHash alertDescriptionText } }`
+                `alerts(feeds: "${env.feed}") { alertHash alertDescriptionTextTranslations { language text } } }`
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
@@ -22,8 +22,13 @@ export function List(l, listen) {
         const content = this.tree.querySelector('tbody')
         if (json) {
             // Remove duplicate alerts
-            const set = [...new Map(json.data.alerts.map(a => [a.alertHash, a])).values()]
-            alerts.innerHTML = set.reduce((cat, a) => `${cat}<p>${a.alertDescriptionText}</p>`, '')
+            const set = [...new Map(json.data.alerts.map(a => [
+                a.alertHash,
+                a.alertDescriptionTextTranslations
+            ])).values()]
+            const lang = request.cookie('lang') ?? 'fi'
+            alerts.innerHTML = set.reduce((cat, a) =>
+                `${cat}<p>${a.find((t) => t.language === lang)?.text ?? l.str.noLang}</p>`, '')
             const toggle = alerts.innerHTML ? `<button>${state === null ? l.str.close : l.str.open}</button><br/>` : ''
             this.tree.querySelector('#home').innerHTML = `${toggle}${home}`
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
