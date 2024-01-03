@@ -18,7 +18,7 @@
     "noArrivals": "Ei vuoroja vuorokauden sisään",
     "dev": "Palvelun kehittäjätiedot",
     "src": "Lähdekoodi",
-    "api": "Palvelu perustuu avoimeen dataan",
+    "api": "Palvelun käyttämä avoin data",
     "license": "Ohjelmistolisenssi",
     "error": "Yhteysvirhe..."
 }
