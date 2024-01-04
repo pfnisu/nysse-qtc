@@ -48,21 +48,25 @@ export function Stops(l) {
         if (sid) {
             // Using aliases to get everything in one query
             const query = {
-                'query': `{ stop(id: "${env.feed}:${sid}") { name zoneId ` +
+                'query': `{ stop(id: "${env.feed}:${sid}") {` +
                     `mon: stoptimesForServiceDate(date: "${dates.mon}") {` +
                         'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
                     `sat: stoptimesForServiceDate(date: "${dates.sat}") {` +
                         'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
                     `sun: stoptimesForServiceDate(date: "${dates.sun}") {` +
-                        'pattern { route { shortName } } stoptimes { scheduledArrival } } } }'
+                        'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
+                    'name zoneId } }'
             }
             let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
-                document.title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name} | ${document.title}`
+                document.title =
+                    `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +
+                    ` | ${document.title}`
                 const hid = request.cookie('home')
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
-                    `<button id="home">${sid === hid ? l.str.home : l.str.setHome}</button><table></table>` +
+                    `<button id="home">${sid === hid ? l.str.home : l.str.setHome}` +
+                    '</button><table></table>' +
                     `<h2>${l.str.monFri}</h2><table id="mon"><tbody></tbody></table>` +
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
@@ -84,7 +88,8 @@ export function Stops(l) {
         } else {
             this.tree.innerHTML =
                 `<h2>${l.str.searchHead}</h2>` +
-                `<form><input type="text"/><button id="search">${l.str.search}</button>` +
+                '<form><input type="text"/>' +
+                    `<button id="search">${l.str.search}</button>` +
                 '</form><table><tbody></tbody></table>'
             const content = this.tree.querySelector('tbody')
             const search = this.tree.querySelector('input')
@@ -93,7 +98,7 @@ export function Stops(l) {
                 ev.preventDefault()
                 content.innerHTML = ''
                 const query = {
-                    'query': `{ stops(feeds: "${env.feed}", maxResults: 20, ` +
+                    'query': `{ stops(feeds: "${env.feed}", maxResults: 20,` +
                         `name: "${search.value}") { gtfsId name zoneId } }`
                 }
                 let json = await request.http(env.uri, 'POST', query, env.key)
@@ -105,7 +110,8 @@ export function Stops(l) {
                     for (const stop of json.data.stops) {
                         const sid = stop.gtfsId.split(':')[1]
                         content.innerHTML +=
-                            `<tr><th class="zone">${stop.zoneId}</th><th class="stop">${sid}</th>` +
+                            `<tr><th class="zone">${stop.zoneId}</th>` +
+                                `<th class="stop">${sid}</th>` +
                                 `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                     }
                 } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`

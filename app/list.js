@@ -8,7 +8,9 @@ export function List(l, listen) {
     this.compose = async () => {
         const query = {
             'query': `{ routes(feeds: "${env.feed}") { shortName longName }` +
-                `alerts(feeds: "${env.feed}") { alertHash alertDescriptionTextTranslations { language text } } }`
+                `alerts(feeds: "${env.feed}") {` +
+                    'alertHash alertDescriptionTextTranslations {' +
+                        'language text } } }'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
@@ -16,8 +18,8 @@ export function List(l, listen) {
         const home = hid ? `<a href="#p=1;stop=${hid}">${l.str.goHome}</a>` : ''
         this.tree.innerHTML =
             `<h2>${l.str.listHead}</h2>` +
-            `<div${state === null ? '' : ' class="hidden"'} id="alert"></div><div id="home"></div>` +
-            '<table><tbody></tbody></table>'
+            `<div${state === null ? '' : ' class="hidden"'} id="alert"></div>` +
+            '<div id="home"></div><table><tbody></tbody></table>'
         const alerts = this.tree.querySelector('#alert')
         const content = this.tree.querySelector('tbody')
         if (json) {
@@ -28,20 +30,26 @@ export function List(l, listen) {
             ])).values()]
             const lang = request.cookie('lang') || 'fi'
             alerts.innerHTML = set.reduce((cat, a) =>
-                `${cat}<p>${a.find((t) => t.language === lang)?.text || l.str.noLang}</p>`, '')
-            const toggle = alerts.innerHTML ? `<button>${state === null ? l.str.close : l.str.open}</button><br/>` : ''
+                `${cat}<p>${a.find((t) => t.language === lang)?.text || l.str.noLang}</p>`,
+                '')
+            const toggle = alerts.innerHTML
+                ? `<button>${state === null ? l.str.close : l.str.open}</button><br/>`
+                : ''
             this.tree.querySelector('#home').innerHTML = `${toggle}${home}`
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
                 const a = this.tree.querySelector('#alert')
                 a.classList.toggle('hidden')
-                ev.target.innerHTML = a.classList.contains('hidden') ? l.str.open : l.str.close
+                ev.target.innerHTML = a.classList.contains('hidden')
+                    ? l.str.open
+                    : l.str.close
                 request.cookie('alerts', a.className)
             })
             json.data.routes.sort((a, b) => parseInt(a.shortName) - parseInt(b.shortName))
             for (const route of json.data.routes)
                 content.innerHTML += 
                     `<tr><th class="route">${route.shortName}</th>` +
-                        `<td><a href="#p=0;route=${route.shortName}">${route.longName}</a></td></tr>`
+                        `<td><a href="#p=0;route=${route.shortName}">` +
+                            `${route.longName}</a></td></tr>`
         } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 

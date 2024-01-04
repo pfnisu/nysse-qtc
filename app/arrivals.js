@@ -13,7 +13,8 @@ export function Arrivals(l) {
         const query = {
             'query': `{ stop(id: "${env.feed}:${sid}") {` +
                 'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10) {' +
-                    'scheduledArrival realtimeArrival headsign trip { route { shortName } } } } }'
+                    'scheduledArrival realtimeArrival headsign trip {' +
+                        'route { shortName } } } } }'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
@@ -23,10 +24,12 @@ export function Arrivals(l) {
                 const diff = Math.round((stop.realtimeArrival - stop.scheduledArrival) / 60)
                 this.tree.innerHTML +=
                     `<tr><td>${time.toUTCString().substring(17, 22)}</td>` +
-                        `<th class="diff">${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
+                        '<th class="diff">' +
+                            `${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
                         `<th class="route">${stop.trip.route.shortName}</th>` +
-                        `<td>&nbsp;&#8594;<a href="#p=0;route=${stop.trip.route.shortName}">` +
-                            `${stop.headsign}</a></td></tr>`
+                        '<td>&nbsp;&#8594;' +
+                            `<a href="#p=0;route=${stop.trip.route.shortName}">` +
+                                `${stop.headsign}</a></td></tr>`
             }
             this.tree.innerHTML ||= `<tr><th class="diff">${l.str.noArrivals}</th></tr>`
         } else this.tree.innerHTML = `<tr><td>${l.str.error}</td></tr>`
