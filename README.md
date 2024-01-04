@@ -30,7 +30,7 @@ App deployed at: <https://nysse-qtc.onrender.com/>
 * v0.2.0          Search functionality
 * v0.1.0          Initial version
 
-## Licence
+## License
 
 Copyright (C) 2023-2024 Niko Suoniemi <niko@tamperelainen.org>
 

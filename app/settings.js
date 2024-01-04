@@ -11,7 +11,7 @@ export function Settings(l) {
             `<p><button id="fi">suomi</button> <button id="en">english</button></p>` +
             `<h2>${l.str.dev}</h2>` +
             `<p>${l.str.src}: <a href="https://github.com/pfnisu/nysse-qtc/">https://github.com/pfnisu/nysse-qtc/</a></p>` +
-            `<p>${l.str.api}: &copy; <a href="https://digitransit.fi/en/developers/apis/6-terms-of-use/">Digitransit</a> 2024</p>` +
+            `<p>${l.str.api}: &copy; 2024 <a href="https://digitransit.fi/en/developers/apis/6-terms-of-use/">Digitransit</a></p>` +
             `<h2>${l.str.license}</h2>` +
             '<p>Copyright &copy; 2023-2024 Niko Suoniemi &lt;niko@tamperelainen.org&gt;</p>' +
             '<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3.</p>' +
