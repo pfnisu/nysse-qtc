@@ -21,14 +21,8 @@ App deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
-* v1.0.0          Release version
-* v0.7.0          Multilang feature
-* v0.6.0          Alerts feature, performance improvements
-* v0.5.0          Usability improvements
-* v0.4.0          Timetable feature
-* v0.3.0          Home stop feature, UI improvements
-* v0.2.0          Search functionality
-* v0.1.0          Initial version
+* Latest stable release: v1.1.0
+* See tags for version history: <https://github.com/pfnisu/nysse-qtc/tags>
 
 ## License
 
