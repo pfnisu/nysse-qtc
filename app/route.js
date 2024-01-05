@@ -15,12 +15,20 @@ export function Route(l) {
         if (json) {
             document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             this.tree.innerHTML = ''
-            for (const pattern of json.data.route.patterns) {
+            const jump = document.createElement('div')
+            jump.id = 'home'
+            let i = 0
+            for (const pat of json.data.route.patterns) {
+                // Generate jump anchors to pattern headings
+                jump.innerHTML +=
+                    `<a href="#p=0;route=${rid};pattern=${i}">` +
+                        `&#8594; ${pat.headsign}</a><br/>`
                 this.tree.innerHTML +=
-                    `<h2>${rid} &#8594; ${pattern.headsign}</h2>` +
+                    `<h2 id="p=0;route=${rid};pattern=${i++}">` +
+                        `${rid} &#8594; ${pat.headsign}</h2>` +
                     '<table><tbody></tbody></table>'
                 const content = this.tree.querySelector('table:last-of-type>tbody')
-                for (const stop of pattern.stops) {
+                for (const stop of pat.stops) {
                     const sid = stop.gtfsId.split(':')[1]
                     content.innerHTML +=
                         `<tr><th class="zone">${stop.zoneId}</th>` +
@@ -28,6 +36,7 @@ export function Route(l) {
                             `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                 }
             }
+            this.tree.querySelector('h2').after(jump)
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
 }
