@@ -48,14 +48,14 @@ export function Stops(l) {
         if (sid) {
             // Using aliases to get everything in one query
             const query = {
-                'query': `{ stop(id: "${env.feed}:${sid}") {` +
-                    `mon: stoptimesForServiceDate(date: "${dates.mon}") {` +
-                        'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
-                    `sat: stoptimesForServiceDate(date: "${dates.sat}") {` +
-                        'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
-                    `sun: stoptimesForServiceDate(date: "${dates.sun}") {` +
-                        'pattern { route { shortName } } stoptimes { scheduledArrival } }' +
-                    'name zoneId } }'
+                'query': `{stop(id:"${env.feed}:${sid}"){` +
+                    `mon:stoptimesForServiceDate(date:"${dates.mon}"){` +
+                        'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
+                    `sat:stoptimesForServiceDate(date:"${dates.sat}"){` +
+                        'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
+                    `sun:stoptimesForServiceDate(date:"${dates.sun}"){` +
+                        'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
+                    'name zoneId}}'
             }
             let json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
@@ -98,8 +98,8 @@ export function Stops(l) {
                 ev.preventDefault()
                 content.innerHTML = ''
                 const query = {
-                    'query': `{ stops(feeds: "${env.feed}", maxResults: 20,` +
-                        `name: "${search.value}") { gtfsId name zoneId } }`
+                    'query': `{stops(feeds:"${env.feed}",maxResults:20,` +
+                        `name:"${search.value}"){gtfsId name zoneId}}`
                 }
                 let json = await request.http(env.uri, 'POST', query, env.key)
                 if (json) {

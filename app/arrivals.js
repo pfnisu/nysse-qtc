@@ -11,11 +11,10 @@ export function Arrivals(l) {
     this.compose = async () => {
         const sid = request.hash('stop')
         const query = {
-            'query': `{ stop(id: "${env.feed}:${sid}") {` +
-                'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10,' +
-                    'omitCanceled: false) {' +
-                    'realtimeState scheduledArrival realtimeArrival headsign trip {' +
-                        'route { shortName } } } } }'
+            'query': `{stop(id:"${env.feed}:${sid}"){stoptimesWithoutPatterns(`+
+                'timeRange:86400,numberOfDepartures:10,omitCanceled:false){' +
+                    'realtimeState scheduledArrival realtimeArrival headsign trip{' +
+                        'route{shortName}}}}}'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
