@@ -12,7 +12,7 @@ export function Arrivals(l) {
         const sid = request.hash('stop')
         const query = {
             'query': `{stop(id:"${env.feed}:${sid}"){stoptimesWithoutPatterns(`+
-                'timeRange:86400,numberOfDepartures:10,omitCanceled:false){' +
+                'timeRange:86400,numberOfDepartures:15,omitCanceled:false){' +
                     'realtimeState scheduledArrival realtimeArrival headsign trip{' +
                         'route{shortName}}}}}'
         }
