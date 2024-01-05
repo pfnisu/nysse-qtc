@@ -63,7 +63,7 @@ table a,th,input,button,#alert p,#home a {
 table a,th,#alert p {
     color:#282c34;
 }
-table a:active,table a:hover,span.route {
+table a:link:active,table a:link:hover,span.route {
     background:#cff3fd;
 }
 #alert {

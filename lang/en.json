@@ -16,6 +16,7 @@
     "sun": "Sunday",
     "noTrips": "No trips",
     "noArrivals": "No trips during the next 24 hours",
+    "canceled": "Canceled",
     "dev": "Developer info",
     "src": "Source code",
     "api": "App uses open data provided by",

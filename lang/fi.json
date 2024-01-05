@@ -16,6 +16,7 @@
     "sun": "Sunnuntai",
     "noTrips": "Ei vuoroja",
     "noArrivals": "Ei vuoroja vuorokauden sisään",
+    "canceled": "Peruttu",
     "dev": "Palvelun kehittäjätiedot",
     "src": "Lähdekoodi",
     "api": "Palvelun käyttämä avoin data",

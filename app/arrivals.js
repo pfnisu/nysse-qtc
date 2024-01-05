@@ -12,24 +12,28 @@ export function Arrivals(l) {
         const sid = request.hash('stop')
         const query = {
             'query': `{ stop(id: "${env.feed}:${sid}") {` +
-                'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10) {' +
-                    'scheduledArrival realtimeArrival headsign trip {' +
+                'stoptimesWithoutPatterns(timeRange: 86400, numberOfDepartures: 10,' +
+                    'omitCanceled: false) {' +
+                    'realtimeState scheduledArrival realtimeArrival headsign trip {' +
                         'route { shortName } } } } }'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
             this.tree.innerHTML = ''
-            for (const stop of json.data.stop.stoptimesWithoutPatterns) {
-                const time = new Date(stop.scheduledArrival * 1000)
-                const diff = Math.round((stop.realtimeArrival - stop.scheduledArrival) / 60)
+            for (const dep of json.data.stop.stoptimesWithoutPatterns) {
+                let sign =
+                    `&#8594;<a href="#p=0;route=${dep.trip.route.shortName}">` +
+                    `${dep.headsign}</a>`
+                if (dep.realtimeState == 'CANCELED')
+                    sign = `&#10005;<a>${l.str.canceled}</a>`
+                const dt = new Date(dep.scheduledArrival * 1000)
+                const diff = Math.round((dep.realtimeArrival - dep.scheduledArrival) / 60)
                 this.tree.innerHTML +=
-                    `<tr><td>${time.toUTCString().substring(17, 22)}</td>` +
+                    `<tr><td>${dt.toUTCString().substring(17, 22)}</td>` +
                         '<th class="diff">' +
                             `${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
-                        `<th class="route">${stop.trip.route.shortName}</th>` +
-                        '<td>&nbsp;&#8594;' +
-                            `<a href="#p=0;route=${stop.trip.route.shortName}">` +
-                                `${stop.headsign}</a></td></tr>`
+                        `<th class="route">${dep.trip.route.shortName}</th>` +
+                        `<td>&nbsp;${sign}</td></tr>`
             }
             this.tree.innerHTML ||= `<tr><th class="diff">${l.str.noArrivals}</th></tr>`
         } else this.tree.innerHTML = `<tr><td>${l.str.error}</td></tr>`
