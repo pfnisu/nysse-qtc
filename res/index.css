@@ -1,12 +1,12 @@
 * {
     box-sizing:border-box;
+    margin:0;
     transition:box-shadow 0.5s,background 0.5s;
     font-family:sans-serif;
     font-size:calc(10px + 0.5vw);
     color:#000;
 }
-html,body,button,#home a {
-    margin:0;
+html,body,button,table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#home a,#alert p {
     background:#f6f5f4;
 }
 nav {
@@ -88,9 +88,6 @@ table[id] th,th.stop,th.diff,.route {
     width:3em;
     text-align:center;
 }
-table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#alert p {
-    background:#f6f5f4;
-}
 td,a {
     box-decoration-break:clone;
 }
@@ -116,7 +113,6 @@ button#search {
     right:0.5em;
 }
 #home button,#home a {
-    display:block;
     text-decoration:none;
     float:right;
 }
