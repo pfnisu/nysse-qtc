@@ -15,14 +15,13 @@ export function Route(l) {
         if (json) {
             document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             this.tree.innerHTML = ''
-            const jump = document.createElement('div')
-            jump.id = 'home'
+            const jump = document.createElement('ul')
             let i = 0
             for (const pat of json.data.route.patterns) {
                 // Generate jump anchors to pattern headings
                 jump.innerHTML +=
-                    `<a href="#p=0;route=${rid};pattern=${i}">` +
-                        `&#8594; ${pat.headsign}</a><br/>`
+                    `<li><a href="#p=0;route=${rid};pattern=${i}">` +
+                        `&#8594; ${pat.headsign}</a></li>`
                 this.tree.innerHTML +=
                     `<h2 id="p=0;route=${rid};pattern=${i++}">` +
                         `${rid} &#8594; ${pat.headsign}</h2>` +

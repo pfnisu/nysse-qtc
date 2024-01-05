@@ -15,11 +15,11 @@ export function List(l, listen) {
         let json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
         const state = request.cookie('alerts')
-        const home = hid ? `<a href="#p=1;stop=${hid}">${l.str.goHome}</a>` : ''
+        const home = hid ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>` : ''
         this.tree.innerHTML =
             `<h2>${l.str.listHead}</h2>` +
             `<div${state === null ? '' : ' class="hidden"'} id="alert"></div>` +
-            '<div id="home"></div><table><tbody></tbody></table>'
+            '<ul></ul><table><tbody></tbody></table>'
         const alerts = this.tree.querySelector('#alert')
         const content = this.tree.querySelector('tbody')
         if (json) {
@@ -33,9 +33,9 @@ export function List(l, listen) {
                 `${cat}<p>${a.find((t) => t.language === lang)?.text || l.str.noLang}</p>`,
                 '')
             const toggle = alerts.innerHTML
-                ? `<button>${state === null ? l.str.close : l.str.open}</button><br/>`
+                ? `<li><button>${state === null ? l.str.close : l.str.open}</button></li>`
                 : ''
-            this.tree.querySelector('#home').innerHTML = `${toggle}${home}`
+            this.tree.querySelector('ul').innerHTML = `${toggle}${home}`
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
                 const a = this.tree.querySelector('#alert')
                 a.classList.toggle('hidden')

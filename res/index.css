@@ -6,7 +6,7 @@
     font-size:calc(10px + 0.5vw);
     color:#000;
 }
-html,body,button,table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#home a,#alert p {
+html,button,li a,table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#alert p {
     background:#f6f5f4;
 }
 nav {
@@ -54,10 +54,10 @@ h2 {
     border-bottom:1px solid #484c54;
     font-size:1.3em;
 }
-table a,th,td,input,button,#alert p,#home a,.route {
+table a,th,td,input,button,li a,#alert p,.route {
     border-radius:6px;
 }
-table a,th,input,button,#alert p,#home a {
+table a,th,input,button,li a,#alert p {
     padding:8px 4px;
 }
 table a,th,#alert p {
@@ -95,7 +95,7 @@ td p,span.route {
     display:inline-block;
     margin:1px;
 }
-input,button,#home a {
+input,button,li a {
     border:1px solid #484c54;
 }
 input {
@@ -103,24 +103,25 @@ input {
     border-right:0;
     padding-right:5em;
 }
-button#search {
+#search {
     width:5em;
     margin-left:-5em;
     border-radius:0 6px 6px 0;
 }
-#home {
+ul,#home {
     position:absolute;
     right:0.5em;
+    list-style:none;
 }
-#home button,#home a {
+li * {
     text-decoration:none;
     float:right;
 }
-input:focus,button:hover,#home a:hover {
+input:focus,button:hover,li a:hover {
     outline:2px solid #61dafb;
     box-shadow:0 0 8px #61dafb;
 }
-button:active,#home a:active {
+button:active,li a:active {
     box-shadow:inset 1px 1px 1px #484c54;
 }
 @media (min-width:640px) {
@@ -134,13 +135,13 @@ button:active,#home a:active {
         margin:0 auto 8px;
         padding:16px 1em 8px;
     }
-    table a,th,input,button,#alert p,#home a {
+    table a,th,input,button,li a,#alert p {
         padding:8px;
     }
     input {
         width:50%;
     }
-    #home {
+    ul,#home {
         right:1em;
     }
 }
