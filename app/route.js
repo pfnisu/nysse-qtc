@@ -20,11 +20,9 @@ export function Route(l) {
             for (const pat of json.data.route.patterns) {
                 // Generate jump anchors to pattern headings
                 jump.innerHTML +=
-                    `<li><a href="#p=0;route=${rid};pattern=${i}">` +
-                        `&#8594; ${pat.headsign}</a></li>`
+                    `<li><a data-i="${i++}">&#8594; ${pat.headsign}</a></li>`
                 this.tree.innerHTML +=
-                    `<h2 id="p=0;route=${rid};pattern=${i++}">` +
-                        `${rid} &#8594; ${pat.headsign}</h2>` +
+                    `<h2>${rid} &#8594; ${pat.headsign}</h2>` +
                     '<table><tbody></tbody></table>'
                 const content = this.tree.querySelector('table:last-of-type>tbody')
                 for (const stop of pat.stops) {
@@ -35,6 +33,9 @@ export function Route(l) {
                             `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                 }
             }
+            jump.addEventListener('click', (ev) => {
+                this.tree.querySelectorAll('h2')[ev.target.dataset.i].scrollIntoView()
+            }, true)
             this.tree.querySelector('h2').after(jump)
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
