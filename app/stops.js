@@ -70,7 +70,7 @@ export function Stops(l) {
                     `<h2>${l.str.monFri}</h2><table id="mon"><tbody></tbody></table>` +
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
-                this.tree.querySelector('#home').addEventListener('click', async (ev) => {
+                this.tree.querySelector('#home').addEventListener('click', (ev) => {
                     ev.preventDefault()
                     request.cookie('home', sid)
                     ev.target.innerHTML = l.str.home
