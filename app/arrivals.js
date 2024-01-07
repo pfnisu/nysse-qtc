@@ -13,8 +13,8 @@ export function Arrivals(l) {
         const query = {
             'query': `{stop(id:"${env.feed}:${sid}"){stoptimesWithoutPatterns(`+
                 'timeRange:86400,numberOfDepartures:15,omitCanceled:false){' +
-                    'realtimeState scheduledArrival realtimeArrival headsign trip{' +
-                        'route{shortName}}}}}'
+                    'scheduledArrival realtimeArrival headsign trip{' +
+                        'route{shortName}}realtimeState}}}'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {

@@ -9,7 +9,7 @@ export function Route(l) {
         const rid = request.hash(this.title)
         const query = {
             'query': `{route(id:"${env.feed}:${rid}"){` +
-                'longName patterns{headsign stops{gtfsId name zoneId}}}}'
+                'patterns{stops{gtfsId name zoneId}headsign}longName}}'
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {

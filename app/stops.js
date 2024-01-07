@@ -98,7 +98,7 @@ export function Stops(l) {
                 ev.preventDefault()
                 content.innerHTML = ''
                 const query = {
-                    'query': `{stops(feeds:"${env.feed}",maxResults:20,` +
+                    'query': `{stops(feeds:"${env.feed}",maxResults:30,` +
                         `name:"${search.value}"){gtfsId name zoneId}}`
                 }
                 let json = await request.http(env.uri, 'POST', query, env.key)
