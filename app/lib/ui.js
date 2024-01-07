@@ -20,12 +20,13 @@ export default {
                     `${cat}<a href="#${nav.id}=${i}">${v.title}</a>`, '')
                 const index = request.hash(nav.id) ?? 0
                 nav.children[index].className = 'active'
+                window.scroll(0, 0)
                 if (title) document.title = `${views[index].title}${title}`
                 views[index].start(root)
             } else (views.find((v) => request.hash(v.title)) || views[0]).start(root)
         }
         // Change view when hash changes
-        if (views.length > 1) window.addEventListener('hashchange', setView)
+        if (views.length > 1) window.addEventListener('popstate', setView)
         setView()
     },
 

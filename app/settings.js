@@ -25,7 +25,7 @@ export function Settings(l) {
                 this.title = l.str.settings
                 this.notify()
                 // Force update nav titles
-                window.dispatchEvent(new Event('hashchange'))
+                window.dispatchEvent(new Event('popstate'))
             }
         }, true)
     }
