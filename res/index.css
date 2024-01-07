@@ -6,7 +6,7 @@
     font-size:calc(10px + 0.5vw);
     color:#000;
 }
-html,button,li a,table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#alert p {
+html,table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#alert p {
     background:#f6f5f4;
 }
 nav {
@@ -103,6 +103,10 @@ input {
     border-right:0;
     padding-right:5em;
 }
+button,li a {
+    background:linear-gradient(#f6f5f4, #e6e5e4);
+    text-shadow:2px 2px 2px #fff;
+}
 #search {
     width:5em;
     margin-left:-5em;
@@ -123,6 +127,7 @@ input:focus,button:hover,li a:hover {
 }
 button:active,li a:active {
     box-shadow:inset 1px 1px 1px #484c54;
+    background:linear-gradient(#e6e5e4, #f6f5f4);
 }
 @media (min-width:640px) {
     nav a {
