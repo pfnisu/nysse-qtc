@@ -34,7 +34,9 @@ export function Route(l) {
                 }
             }
             jump.addEventListener('click', (ev) => {
-                this.tree.querySelectorAll('h2')[ev.target.dataset.i].scrollIntoView()
+                const h = this.tree.querySelectorAll('h2')[ev.target.dataset.i]
+                h.scrollIntoView({ behavior: "smooth" })
+                h.after(jump)
             }, true)
             this.tree.querySelector('h2').after(jump)
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
