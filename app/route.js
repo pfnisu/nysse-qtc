@@ -35,7 +35,7 @@ export function Route(l) {
             }
             jump.addEventListener('click', (ev) => {
                 const h = this.tree.querySelectorAll('h2')[ev.target.dataset.i]
-                h.scrollIntoView({ behavior: "smooth" })
+                h.scrollIntoView()
                 h.after(jump)
             }, true)
             this.tree.querySelector('h2').after(jump)
