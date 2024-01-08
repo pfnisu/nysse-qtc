@@ -21,7 +21,7 @@ App deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
-* Latest stable release: v1.1.0
+* Latest stable release: v1.2.0
 * See tags for version history: <https://github.com/pfnisu/nysse-qtc/tags>
 
 ## License
