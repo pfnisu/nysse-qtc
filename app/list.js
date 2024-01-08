@@ -28,9 +28,11 @@ export function List(l, listen) {
                 a.alertDescriptionTextTranslations
             ])).values()]
             const lang = request.cookie('lang') || 'fi'
-            alerts.innerHTML = set.reduce((cat, a) =>
-                `${cat}<p>${a.find((t) => t.language === lang)?.text || l.str.noLang}</p>`,
-                '')
+            alerts.innerHTML = set.reduce((cat, a) => {
+                const t = a.find((t) => t.language === lang)
+                // Skip alerts with no description
+                return t?.text ? `${cat}<p>${t.text}</p>` : cat
+            }, '')
             const toggle = alerts.innerHTML
                 ? `<li><button>${state === null ? l.str.close : l.str.open}</button></li>`
                 : ''
