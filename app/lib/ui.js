@@ -1,5 +1,28 @@
 import request from './request.js'
 
+// Private view methods
+const start = (view, root) => {
+    // Replace view with updated tree
+    const load = async () => {
+        root.replaceChildren(view.tree)
+        if (!view.loaded) await view.compose()
+        if (!view.live) view.loaded = true
+    }
+    view.started = true
+    load()
+    const interval = view.interval ?? 0
+    // Reload is only spawned if view is live and visible
+    if (view.live && interval && !view.id)
+        view.id = setInterval(() => {
+            if (!document.hidden && !!view.tree.offsetParent) load()
+        }, interval)
+}
+const stop = (view) => {
+    clearInterval(view.id)
+    view.id = null
+    view.started = null
+}
+
 export default {
     // bind()   Bind an array of views to a root element
     // views    Array of unique objects constructed with init()
@@ -14,7 +37,7 @@ export default {
     bind: (views, root, nav = null, title = null) => {
         // Switch to view that matches hash
         const setView = () => {
-            for (const v of views) if (v.started) v.stop()
+            for (const v of views) if (v.started) stop(v)
             if (nav) {
                 nav.innerHTML = views.reduce((cat, v, i) =>
                     `${cat}<a href="#${nav.id}=${i}">${v.title}</a>`, '')
@@ -22,8 +45,8 @@ export default {
                 nav.children[index].className = 'active'
                 window.scroll(0, 0)
                 if (title) document.title = `${views[index].title}${title}`
-                views[index].start(root)
-            } else (views.find((v) => request.hash(v.title)) || views[0]).start(root)
+                start(views[index], root)
+            } else start(views.find((v) => request.hash(v.title)) || views[0], root)
         }
         // Change view when hash changes
         if (views.length > 1) window.addEventListener('popstate', setView)
@@ -40,28 +63,8 @@ export default {
     //          default = div.
     init: (target, title, live = true, tag = 'div') => {
         target.title = title
+        target.live = live
         target.tree = document.createElement(tag)
-        // Replace view with updated tree
-        const load = async (root) => {
-            root.replaceChildren(target.tree)
-            if (!target.loaded) await target.compose()
-            if (!live) target.loaded = true
-        }
-        // Reload is only spawned if view is live and visible
-        target.start = (root) => {
-            target.started = true
-            load(root)
-            const interval = target.interval ?? 0
-            if (live && interval && !target.id)
-                target.id = setInterval(() => {
-                    if (!document.hidden && !!target.tree.offsetParent) load(root)
-                }, interval)
-        }
-        target.stop = () => {
-            clearInterval(target.id)
-            target.id = null
-            target.started = null
-        }
         // Subscribe to notifications from target object
         target.listen = (fn) => {
             target.listeners ??= []
