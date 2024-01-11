@@ -2,7 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 
 export function Settings(l) {
-    ui.init(this, l.str.settings)
+    ui.init(this, l.str.settings, false)
 
     this.compose = async () => {
         const lang = request.cookie('lang') || 'fi'
@@ -26,6 +26,7 @@ export function Settings(l) {
                 this.notify()
                 // Force update nav titles
                 window.dispatchEvent(new Event('popstate'))
+                this.compose()
             }
         }, true)
     }
