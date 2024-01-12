@@ -18,7 +18,7 @@ export function Arrivals(l) {
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
-            html = ''
+            let html = ''
             for (const dep of json.data.stop.stoptimesWithoutPatterns) {
                 let sign =
                     `&#8594;<a href="#p=0;route=${dep.trip.route.shortName}">` +
