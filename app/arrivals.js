@@ -18,7 +18,7 @@ export function Arrivals(l) {
         }
         let json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
-            this.tree.innerHTML = ''
+            html = ''
             for (const dep of json.data.stop.stoptimesWithoutPatterns) {
                 let sign =
                     `&#8594;<a href="#p=0;route=${dep.trip.route.shortName}">` +
@@ -26,15 +26,17 @@ export function Arrivals(l) {
                 if (dep.realtimeState == 'CANCELED')
                     sign = `&#10005;<a>${l.str.canceled}</a>`
                 const dt = new Date(dep.scheduledArrival * 1000)
-                const diff = Math.round((dep.realtimeArrival - dep.scheduledArrival) / 60)
-                this.tree.innerHTML +=
+                const diff =
+                    Math.round((dep.realtimeArrival - dep.scheduledArrival) / 60)
+                html +=
                     `<tr><td>${dt.toUTCString().substring(17, 22)}</td>` +
                         '<th class="diff">' +
                             `${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
                         `<th class="route">${dep.trip.route.shortName}</th>` +
                         `<td>&nbsp;${sign}</td></tr>`
             }
-            this.tree.innerHTML ||= `<tr><th class="diff">${l.str.noArrivals}</th></tr>`
+            this.tree.innerHTML =
+                html || `<tr><th class="diff">${l.str.noArrivals}</th></tr>`
         } else this.tree.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 }

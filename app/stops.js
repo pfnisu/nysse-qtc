@@ -33,14 +33,15 @@ export function Stops(l, listenLang) {
             }
         }
         // Sparse array, iterating as object
+        let html = ''
         for (const hour in table) {
             table[hour].sort((a, b) => a.minute - b.minute)
-            let row = `<tr><th>${hour.toString().padStart(2, '0')}</th><td>`
+            html += `<tr><th>${hour.toString().padStart(2, '0')}</th><td>`
             for (const trip of table[hour])
-                row += ` <p>${trip.minute}<span class="route">${trip.route}</span></p>`
-            root.innerHTML += `${row}</td></tr>`
+                html += ` <p>${trip.minute}<span class="route">${trip.route}</span></p>`
+            html += '</td></tr>'
         }
-        root.innerHTML ||= `<tr><th>${l.str.error}</th></tr>`
+        root.innerHTML = html || `<tr><th>${l.str.error}</th></tr>`
     }
 
     this.compose = async () => {
@@ -96,7 +97,6 @@ export function Stops(l, listenLang) {
             search.focus()
             this.tree.querySelector('#search').addEventListener('click', async (ev) => {
                 ev.preventDefault()
-                content.innerHTML = ''
                 const query = {
                     'query': `{stops(feeds:"${env.feed}",maxResults:30,` +
                         `name:"${search.value}"){gtfsId name zoneId}}`
@@ -107,13 +107,15 @@ export function Stops(l, listenLang) {
                     json.data.stops.sort((a, b) =>
                         a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
                             a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
+                    let html = ''
                     for (const stop of json.data.stops) {
                         const sid = stop.gtfsId.split(':')[1]
-                        content.innerHTML +=
+                        html +=
                             `<tr><th class="zone">${stop.zoneId}</th>` +
                                 `<th class="stop">${sid}</th>` +
                                 `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                     }
+                    content.innerHTML = html
                 } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
             })
         }

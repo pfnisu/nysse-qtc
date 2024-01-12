@@ -46,11 +46,13 @@ export function List(l, listenLang, listenHome) {
                 request.cookie('alerts', a.className)
             })
             json.data.routes.sort((a, b) => parseInt(a.shortName) - parseInt(b.shortName))
+            let html = ''
             for (const route of json.data.routes)
-                content.innerHTML += 
+                html +=
                     `<tr><th class="route">${route.shortName}</th>` +
                         `<td><a href="#p=0;route=${route.shortName}">` +
                             `${route.longName}</a></td></tr>`
+            content.innerHTML = html
         } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 
