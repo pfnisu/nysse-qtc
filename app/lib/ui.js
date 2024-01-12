@@ -1,6 +1,5 @@
 import request from './request.js'
 
-// Private view methods
 const start = (view, root) => {
     // Replace view with updated tree
     const load = async () => {
@@ -48,7 +47,7 @@ export default {
                 start(views[index], root)
             } else start(views.find((v) => request.hash(v.title)) || views[0], root)
         }
-        // Change view when hash changes
+        // Change view when history changes
         if (views.length > 1) window.addEventListener('popstate', setView)
         setView()
     },
