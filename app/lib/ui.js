@@ -70,8 +70,8 @@ export default {
             target.listeners ??= []
             target.listeners.push(fn)
         }
-        target.notify = (data = null) => {
-            if (target.listeners) for (const fn of target.listeners) fn(data)
+        target.notify = () => {
+            if (target.listeners) for (const fn of target.listeners) fn()
         }
     }
 }
