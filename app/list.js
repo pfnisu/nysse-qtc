@@ -2,7 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
-export function List(l, listen) {
+export function List(l, listenLang, listenHome) {
     ui.init(this, 'list', false)
 
     this.compose = async () => {
@@ -54,7 +54,7 @@ export function List(l, listen) {
         } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 
-    // Listen for home stop and lang change notifications
-    listen(() => this.compose())
-    l.listen(() => this.compose())
+    // Listen for lang change and home stop notifications
+    listenLang(() => this.compose())
+    listenHome(() => this.compose())
 }

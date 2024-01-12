@@ -10,10 +10,9 @@ const l = {}
 const main = async () => {
     l.str = await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
     const settings = new Settings(l)
-    l.listen = settings.listen
-    const stops = new Stops(l)
+    const stops = new Stops(l, settings.listen)
     ui.bind(
-        [new Lines(l, stops.listen), stops, settings],
+        [new Lines(l, settings.listen, stops.listen), stops, settings],
         document.querySelector('main'),
         document.querySelector('nav'),
         ' | Nysse-qtc')

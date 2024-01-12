@@ -3,7 +3,7 @@ import request from './lib/request.js'
 import env from '../.env.js'
 import {Arrivals} from './arrivals.js'
 
-export function Stops(l) {
+export function Stops(l, listenLang) {
     ui.init(this, l.str.stops)
     const arrivals = new Arrivals(l)
 
@@ -118,5 +118,5 @@ export function Stops(l) {
             })
         }
     }
-    l.listen(() => this.title = l.str.stops)
+    listenLang(() => this.title = l.str.stops)
 }
