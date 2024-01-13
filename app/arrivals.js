@@ -2,10 +2,11 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
+// Realtime trip arrivals for a stop
 export function Arrivals(l) {
     ui.init(this, 'arrivals', true, 'tbody')
 
-    // Compose arrival UI every 30 sec
+    // Compose UI every 30 sec
     this.interval = 30000
 
     this.compose = async () => {

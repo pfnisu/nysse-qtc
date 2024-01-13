@@ -2,6 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
+// All patterns (stop lists) for a route
 export function Route(l) {
     ui.init(this, 'route')
 

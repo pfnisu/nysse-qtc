@@ -2,6 +2,7 @@ import ui from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
+// List of all routes and alerts
 export function List(l, listenLang, listenHome) {
     ui.init(this, 'list', false)
 

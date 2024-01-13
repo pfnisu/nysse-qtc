@@ -1,6 +1,7 @@
 import ui from './lib/ui.js'
 import request from './lib/request.js'
 
+// Language setting and project info
 export function Settings(l) {
     ui.init(this, l.str.settings, false)
 

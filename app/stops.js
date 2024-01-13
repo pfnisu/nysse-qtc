@@ -3,6 +3,7 @@ import request from './lib/request.js'
 import env from '../.env.js'
 import {Arrivals} from './arrivals.js'
 
+// Stop search and timetables for a stop. Parent view of Arrivals
 export function Stops(l, listenLang) {
     ui.init(this, l.str.stops)
     const arrivals = new Arrivals(l)

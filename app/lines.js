@@ -2,6 +2,7 @@ import ui from './lib/ui.js'
 import {List} from './list.js'
 import {Route} from './route.js'
 
+// Parent view of List and Route
 export function Lines(l, listenLang, listenHome) {
     ui.init(this, l.str.lines, false)
 
