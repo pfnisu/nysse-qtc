@@ -2,7 +2,7 @@
 
 ## App description
 
-Fast UI for checking stop timetables and arrival estimates of Tampere public transport routes. Uses public data from <https://digitransit.fi/> API (licensed under CC BY 4.0).
+Fast, mobile-first UI for checking stop timetables and arrival estimates of Tampere public transport routes. Uses public data from <https://digitransit.fi/> API (licensed under CC BY 4.0).
 
 ## Author
 
@@ -21,7 +21,7 @@ App deployed at: <https://nysse-qtc.onrender.com/>
 
 ## Releases
 
-* Latest stable release: v1.2.0
+* Latest stable release: v1.3.0
 * See tags for version history: <https://github.com/pfnisu/nysse-qtc/tags>
 
 ## License
