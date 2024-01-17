@@ -6,7 +6,7 @@
     font-size:calc(10px + 0.5vw);
     color:#000;
 }
-html,table[id] tr:nth-child(odd) th,table[id] tr:nth-child(odd) td,th.diff,#alert p {
+html,table[id] tr:nth-child(odd) > *,th.diff,#alert p {
     background:#f6f5f4;
 }
 nav {
