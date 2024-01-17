@@ -57,7 +57,7 @@ export function List(l, listenLang, listenHome) {
         } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 
-    // Listen for lang change and home stop notifications
+    // Listen for lang and home stop change notifications
     listenLang(() => this.compose())
     listenHome(() => this.compose())
 }
