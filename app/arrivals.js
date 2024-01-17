@@ -37,7 +37,7 @@ export function Arrivals(l) {
                         `<td>&nbsp;${sign}</td></tr>`
             }
             this.tree.innerHTML =
-                html || `<tr><th class="diff">${l.str.noArrivals}</th></tr>`
+                html || `<tr><td>${l.str.noArrivals}</td></tr>`
         } else this.tree.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
 }

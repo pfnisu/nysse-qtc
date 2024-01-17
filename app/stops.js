@@ -42,7 +42,7 @@ export function Stops(l, listenLang) {
                 html += ` <p>${trip.minute}<span class="route">${trip.route}</span></p>`
             html += '</td></tr>'
         }
-        root.innerHTML = html || `<tr><th>${l.str.error}</th></tr>`
+        root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
     }
 
     this.compose = async () => {
