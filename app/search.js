@@ -3,7 +3,7 @@ import request from './lib/request.js'
 import env from '../.env.js'
 
 // Stop search
-export function Search(l) {
+export function Search(l, listenLang) {
     // Static view, latest search persists
     ui.init(this, 'search', false)
     this.compose = async () => {
@@ -38,4 +38,5 @@ export function Search(l) {
             } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
         })
     }
+    listenLang(() => this.compose())
 }

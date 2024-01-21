@@ -8,7 +8,7 @@ import {Search} from './search.js'
 export function Stops(l, listenLang) {
     ui.init(this, l.str.stops)
     const arrivals = new Arrivals(l)
-    const search = new Search(l)
+    const search = new Search(l, listenLang)
 
     // Format a day offset as YYYYMMDD
     // 0...6 = Sunday - Saturday, null = Closest weekday
