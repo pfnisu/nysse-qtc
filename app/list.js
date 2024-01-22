@@ -21,7 +21,7 @@ export function List(l, listenLang, listenHome) {
             `<div${state === null ? '' : ' class="hidden"'} id="alert"></div>` +
             '<ul></ul><table><tbody></tbody></table>'
         const alerts = this.tree.querySelector('#alert')
-        const content = this.tree.querySelector('tbody')
+        let html = ''
         if (json) {
             // Remove duplicate alerts
             const set = [...new Map(json.data.alerts.map(a => [
@@ -47,16 +47,14 @@ export function List(l, listenLang, listenHome) {
                 request.cookie('alerts', a.className)
             })
             json.data.routes.sort((a, b) => parseInt(a.shortName) - parseInt(b.shortName))
-            let html = ''
             for (const route of json.data.routes)
                 html +=
                     `<tr><th class="route">${route.shortName}</th>` +
                         `<td><a href="#p=0;route=${route.shortName}">` +
                             `${route.longName}</a></td></tr>`
-            content.innerHTML = html
-        } else content.innerHTML = `<tr><td>${l.str.error}</td></tr>`
+        } else html = `<tr><td>${l.str.error}</td></tr>`
+        this.tree.querySelector('tbody').innerHTML = html
     }
-
     // Listen for lang and home stop change notifications
     listenLang(() => this.compose())
     listenHome(() => this.compose())
