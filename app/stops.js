@@ -91,7 +91,9 @@ export function Stops(l, listenLang) {
             } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
         } else {
             ui.bind([search], this.tree)
-            search.tree.querySelector('input').select()
+            const input = search.tree.querySelector('input')
+            input.value = ''
+            input.focus()
         }
     }
     listenLang(() => this.title = l.str.stops)
