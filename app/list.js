@@ -12,7 +12,7 @@ export function List(l, listenLang, listenHome) {
                 `alerts(feeds:"${env.feed}"){alertDescriptionTextTranslations{` +
                     'language text}alertHash}}'
         }
-        let json = await request.http(env.uri, 'POST', query, env.key)
+        const json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
         const state = request.cookie('alerts')
         const home = hid ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>` : ''
@@ -55,6 +55,7 @@ export function List(l, listenLang, listenHome) {
         } else html = `<tr><td>${l.str.error}</td></tr>`
         this.tree.querySelector('tbody').innerHTML = html
     }
+
     // Listen for lang and home stop change notifications
     listenLang(() => this.compose())
     listenHome(() => this.compose())

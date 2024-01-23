@@ -35,8 +35,8 @@ export function Stops(l, listenLang) {
                 })
             }
         }
-        // Sparse array, iterating as object
         let html = ''
+        // Sparse array, iterating as object
         for (const hour in table) {
             table[hour].sort((a, b) => a.minute - b.minute)
             html += `<tr><th>${hour.toString().padStart(2, '0')}</th><td>`
@@ -61,7 +61,7 @@ export function Stops(l, listenLang) {
                         'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
                     'name zoneId}}'
             }
-            let json = await request.http(env.uri, 'POST', query, env.key)
+            const json = await request.http(env.uri, 'POST', query, env.key)
             if (json) {
                 document.title =
                     `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +
@@ -96,5 +96,6 @@ export function Stops(l, listenLang) {
             input.focus()
         }
     }
+
     listenLang(() => this.title = l.str.stops)
 }

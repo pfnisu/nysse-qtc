@@ -20,7 +20,7 @@ export function Search(l, listenLang) {
                     `name:"${this.tree.querySelector('input').value}")` +
                         '{gtfsId name zoneId}}'
             }
-            let json = await request.http(env.uri, 'POST', query, env.key)
+            const json = await request.http(env.uri, 'POST', query, env.key)
             let html = ''
             if (json) {
                 // Sort results 1st by zone, 2nd by stop
@@ -38,5 +38,6 @@ export function Search(l, listenLang) {
             this.tree.querySelector('tbody').innerHTML = html
         })
     }
+
     listenLang(() => this.compose())
 }

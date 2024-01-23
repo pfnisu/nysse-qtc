@@ -12,7 +12,7 @@ export function Route(l) {
             'query': `{route(id:"${env.feed}:${rid}"){` +
                 'patterns{stops{gtfsId name zoneId}headsign}longName}}'
         }
-        let json = await request.http(env.uri, 'POST', query, env.key)
+        const json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
             document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             let i = 0

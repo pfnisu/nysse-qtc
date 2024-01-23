@@ -17,7 +17,7 @@ export function Arrivals(l) {
                     'scheduledArrival realtimeArrival headsign trip{' +
                         'route{shortName}}realtimeState}}}'
         }
-        let json = await request.http(env.uri, 'POST', query, env.key)
+        const json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
             let html = ''
             for (const dep of json.data.stop.stoptimesWithoutPatterns) {
