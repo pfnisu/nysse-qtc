@@ -37,16 +37,15 @@ export function List(l, listenLang, listenHome) {
                 return t?.text ? `${cat}<p>${t.text}</p>` : cat
             }, '')
             const toggle = alerts.innerHTML
-                ? `<li><button>${state === null ? l.str.close : l.str.open}</button></li>`
+                ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
                 : ''
             this.tree.querySelector('ul').innerHTML = `${toggle}${home}`
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
-                const a = this.tree.querySelector('#alert')
-                a.classList.toggle('hidden')
-                ev.target.innerHTML = a.classList.contains('hidden')
+                alerts.classList.toggle('hidden')
+                ev.target.innerHTML = alerts.classList.contains('hidden')
                     ? l.str.open
                     : l.str.close
-                request.cookie('alerts', a.className)
+                request.cookie('alerts', alerts.className)
             })
             json.data.routes.sort((a, b) =>
                 parseInt(a.shortName) - parseInt(b.shortName))
