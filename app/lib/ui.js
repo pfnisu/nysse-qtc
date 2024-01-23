@@ -16,6 +16,7 @@ const start = (view, root) => {
             if (!document.hidden && !!view.tree.offsetParent) load()
         }, interval)
 }
+
 const stop = (view) => {
     clearInterval(view.id)
     view.id = null

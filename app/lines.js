@@ -9,5 +9,6 @@ export function Lines(l, listenLang, listenHome) {
     this.compose = async () => {
         ui.bind([new List(l, listenLang, listenHome), new Route(l)], this.tree)
     }
+
     listenLang(() => this.title = l.str.lines)
 }
