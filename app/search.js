@@ -39,5 +39,5 @@ export function Search(l, listenLang) {
         })
     }
 
-    listenLang(() => this.compose())
+    listenLang(this.compose)
 }

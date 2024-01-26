@@ -59,6 +59,6 @@ export function List(l, listenLang, listenHome) {
     }
 
     // Listen for lang and home stop change notifications
-    listenLang(() => this.compose())
-    listenHome(() => this.compose())
+    listenLang(this.compose)
+    listenHome(this.compose)
 }
