@@ -90,6 +90,7 @@ table[id] th,th.stop,th.diff,.route {
 }
 td,a {
     box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
 }
 td p,span.route {
     display:inline-block;
