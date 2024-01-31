@@ -9,7 +9,7 @@ export function Settings(l) {
         const lang = request.cookie('lang') || 'fi'
         this.tree.innerHTML =
             '<h2>Kieli/Language</h2>' +
-            `<p><button id="fi">suomi</button> <button id="en">english</button></p>` +
+            '<p><button id="fi">suomi</button> <button id="en">english</button></p>' +
             `<h2>${l.str.dev}</h2>` +
             `<p>${l.str.src}: <a href="https://github.com/pfnisu/nysse-qtc/">https://github.com/pfnisu/nysse-qtc/</a></p>` +
             `<p>${l.str.api}: &copy; 2024 <a href="https://digitransit.fi/en/developers/apis/6-terms-of-use/">Digitransit</a></p>` +
