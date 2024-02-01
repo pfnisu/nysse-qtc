@@ -10,7 +10,7 @@ export function List(l, listenLang, listenHome) {
         const query = {
             'query': `{routes(feeds:"${env.feed}"){shortName longName}` +
                 `alerts(feeds:"${env.feed}"){alertDescriptionTextTranslations{` +
-                    'language text}alertHash}}'
+                    'language text}alertHash alertSeverityLevel}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
@@ -26,15 +26,18 @@ export function List(l, listenLang, listenHome) {
         if (json) {
             // Remove duplicate alerts
             const set = [...new Map(json.data.alerts.map(a => [
-                a.alertHash,
-                a.alertDescriptionTextTranslations
+                a.alertHash, [
+                    ...a.alertDescriptionTextTranslations,
+                    a.alertSeverityLevel
+                ]
             ])).values()]
             const alerts = this.tree.querySelector('#alert')
             const lang = request.cookie('lang') || 'fi'
             alerts.innerHTML = set.reduce((cat, a) => {
+                const severity = a.pop() === 'SEVERE' ? ' class="severe"' : ''
                 const t = a.find((t) => t.language === lang)
                 // Skip alerts with no description
-                return t?.text ? `${cat}<p>${t.text}</p>` : cat
+                return t?.text ? `${cat}<p${severity}>${t.text}</p>` : cat
             }, '')
             const toggle = alerts.innerHTML
                 ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
