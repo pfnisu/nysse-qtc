@@ -13,7 +13,7 @@ export function Route(l) {
                 'patterns{stops{gtfsId name zoneId}headsign}longName}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
-        if (json) {
+        if (json?.data.route) {
             document.title = `${rid} ${json.data.route.longName} | ${document.title}`
             let i = 0
             let list = ''
@@ -40,6 +40,6 @@ export function Route(l) {
                 h.after(jump)
             }, true)
             this.tree.querySelector('h2').after(jump)
-        } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
+        } else this.tree.innerHTML = `<h2>${json ? l.str.badRoute : l.str.error}</h2>`
     }
 }

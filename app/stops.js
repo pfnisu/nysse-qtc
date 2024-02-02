@@ -62,7 +62,7 @@ export function Stops(l, listenLang) {
                     'name zoneId}}'
             }
             const json = await request.http(env.uri, 'POST', query, env.key)
-            if (json) {
+            if (json?.data.stop) {
                 document.title =
                     `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +
                     ` | ${document.title}`
@@ -88,7 +88,7 @@ export function Stops(l, listenLang) {
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('table'))
-            } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
+            } else this.tree.innerHTML = `<h2>${json ? l.str.badStop : l.str.error}</h2>`
         } else {
             ui.bind([search], this.tree)
             const input = search.tree.querySelector('input')
