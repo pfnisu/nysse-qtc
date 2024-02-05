@@ -16,7 +16,7 @@ export function Stops(l, listenLang) {
         let dt = new Date()
         const today = dt.getUTCDay() || 7
         offset ??= today < 6 ? today : 8
-        dt.setUTCDate(dt.getUTCDate() + (offset - today))
+        dt.setUTCDate(dt.getUTCDate() + offset - today)
         return dt.toJSON().split('T')[0].replaceAll('-', '')
     }
     const dates = { mon: day(), sat: day(6), sun: day(7) }
