@@ -14,7 +14,7 @@ export function Stops(l, listenLang) {
     // 0...6 = Sunday - Saturday, null = Closest weekday
     const day = (offset = null) => {
         let dt = new Date()
-        const today = dt.getUTCDay()
+        const today = dt.getUTCDay() || 7
         offset ??= today < 6 ? today : 8
         dt.setUTCDate(dt.getUTCDate() + (offset - today))
         return dt.toJSON().split('T')[0].replaceAll('-', '')
