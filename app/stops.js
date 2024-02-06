@@ -88,10 +88,9 @@ export function Stops(l, listenLang) {
                 // Toggle highlight for matching headsigns
                 this.tree.addEventListener('click', (ev) => {
                     if (ev.target.tagName === 'SPAN')
-                        this.tree.querySelectorAll('span').forEach((s) => {
-                            if (s.innerText === ev.target.innerText)
+                        for (const s of this.tree.querySelectorAll('span'))
+                            if (s.textContent === ev.target.textContent)
                                 s.classList.toggle('hl')
-                        })
                 }, true)
 
                 // Arrivals is a live view, updating separately
