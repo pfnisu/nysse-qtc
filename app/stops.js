@@ -45,6 +45,13 @@ export function Stops(l, listenLang) {
             html += '</td></tr>'
         }
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
+        // Toggle highlight for matching headsigns
+        root.addEventListener('click', (ev) => {
+            if (ev.target.tagName === 'SPAN')
+                root.querySelectorAll('span').forEach((s) => {
+                    if (s.innerText === ev.target.innerText) s.classList.toggle('hl')
+                })
+        }, true)
     }
 
     this.compose = async () => {
