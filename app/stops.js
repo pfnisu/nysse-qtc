@@ -97,9 +97,9 @@ export function Stops(l, listenLang) {
         }
     }
 
-    // Toggle highlight for matching headsigns
+    // Toggle highlight for matching shortNames
     this.tree.addEventListener('click', (ev) => {
-        if (ev.target.tagName === 'SPAN')
+        if (ev.target.classList.contains('route'))
             for (const s of this.tree.querySelectorAll('span'))
                 if (s.textContent === ev.target.textContent) s.classList.toggle('hl')
     }, true)
