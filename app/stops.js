@@ -85,13 +85,6 @@ export function Stops(l, listenLang) {
                 timetable(json.data.stop.mon, this.tree.querySelector('#mon>tbody'))
                 timetable(json.data.stop.sat, this.tree.querySelector('#sat>tbody'))
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
-                // Toggle highlight for matching headsigns
-                this.tree.addEventListener('click', (ev) => {
-                    if (ev.target.tagName === 'SPAN')
-                        for (const s of this.tree.querySelectorAll('span'))
-                            if (s.textContent === ev.target.textContent)
-                                s.classList.toggle('hl')
-                }, true)
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('table'))
@@ -103,6 +96,13 @@ export function Stops(l, listenLang) {
             input.focus()
         }
     }
+
+    // Toggle highlight for matching headsigns
+    this.tree.addEventListener('click', (ev) => {
+        if (ev.target.tagName === 'SPAN')
+            for (const s of this.tree.querySelectorAll('span'))
+                if (s.textContent === ev.target.textContent) s.classList.toggle('hl')
+    }, true)
 
     listenLang(() => this.title = l.str.stops)
 }
