@@ -17,7 +17,7 @@ nav {
     padding:4px 4px 0 8px;
     background:#282c34;
 }
-nav a,th.stop,.route:active {
+nav a,th.stop,tbody .route:active {
     background:#484c54;
     color:#61dafb;
 }

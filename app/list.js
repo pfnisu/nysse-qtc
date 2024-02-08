@@ -21,7 +21,7 @@ export function List(l, listenLang, listenHome) {
         this.tree.innerHTML =
             `<h2>${l.str.listHead}</h2>` +
             `<div${state === null ? '' : ' class="hidden"'} id="alert"></div>` +
-            '<ul></ul><table><tbody></tbody></table>'
+            '<ul></ul><table><thead></thead></table>'
         let html = ''
         if (json) {
             // Remove duplicate alerts
@@ -58,7 +58,7 @@ export function List(l, listenLang, listenHome) {
                         `<td><a href="#p=0;route=${route.shortName}">` +
                             `${route.longName}</a></td></tr>`
         } else html = `<tr><td>${l.str.error}</td></tr>`
-        this.tree.querySelector('tbody').innerHTML = html
+        this.tree.querySelector('thead').innerHTML = html
     }
 
     // Listen for lang and home stop change notifications
