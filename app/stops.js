@@ -5,7 +5,7 @@ import {Arrivals} from './arrivals.js'
 import {Search} from './search.js'
 
 // Timetables for a stop. Parent view of Arrivals and Search
-export function Stops(l, listenLang) {
+export function Stops(l, listenLang, highlight) {
     ui.init(this, l.str.stops)
     const arrivals = new Arrivals(l)
     const search = new Search(l, listenLang)
@@ -45,18 +45,6 @@ export function Stops(l, listenLang) {
             html += '</td></tr>'
         }
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
-    }
-
-    // Set highlighted route label from/to cookie
-    const highlight = (route = null) => {
-        const prev = request.cookie('highlight')
-        if (route || prev) {
-            if (route === prev) request.cookie('highlight', '')
-            else if (route) request.cookie('highlight', route)
-            for (const s of this.tree.querySelectorAll('span'))
-                if (s.textContent === route || s.textContent === prev)
-                    s.classList.toggle('hl')
-        }
     }
 
     this.compose = async () => {
@@ -109,11 +97,6 @@ export function Stops(l, listenLang) {
             input.focus()
         }
     }
-
-    // Toggle highlight for matching shortNames
-    this.tree.addEventListener('click', (ev) => {
-        if (ev.target.classList.contains('route')) highlight(ev.target.textContent)
-    }, true)
 
     listenLang(() => this.title = l.str.stops)
 }
