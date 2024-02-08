@@ -101,7 +101,8 @@ export function Stops(l, listenLang) {
     this.tree.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('route'))
             for (const s of this.tree.querySelectorAll('span'))
-                if (s.textContent === ev.target.textContent) s.classList.toggle('hl')
+                if (s.textContent === ev.target.textContent || s.classList.contains('hl'))
+                    s.classList.toggle('hl')
     }, true)
 
     listenLang(() => this.title = l.str.stops)
