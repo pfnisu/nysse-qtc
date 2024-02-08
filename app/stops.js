@@ -82,12 +82,12 @@ export function Stops(l, listenLang) {
                     this.notify()
                 })
 
+                // Arrivals is a live view, updating separately
+                ui.bind([arrivals], this.tree.querySelector('table'))
+
                 timetable(json.data.stop.mon, this.tree.querySelector('#mon>tbody'))
                 timetable(json.data.stop.sat, this.tree.querySelector('#sat>tbody'))
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
-
-                // Arrivals is a live view, updating separately
-                ui.bind([arrivals], this.tree.querySelector('table'))
             } else this.tree.innerHTML = `<h2>${json ? l.str.badStop : l.str.error}</h2>`
         } else {
             ui.bind([search], this.tree)
