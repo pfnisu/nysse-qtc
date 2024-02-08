@@ -47,6 +47,18 @@ export function Stops(l, listenLang) {
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
     }
 
+    // Set highlighted route label from/to cookie
+    const highlight = (route = null) => {
+        const prev = request.cookie('highlight')
+        if (route || prev) {
+            if (route === prev) request.cookie('highlight', '')
+            else if (route) request.cookie('highlight', route)
+            for (const s of this.tree.querySelectorAll('span'))
+                if (s.textContent === route || s.textContent === prev)
+                    s.classList.toggle('hl')
+        }
+    }
+
     this.compose = async () => {
         const sid = request.hash('stop')
         if (sid) {
@@ -88,6 +100,7 @@ export function Stops(l, listenLang) {
                 timetable(json.data.stop.mon, this.tree.querySelector('#mon>tbody'))
                 timetable(json.data.stop.sat, this.tree.querySelector('#sat>tbody'))
                 timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
+                highlight()
             } else this.tree.innerHTML = `<h2>${json ? l.str.badStop : l.str.error}</h2>`
         } else {
             ui.bind([search], this.tree)
@@ -99,10 +112,7 @@ export function Stops(l, listenLang) {
 
     // Toggle highlight for matching shortNames
     this.tree.addEventListener('click', (ev) => {
-        if (ev.target.classList.contains('route'))
-            for (const s of this.tree.querySelectorAll('span'))
-                if (s.textContent === ev.target.textContent || s.classList.contains('hl'))
-                    s.classList.toggle('hl')
+        if (ev.target.classList.contains('route')) highlight(ev.target.textContent)
     }, true)
 
     listenLang(() => this.title = l.str.stops)
