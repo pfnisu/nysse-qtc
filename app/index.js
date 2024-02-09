@@ -29,7 +29,7 @@ const main = async () => {
         document.querySelector('nav'),
         ' | ' + document.title)
 
-    // Toggle highlight for matching shortNames
+    // Toggle highlight for matching shortNames (in Arrivals, List and Stops)
     document.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('route')) highlight(ev.target.textContent)
     }, true)

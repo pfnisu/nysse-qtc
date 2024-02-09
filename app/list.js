@@ -43,6 +43,7 @@ export function List(l, listenLang, listenHome) {
                 ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
                 : ''
             this.tree.querySelector('ul').innerHTML = `${toggle}${home}`
+            // Tree gets overwritten on re-compose, listener can be GC'd
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
                 alerts.classList.toggle('hidden')
                 ev.target.innerHTML = alerts.classList.contains('hidden')
