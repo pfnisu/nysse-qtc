@@ -4,10 +4,9 @@ import {Lines} from './lines.js'
 import {Stops} from './stops.js'
 import {Settings} from './settings.js'
 
-// Language object
-const l = {}
-
 const main = async () => {
+    // Language object
+    const l = {}
     l.str = await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
 
     // Set highlighted route label from/to cookie
