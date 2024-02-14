@@ -73,6 +73,7 @@ export function Stops(l, listenLang, highlight) {
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
                 const fav = document.createElement('ul')
+                // Generate favorite list based on cookie matches
                 const list = () => {
                     const hid = request.cookie('home')
                     const did = request.cookie('dest')
