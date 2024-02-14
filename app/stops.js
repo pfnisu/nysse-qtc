@@ -72,7 +72,6 @@ export function Stops(l, listenLang, highlight) {
                     `<h2>${l.str.monFri}</h2><table id="mon"><tbody></tbody></table>` +
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
-                const title = this.tree.querySelector('h2')
                 const fav = document.createElement('ul')
                 const list = () => {
                     const hid = request.cookie('home')
@@ -89,11 +88,10 @@ export function Stops(l, listenLang, highlight) {
                     const prev = request.cookie(ev.target.id)
                     request.cookie(ev.target.id, sid === prev ? '' : sid)
                     fav.innerHTML = list()
-                    title.after(fav)
                     // Notify listeners when favorite stop is set
                     this.notify()
                 })
-                title.after(fav)
+                this.tree.querySelector('h2').after(fav)
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('table'))
