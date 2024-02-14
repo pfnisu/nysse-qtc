@@ -113,7 +113,7 @@ button,li a {
     margin-left:-5em;
     border-radius:0 6px 6px 0;
 }
-ul,#home {
+ul {
     position:absolute;
     right:0.5em;
     list-style:none;
@@ -147,7 +147,7 @@ button:active,li a:active {
     input {
         width:50%;
     }
-    ul,#home {
+    ul {
         right:1em;
     }
 }

@@ -66,20 +66,34 @@ export function Stops(l, listenLang, highlight) {
                 document.title =
                     `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +
                     ` | ${document.title}`
-                const hid = request.cookie('home')
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
-                    `<button id="home">${sid === hid ? l.str.home : l.str.setHome}` +
-                    '</button><table></table>' +
+                    '<table></table>' +
                     `<h2>${l.str.monFri}</h2><table id="mon"><tbody></tbody></table>` +
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
-                this.tree.querySelector('#home').addEventListener('click', (ev) => {
-                    request.cookie('home', sid)
-                    ev.target.innerHTML = l.str.home
-                    // Notify listeners when home stop is set
+                const title = this.tree.querySelector('h2')
+                const fav = document.createElement('ul')
+                const list = () => {
+                    const hid = request.cookie('home')
+                    const did = request.cookie('dest')
+                    if (sid === hid)
+                        return `<li><button id="home">${l.str.home}</button></li>`
+                    else if (sid === did)
+                        return `<li><button id="dest">${l.str.dest}</button></li>`
+                    return `<li><button id="home">${l.str.setHome}</button></li>` +
+                        `<li><button id="dest">${l.str.setDest}</button></li>`
+                }
+                fav.innerHTML = list()
+                fav.addEventListener('click', (ev) => {
+                    const prev = request.cookie(ev.target.id)
+                    request.cookie(ev.target.id, sid === prev ? '' : sid)
+                    fav.innerHTML = list()
+                    title.after(fav)
+                    // Notify listeners when favorite stop is set
                     this.notify()
                 })
+                title.after(fav)
 
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], this.tree.querySelector('table'))

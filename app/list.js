@@ -14,9 +14,13 @@ export function List(l, listenLang, listenHome) {
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
         const hid = request.cookie('home')
+        const did = request.cookie('dest')
         const state = request.cookie('alerts')
         const home = hid
             ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>`
+            : ''
+        const dest = did
+            ? `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>`
             : ''
         this.tree.innerHTML =
             `<h2>${l.str.listHead}</h2>` +
@@ -42,7 +46,7 @@ export function List(l, listenLang, listenHome) {
             const toggle = alerts.innerHTML
                 ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
                 : ''
-            this.tree.querySelector('ul').innerHTML = `${toggle}${home}`
+            this.tree.querySelector('ul').innerHTML = `${toggle}${home}${dest}`
             // Tree gets overwritten on re-compose, listener can be GC'd
             this.tree.querySelector('button')?.addEventListener('click', (ev) => {
                 alerts.classList.toggle('hidden')
