@@ -22,7 +22,7 @@ export function Arrivals(l) {
             let html = ''
             for (const dep of json.data.stop.stoptimesWithoutPatterns) {
                 let sign =
-                    `&#8594;<a href="#p=0;route=${dep.trip.route.shortName}">` +
+                    `&#10141;<a href="#p=0;route=${dep.trip.route.shortName}">` +
                     `${dep.headsign}</a>`
                 if (dep.realtimeState == 'CANCELED')
                     sign = `&#10005;<a>${l.str.canceled}</a>`

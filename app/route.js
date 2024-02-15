@@ -20,8 +20,8 @@ export function Route(l) {
             let html = ''
             for (const pat of json.data.route.patterns) {
                 // Generate jump anchors to pattern headings
-                list += `<li><a data-i="${i++}">&#8594; ${pat.headsign}</a></li>`
-                html += `<h2>${rid} &#8594; ${pat.headsign}</h2><table><tbody>`
+                list += `<li><a data-i="${i++}">&#10141; ${pat.headsign}</a></li>`
+                html += `<h2>${rid} &#10141; ${pat.headsign}</h2><table><tbody>`
                 for (const stop of pat.stops) {
                     const sid = stop.gtfsId.split(':')[1]
                     html +=
