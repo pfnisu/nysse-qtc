@@ -11,7 +11,6 @@ html,table[id] tr:nth-child(odd) > *,th.diff,#alert p {
     background:#f6f5f4;
 }
 nav {
-    position:relative;
     display:flex;
     flex-direction:row;
     justify-content:center;
@@ -35,7 +34,6 @@ nav a:hover,.route,th.zone,td span.hl {
     color:#282c34;
 }
 nav a:active,nav a:hover.active,.active {
-    position:relative;
     z-index:1;
     background:#fff;
     color:#282c34;
@@ -120,8 +118,8 @@ ul {
     list-style:none;
 }
 li * {
-    text-decoration:none;
     float:right;
+    text-decoration:none;
 }
 input:focus,button:hover,li a:hover {
     outline:2px solid #61dafb;
