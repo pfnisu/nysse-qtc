@@ -12,7 +12,6 @@ html,table[id] tr:nth-child(odd) > *,th.diff,#alert p {
 }
 nav {
     display:flex;
-    flex-direction:row;
     justify-content:center;
     padding:4px 4px 0 8px;
     background:#282c34;
@@ -27,6 +26,8 @@ nav a {
     border-radius:6px 6px 0 0;
     padding:12px 0;
     text-align:center;
+}
+nav a,li a {
     text-decoration:none;
 }
 nav a:hover,.route,th.zone,td span.hl {
@@ -119,7 +120,6 @@ ul {
 }
 li * {
     float:right;
-    text-decoration:none;
 }
 input:focus,button:hover,li a:hover {
     outline:2px solid #61dafb;
