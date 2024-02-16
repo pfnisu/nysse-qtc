@@ -6,8 +6,9 @@ import {Settings} from './settings.js'
 
 const main = async () => {
     // Language object
-    const l = {}
-    l.str = await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
+    const l = {
+        str: await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
+    }
 
     const size = request.cookie('size')
     if (size) document.documentElement.style.setProperty('--size', size)
