@@ -9,6 +9,9 @@ const main = async () => {
     const l = {}
     l.str = await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
 
+    const size = request.cookie('size')
+    if (size) document.documentElement.style.setProperty('--size', size)
+
     // Set highlighted route label from/to cookie
     const highlight = (route = null) => {
         const prev = request.cookie('highlight')
