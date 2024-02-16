@@ -7,12 +7,12 @@ export function Settings(l) {
 
     this.compose = async () => {
         const lang = request.cookie('lang') || 'fi'
-        const size = request.cookie('size') || '12px'
+        const size = request.cookie('size') || '10px'
         this.tree.innerHTML =
             '<h2>Kieli/Language</h2>' +
             '<p><button id="fi">suomi</button> <button id="en">english</button></p>' +
             `<h2>${l.str.size}</h2>` +
-            `<p><button data-s="10px">${l.str.small}</button> <button data-s="12px">${l.str.medium}</button> <button data-s="14px">${l.str.large}</button></p>` +
+            `<p><button data-s="9px">${l.str.small}</button> <button data-s="10px">${l.str.medium}</button> <button data-s="11px">${l.str.large}</button></p>` +
             `<h2>${l.str.dev}</h2>` +
             `<p>${l.str.src}: <a href="https://github.com/pfnisu/nysse-qtc/">https://github.com/pfnisu/nysse-qtc/</a></p>` +
             `<p>${l.str.api}: &copy; 2024 <a href="https://digitransit.fi/en/developers/apis/6-terms-of-use/">Digitransit</a></p>` +
