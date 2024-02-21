@@ -10,7 +10,7 @@ export function Settings(l) {
         const size = request.cookie('size') || '10px'
         this.tree.innerHTML =
             '<h2>Kieli/Language</h2>' +
-            '<p><button id="fi">suomi</button> <button id="en">english</button></p>' +
+            '<p><button data-l="fi">suomi</button> <button data-l="en">english</button></p>' +
             `<h2>${l.str.size}</h2>` +
             `<p><button data-s="9px">${l.str.small}</button> <button data-s="10px">${l.str.medium}</button> <button data-s="11px">${l.str.large}</button></p>` +
             `<h2>${l.str.dev}</h2>` +
@@ -21,16 +21,19 @@ export function Settings(l) {
             '<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3.</p>' +
             '<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</p>' +
             '<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>'
-        // Needs innerHTML to parse entity
-        this.tree.querySelector(`#${lang}`).innerHTML += ' &#10003;'
-        this.tree.querySelector(`[data-s="${size}"]`).innerHTML += ' &#10003;'
+        for (const b of this.tree.querySelectorAll('button')) {
+            if (b.dataset.l === lang || b.dataset.s === size) {
+                b.setAttribute('disabled', '')
+                b.innerHTML += ' &#10003;'
+            }
+        }
     }
 
     // Use single listener for all settings
     this.tree.addEventListener('click', async (ev) => {
-        if (ev.target.id) {
-            request.cookie('lang', ev.target.id)
-            l.str = await request.http(`lang/${ev.target.id}.json`)
+        if (ev.target.dataset.l) {
+            request.cookie('lang', ev.target.dataset.l)
+            l.str = await request.http(`lang/${ev.target.dataset.l}.json`)
             this.title = l.str.settings
             this.notify()
             // Force update nav titles

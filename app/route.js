@@ -20,7 +20,7 @@ export function Route(l) {
             let html = ''
             for (const pat of json.data.route.patterns) {
                 // Generate jump anchors to pattern headings
-                list += `<li><a data-i="${i++}">&#10141; ${pat.headsign}</a></li>`
+                list += `<li><button data-i="${i++}">&#10141; ${pat.headsign}</button></li>`
                 html += `<h2>${rid} &#10141; ${pat.headsign}</h2><table><tbody>`
                 for (const stop of pat.stops) {
                     const sid = stop.gtfsId.split(':')[1]
@@ -38,6 +38,9 @@ export function Route(l) {
                 const h = this.tree.querySelectorAll('h2')[ev.target.dataset.i]
                 h.scrollIntoView()
                 h.after(jump)
+                for (const b of jump.querySelectorAll('button'))
+                    b.removeAttribute('disabled')
+                ev.target.setAttribute('disabled', '')
             }, true)
             this.tree.querySelector('h2').after(jump)
         } else this.tree.innerHTML = `<h2>${json ? l.str.badRoute : l.str.error}</h2>`

@@ -121,11 +121,11 @@ ul {
 li * {
     float:right;
 }
-input:focus,button:hover,li a:hover {
+input:focus,button:enabled:hover,li a:hover {
     outline:2px solid #61dafb;
     box-shadow:0 0 8px #61dafb;
 }
-button:active,li a:active {
+button:enabled:active,li a:active,:disabled {
     box-shadow:inset 1px 1px 1px #484c54;
     background:linear-gradient(#e6e5e4, #f6f5f4);
 }
