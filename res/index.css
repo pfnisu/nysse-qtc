@@ -1,7 +1,7 @@
 * {
     box-sizing:border-box;
     margin:0;
-    transition:box-shadow 0.5s,background 0.5s;
+    transition:box-shadow 0.5s,background 0.4s;
     font-family:sans-serif;
     font-size:calc(var(--size, 10px) + 0.5vw);
     line-height:1.2;
@@ -128,6 +128,14 @@ input:focus,button:enabled:hover,li a:hover {
 button:enabled:active,li a:active,:disabled {
     box-shadow:inset 1px 1px 1px #484c54;
     background:linear-gradient(#e6e5e4, #f6f5f4);
+}
+@keyframes flip {
+    to {
+        transform:rotateX(360deg);
+    }
+}
+:disabled.switch {
+    animation:0.3s flip;
 }
 @media (min-width:640px) {
     nav a {
