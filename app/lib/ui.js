@@ -3,8 +3,12 @@ import request from './request.js'
 const start = (view, root) => {
     // Replace view with updated tree
     const load = async () => {
+        if (view.live && view.prev !== window.location.hash) view.tree.innerHTML = ''
         root.replaceChildren(view.tree)
-        if (!view.loaded) await view.compose()
+        if (!view.loaded) {
+            await view.compose()
+            view.prev = window.location.hash
+        }
         if (!view.live) view.loaded = true
     }
     view.started = true
@@ -64,6 +68,7 @@ export default {
     init: (target, title, live = true, tag = 'div') => {
         target.title = title
         target.live = live
+        target.prev = null
         target.tree = document.createElement(tag)
         // Subscribe to notifications from target object
         target.listen = (fn) => {
