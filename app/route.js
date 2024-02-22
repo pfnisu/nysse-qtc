@@ -8,6 +8,7 @@ export function Route(l) {
 
     this.compose = async () => {
         const rid = request.hash(this.title)
+        let prev = null
         const query = {
             'query': `{route(id:"${env.feed}:${rid}"){` +
                 'patterns{stops{gtfsId name zoneId}headsign}longName}}'
@@ -20,9 +21,7 @@ export function Route(l) {
             let html = ''
             for (const pat of json.data.route.patterns) {
                 // Generate jump anchors to pattern headings
-                list +=
-                    `<li><button class="switch" data-i="${i++}">` +
-                        `&#10141; ${pat.headsign}</button></li>`
+                list += `<li><button data-i="${i++}">&#10141; ${pat.headsign}</button></li>`
                 html += `<h2>${rid} &#10141; ${pat.headsign}</h2><table><tbody>`
                 for (const stop of pat.stops) {
                     const sid = stop.gtfsId.split(':')[1]
@@ -37,12 +36,12 @@ export function Route(l) {
             const jump = document.createElement('ul')
             jump.innerHTML = list
             jump.addEventListener('click', (ev) => {
-                const h = this.tree.querySelectorAll('h2')[ev.target.dataset.i]
+                prev?.removeAttribute('disabled')
+                prev = ev.target
+                const h = this.tree.querySelectorAll('h2')[prev.dataset.i]
                 h.scrollIntoView()
                 h.after(jump)
-                for (const b of jump.querySelectorAll('button'))
-                    b.removeAttribute('disabled')
-                ev.target.setAttribute('disabled', '')
+                prev.setAttribute('disabled', '')
             }, true)
             this.tree.querySelector('h2').after(jump)
         } else this.tree.innerHTML = `<h2>${json ? l.str.badRoute : l.str.error}</h2>`

@@ -134,7 +134,7 @@ button:enabled:active,li a:active,:disabled {
         transform:rotateX(360deg);
     }
 }
-:disabled.switch {
+:disabled:not(.idle) {
     animation:0.3s flip;
 }
 @media (min-width:640px) {
