@@ -86,8 +86,9 @@ export function Stops(l, listenLang, highlight) {
                 }
                 fav.innerHTML = list()
                 fav.addEventListener('click', (ev) => {
-                    const prev = request.cookie(ev.target.id)
-                    request.cookie(ev.target.id, sid === prev ? '' : sid)
+                    request.cookie(
+                        ev.target.id,
+                        sid === request.cookie(ev.target.id) ? '' : sid)
                     fav.innerHTML = list()
                     // Notify listeners when favorite stop is set
                     this.notify()
