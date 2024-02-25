@@ -36,12 +36,14 @@ export function Route(l) {
             const jump = document.createElement('ul')
             jump.innerHTML = list
             jump.addEventListener('click', (ev) => {
-                prev?.removeAttribute('disabled')
-                prev = ev.target
-                const h = this.tree.querySelectorAll('h2')[prev.dataset.i]
-                h.scrollIntoView()
-                h.after(jump)
-                prev.setAttribute('disabled', '')
+                if (ev.target.dataset.i) {
+                    prev?.removeAttribute('disabled')
+                    prev = ev.target
+                    const h = this.tree.querySelectorAll('h2')[prev.dataset.i]
+                    h.scrollIntoView()
+                    h.after(jump)
+                    prev.setAttribute('disabled', '')
+                }
             }, true)
             this.tree.querySelector('h2').after(jump)
         } else this.tree.innerHTML = `<h2>${json ? l.str.badRoute : l.str.error}</h2>`

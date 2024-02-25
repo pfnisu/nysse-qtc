@@ -36,7 +36,7 @@ export function Settings(l) {
     // Use single listener for all settings
     this.tree.addEventListener('click', async (ev) => {
         prev = ev.target.dataset
-        if ('l' in prev) {
+        if (prev.l) {
             request.cookie('lang', prev.l)
             l.str = await request.http(`lang/${prev.l}.json`)
             this.title = l.str.settings
@@ -44,7 +44,7 @@ export function Settings(l) {
             // Force update nav titles
             window.dispatchEvent(new Event('popstate'))
             this.compose()
-        } else if ('s' in prev) {
+        } else if (prev.s) {
             request.cookie('size', prev.s)
             document.documentElement.style.setProperty('--size', prev.s)
             this.compose()
