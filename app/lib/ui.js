@@ -68,7 +68,6 @@ export default {
     init: (target, title, live = true, tag = 'div') => {
         target.title = title
         target.live = live
-        target.prev = null
         target.tree = document.createElement(tag)
         // Subscribe to notifications from target object
         target.listen = (fn) => {
