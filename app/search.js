@@ -5,7 +5,7 @@ import env from '../.env.js'
 // Stop search
 export function Search(l, listenLang) {
     // Static view, latest search persists
-    ui.init(this, 'search', false)
+    ui.init(this, 'search')
 
     this.compose = async () => {
         this.tree.innerHTML =

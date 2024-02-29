@@ -4,7 +4,7 @@ import env from '../.env.js'
 
 // All patterns (stop lists) for a route
 export function Route(l) {
-    ui.init(this, 'route')
+    ui.init(this, 'route', 0)
 
     this.compose = async () => {
         const rid = request.hash(this.title)

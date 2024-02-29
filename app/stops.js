@@ -6,7 +6,7 @@ import {Search} from './search.js'
 
 // Timetables for a stop. Parent view of Arrivals and Search
 export function Stops(l, listenLang, highlight) {
-    ui.init(this, l.str.stops)
+    ui.init(this, l.str.stops, 0)
     const arrivals = new Arrivals(l)
     const search = new Search(l, listenLang)
 

@@ -4,10 +4,8 @@ import env from '../.env.js'
 
 // Realtime trip arrivals for a stop
 export function Arrivals(l) {
-    ui.init(this, 'arrivals', true, 'tbody')
-
     // Compose UI every 30 sec
-    this.interval = 30000
+    ui.init(this, 'arrivals', 30000, 'tbody')
 
     this.compose = async () => {
         const sid = request.hash('stop')

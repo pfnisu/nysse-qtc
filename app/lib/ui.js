@@ -3,10 +3,10 @@ import request from './request.js'
 const start = (view, root) => {
     // Replace view with updated tree
     const load = async () => {
-        if ('interval' in view && view.prev !== window.location.hash)
+        if ('live' in view && view.prev !== window.location.hash)
             view.tree.innerHTML = ''
         root.replaceChildren(view.tree)
-        if ('interval' in view || !('prev' in view)) {
+        if ('live' in view || !('prev' in view)) {
             await view.compose()
             view.prev = window.location.hash
         }
@@ -14,10 +14,10 @@ const start = (view, root) => {
     view.started = true
     load()
     // Reload is only spawned if view is live and visible
-    if (view.interval && !('id' in view))
+    if (view.live && !('id' in view))
         view.id = setInterval(() => {
             if (!document.hidden && !!view.tree.offsetParent) load()
-        }, view.interval)
+        }, view.live)
 }
 
 const stop = (view) => {
@@ -59,14 +59,14 @@ export default {
     // init()   Construct a composable view
     // target   Target object, required to have target.compose()
     // title    Unique string used as view id and title in menu
-    // live     Optional boolean to construct a live or static view:
-    //          Live view uses target.interval, default = 0 (i.e. on demand).
+    // live     Optional integer to construct a static or live view:
+    //          default = null (static), 0 = on demand, >0 = reload interval.
     //          Static view is composed only once.
-    // tag      Optional tagName to use as container element of target.tree,
+    // tag      Optional tagName to use as container element of target.tree:
     //          default = div.
-    init: (target, title, live = true, tag = 'div') => {
+    init: (target, title, live = null, tag = 'div') => {
         target.title = title
-        if (live) target.interval = 0
+        if (live !== null) target.live = live
         target.tree = document.createElement(tag)
         // Subscribe to notifications from target object
         target.listen = (fn) => {

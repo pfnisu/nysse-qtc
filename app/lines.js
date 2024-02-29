@@ -4,7 +4,7 @@ import {Route} from './route.js'
 
 // Parent view of List and Route
 export function Lines(l, listenLang, listenHome) {
-    ui.init(this, l.str.lines, false)
+    ui.init(this, l.str.lines)
 
     this.compose = async () => {
         ui.bind([new List(l, listenLang, listenHome), new Route(l)], this.tree)

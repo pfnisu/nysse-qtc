@@ -3,7 +3,7 @@ import request from './lib/request.js'
 
 // Language setting and project info
 export function Settings(l) {
-    ui.init(this, l.str.settings, false)
+    ui.init(this, l.str.settings)
     // Track previous change
     let prev = null
 

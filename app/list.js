@@ -4,7 +4,7 @@ import env from '../.env.js'
 
 // List of all routes and alerts
 export function List(l, listenLang, listenHome) {
-    ui.init(this, 'list', false)
+    ui.init(this, 'list')
 
     this.compose = async () => {
         const query = {
