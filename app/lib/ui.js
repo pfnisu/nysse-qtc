@@ -5,17 +5,16 @@ const start = (view, root) => {
     const load = async () => {
         if (view.live && view.prev !== window.location.hash) view.tree.innerHTML = ''
         root.replaceChildren(view.tree)
-        if (!view.loaded) {
+        if (view.live || !('prev' in view)) {
             await view.compose()
             view.prev = window.location.hash
         }
-        if (!view.live) view.loaded = true
     }
     view.started = true
     load()
     const interval = view.interval ?? 0
     // Reload is only spawned if view is live and visible
-    if (view.live && interval && !view.id)
+    if (view.live && interval && !('id' in view))
         view.id = setInterval(() => {
             if (!document.hidden && !!view.tree.offsetParent) load()
         }, interval)
@@ -23,7 +22,7 @@ const start = (view, root) => {
 
 const stop = (view) => {
     clearInterval(view.id)
-    view.id = null
+    delete view.id
     view.started = null
 }
 
