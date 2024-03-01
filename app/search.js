@@ -1,4 +1,4 @@
-import ui from './lib/ui.js'
+import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
@@ -13,11 +13,11 @@ export function Search(l, listenLang) {
             '<form><input type="text"/>' +
                 `<button id="search">${l.str.search}</button>` +
             '</form><table><tbody></tbody></table>'
-        this.tree.querySelector('#search').addEventListener('click', async (ev) => {
+        $('#search', this).addEventListener('click', async (ev) => {
             ev.preventDefault()
             const query = {
                 'query': `{stops(feeds:"${env.feed}",maxResults:30,` +
-                    `name:"${this.tree.querySelector('input').value}")` +
+                    `name:"${$('input', this).value}")` +
                         '{gtfsId name zoneId}}'
             }
             const json = await request.http(env.uri, 'POST', query, env.key)
@@ -35,7 +35,7 @@ export function Search(l, listenLang) {
                             `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                 }
             } else html = `<tr><td>${l.str.error}</td></tr>`
-            this.tree.querySelector('tbody').innerHTML = html
+            $('tbody', this).innerHTML = html
         })
     }
 

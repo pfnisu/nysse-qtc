@@ -1,4 +1,4 @@
-import ui from './lib/ui.js'
+import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
@@ -39,13 +39,13 @@ export function Route(l) {
                 if (ev.target.dataset.i) {
                     prev?.removeAttribute('disabled')
                     prev = ev.target
-                    const h = this.tree.querySelectorAll('h2')[prev.dataset.i]
+                    const h = $('h2', this, true)[prev.dataset.i]
                     h.scrollIntoView()
                     h.after(jump)
                     prev.setAttribute('disabled', '')
                 }
             }, true)
-            this.tree.querySelector('h2').after(jump)
+            $('h2', this).after(jump)
         } else this.tree.innerHTML = `<h2>${json ? l.str.badRoute : l.str.error}</h2>`
     }
 }

@@ -1,4 +1,4 @@
-import ui from './lib/ui.js'
+import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 
 // Language setting and project info
@@ -25,7 +25,7 @@ export function Settings(l) {
             '<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>'
         // Mark current settings and previous change
         for (const b of
-            this.tree.querySelectorAll(`[data-l="${lang}"],[data-s="${size}"]`)) {
+            $(`[data-l="${lang}"],[data-s="${size}"]`, this, true)) {
             b.setAttribute('disabled', '')
             // Needs innerHTML to parse entity
             b.innerHTML += ' &#10003;'

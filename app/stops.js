@@ -1,4 +1,4 @@
-import ui from './lib/ui.js'
+import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 import {Arrivals} from './arrivals.js'
@@ -93,19 +93,19 @@ export function Stops(l, listenLang, highlight) {
                     // Notify listeners when favorite stop is set
                     this.notify()
                 })
-                this.tree.querySelector('h2').after(fav)
+                $('h2', this).after(fav)
 
                 // Arrivals is a live view, updating separately
-                ui.bind([arrivals], this.tree.querySelector('table'))
+                ui.bind([arrivals], $('table', this))
 
-                timetable(json.data.stop.mon, this.tree.querySelector('#mon>tbody'))
-                timetable(json.data.stop.sat, this.tree.querySelector('#sat>tbody'))
-                timetable(json.data.stop.sun, this.tree.querySelector('#sun>tbody'))
+                timetable(json.data.stop.mon, $('#mon>tbody', this))
+                timetable(json.data.stop.sat, $('#sat>tbody', this))
+                timetable(json.data.stop.sun, $('#sun>tbody', this))
                 highlight()
             } else this.tree.innerHTML = `<h2>${json ? l.str.badStop : l.str.error}</h2>`
         } else {
             ui.bind([search], this.tree)
-            const input = search.tree.querySelector('input')
+            const input = $('input', search)
             input.value = ''
             input.focus()
         }

@@ -1,4 +1,4 @@
-import ui from './lib/ui.js'
+import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
 
@@ -35,7 +35,7 @@ export function List(l, listenLang, listenHome) {
                     a.alertSeverityLevel
                 ]
             ])).values()]
-            const alerts = this.tree.querySelector('#alert')
+            const alerts = $('#alert', this)
             const lang = request.cookie('lang') || 'fi'
             alerts.innerHTML = set.reduce((cat, a) => {
                 const severity = a.pop() === 'SEVERE' ? ' class="severe"' : ''
@@ -46,9 +46,9 @@ export function List(l, listenLang, listenHome) {
             const toggle = alerts.innerHTML
                 ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
                 : ''
-            this.tree.querySelector('ul').innerHTML = `${toggle}${home}${dest}`
+            $('ul', this).innerHTML = `${toggle}${home}${dest}`
             // Tree gets overwritten on re-compose, listener can be GC'd
-            this.tree.querySelector('button')?.addEventListener('click', (ev) => {
+            $('button', this)?.addEventListener('click', (ev) => {
                 alerts.classList.toggle('hidden')
                 ev.target.innerHTML = alerts.classList.contains('hidden')
                     ? l.str.open
@@ -63,7 +63,7 @@ export function List(l, listenLang, listenHome) {
                         `<td><a href="#p=0;route=${route.shortName}">` +
                             `${route.longName}</a></td></tr>`
         } else html = `<tr><td>${l.str.error}</td></tr>`
-        this.tree.querySelector('tbody').innerHTML = html
+        $('tbody', this).innerHTML = html
     }
 
     // Listen for lang and home stop change notifications

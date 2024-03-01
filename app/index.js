@@ -1,4 +1,4 @@
-import ui from './lib/ui.js'
+import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 import {Lines} from './lines.js'
 import {Stops} from './stops.js'
@@ -19,7 +19,7 @@ const main = async () => {
         if (route || prev) {
             if (route === prev) request.cookie('highlight', '')
             else if (route) request.cookie('highlight', route)
-            for (const s of document.querySelectorAll('span'))
+            for (const s of $('span', null, true))
                 if (s.textContent === route || s.textContent === prev)
                     s.classList.toggle('hl')
         }
@@ -29,8 +29,8 @@ const main = async () => {
     const stops = new Stops(l, settings.listen, highlight)
     ui.bind(
         [new Lines(l, settings.listen, stops.listen), stops, settings],
-        document.querySelector('main'),
-        document.querySelector('nav'),
+        $('main'),
+        $('nav'),
         ' | ' + document.title)
 
     // Toggle highlight for matching shortNames (in Arrivals, List and Stops)
