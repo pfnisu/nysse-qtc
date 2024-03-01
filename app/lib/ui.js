@@ -26,6 +26,18 @@ const stop = (view) => {
     view.started = null
 }
 
+// $()      JQuery-style convenience wrapper for querySelector
+// query    Query string
+// target   Optional target object which tree is queried,
+//          dafault = document tree.
+// all      Optional boolean to match all or first element,
+//          default = first.
+export const $ = (query, target = null, all = false) => {
+    const tree = target ? target.tree : document
+    if (all) return tree.querySelectorAll(query)
+    return tree.querySelector(query)
+}
+
 export default {
     // bind()   Bind an array of views to a root element
     // views    Array of unique objects constructed with init()
@@ -60,7 +72,7 @@ export default {
     // target   Target object, required to have target.compose()
     // title    Unique string used as view id and title in menu
     // live     Optional integer to construct a static or live view:
-    //          default = null (static), 0 = on demand, >0 = reload interval.
+    //          default = null (static), 0 = on demand, >0 = interval (ms).
     //          Static view is composed only once.
     // tag      Optional tagName to use as container element of target.tree:
     //          default = div.
