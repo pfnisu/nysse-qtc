@@ -1,8 +1,9 @@
 import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 import env from '../.env.js'
+import {Alerts} from './alerts.js'
 
-// List of all routes and alerts
+// List of all routes. Parent view of Alerts
 export function List(l, listenLang, listenHome) {
     ui.init(this, 'list')
 
@@ -13,19 +14,9 @@ export function List(l, listenLang, listenHome) {
                     'language text}alertHash alertSeverityLevel}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
-        const hid = request.cookie('home')
-        const did = request.cookie('dest')
-        const state = request.cookie('alerts')
-        const home = hid
-            ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>`
-            : ''
-        const dest = did
-            ? `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>`
-            : ''
         this.tree.innerHTML =
             `<h2>${l.str.listHead}</h2>` +
-            `<div${state === null ? '' : ' class="hidden"'} id="alert"></div>` +
-            '<ul></ul><table><tbody></tbody></table>'
+            '<div></div><table><tbody></tbody></table>'
         let html = ''
         if (json) {
             // Remove duplicate alerts
@@ -35,26 +26,8 @@ export function List(l, listenLang, listenHome) {
                     a.alertSeverityLevel
                 ]
             ])).values()]
-            const alerts = $('#alert', this)
-            const lang = request.cookie('lang') || 'fi'
-            alerts.innerHTML = set.reduce((cat, a) => {
-                const severity = a.pop() === 'SEVERE' ? ' class="severe"' : ''
-                const t = a.find((t) => t.language === lang)
-                // Skip alerts with no description
-                return t?.text ? `${cat}<p${severity}>${t.text}</p>` : cat
-            }, '')
-            const toggle = alerts.innerHTML
-                ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
-                : ''
-            $('ul', this).innerHTML = `${toggle}${home}${dest}`
-            // Tree gets overwritten on re-compose, listener can be GC'd
-            $('button', this)?.addEventListener('click', (ev) => {
-                alerts.classList.toggle('hidden')
-                ev.target.innerHTML = alerts.classList.contains('hidden')
-                    ? l.str.open
-                    : l.str.close
-                request.cookie('alerts', alerts.className)
-            })
+            ui.bind([new Alerts(l, listenLang, listenHome, set)], $('div', this))
+
             json.data.routes.sort((a, b) =>
                 parseInt(a.shortName) - parseInt(b.shortName))
             for (const route of json.data.routes)
@@ -65,8 +38,4 @@ export function List(l, listenLang, listenHome) {
         } else html = `<tr><td>${l.str.error}</td></tr>`
         $('tbody', this).innerHTML = html
     }
-
-    // Listen for lang and home stop change notifications
-    listenLang(this.compose)
-    listenHome(this.compose)
 }
