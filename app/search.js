@@ -7,6 +7,12 @@ export function Search(l) {
     // Static view, latest search persists
     ui.init(this, 'search')
 
+    this.start = () => {
+        const input = $('input', this)
+        input.value = ''
+        input.focus()
+    }
+
     this.compose = async () => {
         this.tree.innerHTML =
             `<h2>${l.str.searchHead}</h2>` +

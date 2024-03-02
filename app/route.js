@@ -5,10 +5,17 @@ import env from '../.env.js'
 // All patterns (stop lists) for a route
 export function Route(l) {
     ui.init(this, 'route', 0)
+    const jump = document.createElement('ul')
+
+    this.start = (i = null) => {
+        $('[disabled]', this)?.removeAttribute('disabled')
+        const h = $('h2', this, true)[i ?? 0]
+        if (i) h.scrollIntoView()
+        h.after(jump)
+    }
 
     this.compose = async () => {
         const rid = request.hash(this.title)
-        let prev = null
         const query = {
             'query': `{route(id:"${env.feed}:${rid}"){` +
                 'patterns{stops{gtfsId name zoneId}headsign}longName}}'
@@ -33,16 +40,11 @@ export function Route(l) {
                 html += '</tbody></table>'
             }
             this.tree.innerHTML = html
-            const jump = document.createElement('ul')
             jump.innerHTML = list
             jump.addEventListener('click', (ev) => {
                 if (ev.target.dataset.i) {
-                    prev?.removeAttribute('disabled')
-                    prev = ev.target
-                    const h = $('h2', this, true)[prev.dataset.i]
-                    h.scrollIntoView()
-                    h.after(jump)
-                    prev.setAttribute('disabled', '')
+                    this.start(ev.target.dataset.i)
+                    ev.target.setAttribute('disabled', '')
                 }
             }, true)
             $('h2', this).after(jump)

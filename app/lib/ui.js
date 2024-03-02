@@ -6,10 +6,11 @@ const start = (view, root) => {
         if ('live' in view && view._prev !== window.location.hash)
             view.tree.innerHTML = ''
         root.replaceChildren(view.tree)
-        if ('live' in view || view._prev == null) {
+        if (!view.tree.innerHTML || view.live || view._prev == null) {
             await view.compose()
             view._prev = window.location.hash
         }
+        view.start?.()
     }
     view._started = true
     load()
@@ -24,6 +25,7 @@ const stop = (view) => {
     clearInterval(view._id)
     delete view._id
     view._started = null
+    view.stop?.()
 }
 
 // $()      JQuery-style convenience wrapper for querySelector

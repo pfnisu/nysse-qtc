@@ -47,6 +47,8 @@ export function Stops(l, highlight) {
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
     }
 
+    this.start = () => search.start?.()
+
     this.compose = async () => {
         const sid = request.hash('stop')
         if (sid) {
@@ -103,12 +105,7 @@ export function Stops(l, highlight) {
                 timetable(json.data.stop.sun, $('#sun>tbody', this))
                 highlight()
             } else this.tree.innerHTML = `<h2>${json ? l.str.badStop : l.str.error}</h2>`
-        } else {
-            ui.bind([search], this.tree)
-            const input = $('input', search)
-            input.value = ''
-            input.focus()
-        }
+        } else ui.bind([search], this.tree)
     }
 
     ui.listen('lang', () => this.title = l.str.stops)
