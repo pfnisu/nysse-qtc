@@ -3,5 +3,6 @@ require('esbuild').build({
     outdir: 'build/',
     bundle: true,
     minify: true,
+    mangleProps: /^_/,
     target: 'es2017',
 }).catch(() => process.exit(1))
