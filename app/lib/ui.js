@@ -3,27 +3,27 @@ import request from './request.js'
 const start = (view, root) => {
     // Replace view with updated tree
     const load = async () => {
-        if ('live' in view && view.prev !== window.location.hash)
+        if ('live' in view && view._prev !== window.location.hash)
             view.tree.innerHTML = ''
         root.replaceChildren(view.tree)
-        if ('live' in view || !('prev' in view)) {
+        if ('live' in view || view._prev == null) {
             await view.compose()
-            view.prev = window.location.hash
+            view._prev = window.location.hash
         }
     }
-    view.started = true
+    view._started = true
     load()
     // Reload is only spawned if view is live and visible
-    if (view.live && !('id' in view))
-        view.id = setInterval(() => {
+    if (view.live && view._id == null)
+        view._id = setInterval(() => {
             if (!document.hidden && !!view.tree.offsetParent) load()
         }, view.live)
 }
 
 const stop = (view) => {
-    clearInterval(view.id)
-    delete view.id
-    view.started = null
+    clearInterval(view._id)
+    delete view._id
+    view._started = null
 }
 
 // $()      JQuery-style convenience wrapper for querySelector
@@ -52,7 +52,7 @@ export default {
     bind: (views, root, nav = null, title = null) => {
         // Switch to view that matches hash
         const setView = () => {
-            for (const v of views) if (v.started) stop(v)
+            for (const v of views) if (v._started) stop(v)
             if (nav) {
                 nav.innerHTML = views.reduce((cat, v, i) =>
                     `${cat}<a href="#${nav.id}=${i}">${v.title}</a>`, '')
@@ -82,11 +82,11 @@ export default {
         target.tree = document.createElement(tag)
         // Subscribe to notifications from target object
         target.listen = (fn) => {
-            target.listeners ??= []
-            target.listeners.push(fn)
+            target._listeners ??= []
+            target._listeners.push(fn)
         }
         target.notify = () => {
-            if (target.listeners) for (const fn of target.listeners) fn()
+            if (target._listeners) for (const fn of target._listeners) fn()
         }
     }
 }
