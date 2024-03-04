@@ -20,16 +20,16 @@ export function Alerts(l, listenLang, listenHome, set) {
             // Skip alerts with no description
             return t?.text ? `${cat}<p${severity}>${t.text}</p>` : cat
         }, '')
-        const toggle = alerts.innerHTML
-            ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
-            : ''
-        const home = hid
-            ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>`
-            : ''
-        const dest = did
-            ? `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>`
-            : ''
-        $('ul', this).innerHTML = `${toggle}${home}${dest}`
+        $('ul', this).innerHTML =
+            (alerts.innerHTML
+                ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
+                : '') +
+            (hid
+                ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>`
+                : '') +
+            (did
+                ? `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>`
+                : '')
         // Tree gets overwritten on re-compose, listener can be GC'd
         $('button', this)?.addEventListener('click', (ev) => {
             alerts.classList.toggle('hidden')
