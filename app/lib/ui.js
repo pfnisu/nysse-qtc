@@ -91,7 +91,8 @@ export default {
 
     // notify() Dispatch notifications
     // type     String specifying event type
-    notify: (type) => {
-        window.dispatchEvent(new CustomEvent(type))
+    // data     Optional data sent as CustomEvent.detail
+    notify: (type, data = null) => {
+        window.dispatchEvent(new CustomEvent(type, { detail: data }))
     }
 }
