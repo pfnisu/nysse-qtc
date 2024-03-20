@@ -38,4 +38,6 @@ export function List(l) {
         } else html = `<tr><td>${l.str.error}</td></tr>`
         $('tbody', this).innerHTML = html
     }
+
+    ui.listen('lang', () => $('h2', this).innerHTML = l.str.listHead)
 }
