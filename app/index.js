@@ -25,10 +25,8 @@ const main = async () => {
         }
     }
 
-    const settings = new Settings(l)
-    const stops = new Stops(l, settings.listen, highlight)
     ui.bind(
-        [new Lines(l, settings.listen, stops.listen), stops, settings],
+        [new Lines(l), new Stops(l, highlight), new Settings(l)],
         $('main'),
         $('nav'),
         ' | ' + document.title)

@@ -4,7 +4,7 @@ import env from '../.env.js'
 import {Alerts} from './alerts.js'
 
 // List of all routes. Parent view of Alerts
-export function List(l, listenLang, listenHome) {
+export function List(l) {
     ui.init(this, 'list')
 
     this.compose = async () => {
@@ -26,7 +26,7 @@ export function List(l, listenLang, listenHome) {
                     a.alertSeverityLevel
                 ]
             ])).values()]
-            ui.bind([new Alerts(l, listenLang, listenHome, set)], $('div', this))
+            ui.bind([new Alerts(l, set)], $('div', this))
 
             json.data.routes.sort((a, b) =>
                 parseInt(a.shortName) - parseInt(b.shortName))

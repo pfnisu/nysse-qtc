@@ -80,13 +80,18 @@ export default {
         target.title = title
         if (live !== null) target.live = live
         target.tree = document.createElement(tag)
-        // Subscribe to notifications from target object
-        target.listen = (fn) => {
-            target._listeners ??= []
-            target._listeners.push(fn)
-        }
-        target.notify = () => {
-            if (target._listeners) for (const fn of target._listeners) fn()
-        }
+    },
+
+    // listen() Listen for notifications
+    // type     String specifying event type
+    // fn       Callback function
+    listen: (type, fn) => {
+        window.addEventListener(type, fn)
+    },
+
+    // notify() Dispatch notifications
+    // type     String specifying event type
+    notify: (type) => {
+        window.dispatchEvent(new CustomEvent(type))
     }
 }

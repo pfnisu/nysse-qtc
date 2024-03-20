@@ -3,7 +3,7 @@ import request from './lib/request.js'
 import env from '../.env.js'
 
 // Stop search
-export function Search(l, listenLang) {
+export function Search(l) {
     // Static view, latest search persists
     ui.init(this, 'search')
 
@@ -39,5 +39,5 @@ export function Search(l, listenLang) {
         })
     }
 
-    listenLang(this.compose)
+    ui.listen('lang', this.compose)
 }

@@ -5,10 +5,10 @@ import {Arrivals} from './arrivals.js'
 import {Search} from './search.js'
 
 // Timetables for a stop. Parent view of Arrivals and Search
-export function Stops(l, listenLang, highlight) {
+export function Stops(l, highlight) {
     ui.init(this, l.str.stops, 0)
     const arrivals = new Arrivals(l)
-    const search = new Search(l, listenLang)
+    const search = new Search(l)
 
     // Format a day offset as YYYYMMDD
     // 0...6 = Sunday - Saturday, null = Closest weekday
@@ -91,7 +91,7 @@ export function Stops(l, listenLang, highlight) {
                         sid === request.cookie(ev.target.id) ? '' : sid)
                     fav.innerHTML = list()
                     // Notify listeners when favorite stop is set
-                    this.notify()
+                    ui.notify('fav')
                 })
                 $('h2', this).after(fav)
 
@@ -111,5 +111,5 @@ export function Stops(l, listenLang, highlight) {
         }
     }
 
-    listenLang(() => this.title = l.str.stops)
+    ui.listen('lang', () => this.title = l.str.stops)
 }

@@ -2,7 +2,7 @@ import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 
 // Alerts and favorites menu
-export function Alerts(l, listenLang, listenHome, set) {
+export function Alerts(l, set) {
     ui.init(this, 'alerts')
 
     this.compose = async () => {
@@ -40,7 +40,7 @@ export function Alerts(l, listenLang, listenHome, set) {
         })
     }
 
-    // Listen for lang and home stop change notifications
-    listenLang(this.compose)
-    listenHome(this.compose)
+    // Listen for lang and favorite stop change notifications
+    ui.listen('lang', this.compose)
+    ui.listen('fav', this.compose)
 }

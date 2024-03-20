@@ -3,12 +3,12 @@ import {List} from './list.js'
 import {Route} from './route.js'
 
 // Parent view of List and Route
-export function Lines(l, listenLang, listenHome) {
+export function Lines(l) {
     ui.init(this, l.str.lines)
 
     this.compose = async () => {
-        ui.bind([new List(l, listenLang, listenHome), new Route(l)], this.tree)
+        ui.bind([new List(l), new Route(l)], this.tree)
     }
 
-    listenLang(() => this.title = l.str.lines)
+    ui.listen('lang', () => this.title = l.str.lines)
 }
