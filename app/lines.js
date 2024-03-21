@@ -10,5 +10,5 @@ export function Lines(l) {
         ui.bind([new List(l), new Route(l)], this.tree)
     }
 
-    ui.listen('lang', () => this.title = l.str.lines)
+    ui.listen('lang', () => this.name = l.str.lines)
 }

@@ -57,13 +57,13 @@ export default {
             for (const v of views) if (v._started) stop(v)
             if (nav) {
                 nav.innerHTML = views.reduce((cat, v, i) =>
-                    `${cat}<a href="#${nav.id}=${i}">${v.title}</a>`, '')
+                    `${cat}<a href="#${nav.id}=${i}">${v.name}</a>`, '')
                 const index = request.hash(nav.id) ?? 0
                 nav.children[index].className = 'active'
                 window.scroll(0, 0)
-                if (title) document.title = `${views[index].title}${title}`
+                if (title) document.title = `${views[index].name}${title}`
                 start(views[index], root)
-            } else start(views.find((v) => request.hash(v.title)) || views[0], root)
+            } else start(views.find((v) => request.hash(v.name)) || views[0], root)
         }
         // Change view when history changes
         if (views.length > 1) window.addEventListener('popstate', setView)
@@ -74,14 +74,14 @@ export default {
     // target   Target object, required to have target.compose().
     //          Optional methods target.start() and target.stop()
     //          are called on every view start/stop.
-    // title    Unique string used as view id and title in menu
+    // name     Unique string used as view id and title in menu
     // live     Optional integer to construct a static or live view:
     //          default = null (static), 0 = on demand, >0 = interval (ms).
     //          Static view is composed only once.
     // tag      Optional tagName to use as container element of target.tree:
     //          default = div.
-    init: (target, title, live = null, tag = 'div') => {
-        target.title = title
+    init: (target, name, live = null, tag = 'div') => {
+        target.name = name
         if (live !== null) target.live = live
         target.tree = document.createElement(tag)
     },

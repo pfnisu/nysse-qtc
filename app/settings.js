@@ -39,7 +39,7 @@ export function Settings(l) {
         if (prev.l) {
             request.cookie('lang', prev.l)
             l.str = await request.http(`lang/${prev.l}.json`)
-            this.title = l.str.settings
+            this.name = l.str.settings
             ui.notify('lang')
             // Force update nav titles
             window.dispatchEvent(new Event('popstate'))

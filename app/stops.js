@@ -115,5 +115,5 @@ export function Stops(l, highlight) {
         } else ui.bind([search], this.tree)
     }
 
-    ui.listen('lang', () => this.title = l.str.stops)
+    ui.listen('lang', () => this.name = l.str.stops)
 }

@@ -21,7 +21,7 @@ export function Route(l) {
     this.stop = () => pid = null
 
     this.compose = async () => {
-        const rid = request.hash(this.title)
+        const rid = request.hash(this.name)
         const query = {
             'query': `{route(id:"${env.feed}:${rid}"){` +
                 'patterns{stops{gtfsId name zoneId}headsign code}longName}}'
