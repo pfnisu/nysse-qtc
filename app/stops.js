@@ -47,7 +47,14 @@ export function Stops(l, highlight) {
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
     }
 
-    this.start = () => search.start?.()
+    // Handle focus for Search input
+    this.start = () => {
+        const input = $('input', this)
+        if (input) {
+            input.value = ''
+            input.focus()
+        }
+    }
 
     this.compose = async () => {
         const sid = request.hash('stop')
