@@ -119,6 +119,7 @@ ul {
 }
 li * {
     float:right;
+    clear:right;
 }
 input:focus,button:enabled:hover,li a:hover {
     outline:2px solid #61dafb;
