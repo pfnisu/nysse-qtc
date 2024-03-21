@@ -13,15 +13,16 @@ export function Arrivals(l) {
             'query': `{stop(id:"${env.feed}:${sid}"){stoptimesWithoutPatterns(`+
                 'timeRange:86400,numberOfDepartures:15,omitCanceled:false){' +
                     'scheduledArrival realtimeArrival headsign trip{' +
-                        'route{shortName}}realtimeState}}}'
+                        'pattern{code}}realtimeState}}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
             let html = ''
             for (const dep of json.data.stop.stoptimesWithoutPatterns) {
+                const rid = dep.trip.pattern.code.split(':')[1]
                 let sign =
-                    `&#10141;<a href="#p=0;route=${dep.trip.route.shortName}">` +
-                    `${dep.headsign}</a>`
+                    `&#10141;<a href="#p=0;route=${rid}" ` +
+                    `data-p="${dep.trip.pattern.code}">${dep.headsign}</a>`
                 if (dep.realtimeState == 'CANCELED')
                     sign = `&#10005;<a>${l.str.canceled}</a>`
                 const dt = new Date(dep.scheduledArrival * 1000)
@@ -31,11 +32,16 @@ export function Arrivals(l) {
                     `<tr><td>${dt.toUTCString().substring(17, 22)}</td>` +
                         '<th class="diff">' +
                             `${diff > 0 ? '+' : ''}${diff !== 0 ? diff : ''}</th>` +
-                        `<th class="route">${dep.trip.route.shortName}</th>` +
+                        `<th class="route">${rid}</th>` +
                         `<td>&nbsp;${sign}</td></tr>`
             }
             this.tree.innerHTML =
                 html || `<tr><td>${l.str.noArrivals}</td></tr>`
         } else this.tree.innerHTML = `<tr><td>${l.str.error}</td></tr>`
     }
+
+    // Notify with pattern data
+    this.tree.addEventListener('click', (ev) => {
+        if (ev.target.dataset.p) ui.notify('pattern', ev.target.dataset.p)
+    })
 }
