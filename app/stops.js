@@ -9,7 +9,7 @@ export function Stops(l, highlight) {
     ui.init(this, l.str.stops, 0)
     const arrivals = new Arrivals(l)
     const search = new Search(l)
-    let title = null
+    let title
 
     // Format a day offset as YYYYMMDD
     // 0...6 = Sunday - Saturday, null = Closest weekday

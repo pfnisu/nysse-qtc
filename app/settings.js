@@ -5,7 +5,7 @@ import request from './lib/request.js'
 export function Settings(l) {
     ui.init(this, l.str.settings)
     // Track previous change
-    let prev = null
+    let prev
 
     this.compose = async () => {
         const lang = request.cookie('lang') || 'fi'

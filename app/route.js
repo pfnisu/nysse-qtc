@@ -6,8 +6,7 @@ import env from '../.env.js'
 export function Route(l) {
     ui.init(this, 'route', 0)
     const jump = document.createElement('ul')
-    let pid = null
-    let title = null
+    let pid, title
 
     this.start = () => {
         document.title = title
