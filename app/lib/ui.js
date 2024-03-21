@@ -71,7 +71,9 @@ export default {
     },
 
     // init()   Construct a composable view
-    // target   Target object, required to have target.compose()
+    // target   Target object, required to have target.compose().
+    //          Optional methods target.start() and target.stop()
+    //          are called on every view start/stop.
     // title    Unique string used as view id and title in menu
     // live     Optional integer to construct a static or live view:
     //          default = null (static), 0 = on demand, >0 = interval (ms).
