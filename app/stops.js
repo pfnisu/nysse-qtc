@@ -9,6 +9,7 @@ export function Stops(l, highlight) {
     ui.init(this, l.str.stops, 0)
     const arrivals = new Arrivals(l)
     const search = new Search(l)
+    let title = null
 
     // Format a day offset as YYYYMMDD
     // 0...6 = Sunday - Saturday, null = Closest weekday
@@ -53,7 +54,7 @@ export function Stops(l, highlight) {
         if (input) {
             input.value = ''
             input.focus()
-        }
+        } else document.title = title
     }
 
     this.compose = async () => {
@@ -72,7 +73,7 @@ export function Stops(l, highlight) {
             }
             const json = await request.http(env.uri, 'POST', query, env.key)
             if (json?.data.stop) {
-                document.title =
+                title =
                     `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +
                     ` | ${document.title}`
                 this.tree.innerHTML =

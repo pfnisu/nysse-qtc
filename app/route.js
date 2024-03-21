@@ -7,8 +7,10 @@ export function Route(l) {
     ui.init(this, 'route', 0)
     const jump = document.createElement('ul')
     let pid = null
+    let title = null
 
     this.start = () => {
+        document.title = title
         $('[disabled]', this)?.removeAttribute('disabled')
         const h = pid ? $(`[data-h="${pid}"]`, this) : $('h2', this)
         h.after(jump)
@@ -28,7 +30,7 @@ export function Route(l) {
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
         if (json?.data.route) {
-            document.title = `${rid} ${json.data.route.longName} | ${document.title}`
+            title = `${rid} ${json.data.route.longName} | ${document.title}`
             let list = ''
             let html = ''
             for (const pat of json.data.route.patterns) {
