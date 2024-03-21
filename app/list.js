@@ -14,9 +14,7 @@ export function List(l) {
                     'language text}alertHash alertSeverityLevel}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
-        this.tree.innerHTML =
-            `<h2>${l.str.listHead}</h2>` +
-            '<div></div><table><tbody></tbody></table>'
+        this.tree.innerHTML = '<div></div><table><tbody></tbody></table>'
         let html = ''
         if (json) {
             // Remove duplicate alerts
@@ -38,6 +36,4 @@ export function List(l) {
         } else html = `<tr><td>${l.str.error}</td></tr>`
         $('tbody', this).innerHTML = html
     }
-
-    ui.listen('lang', () => $('h2', this).innerHTML = l.str.listHead)
 }

@@ -11,6 +11,7 @@ export function Alerts(l, set) {
         const hid = request.cookie('home')
         const did = request.cookie('dest')
         this.tree.innerHTML =
+            `<h2>${l.str.listHead}</h2>` +
             `<div${state === null ? '' : ' class="hidden"'} id="alert"></div>` +
             '<ul></ul>'
         const alerts = $('#alert', this)
