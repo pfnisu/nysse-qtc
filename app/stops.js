@@ -116,5 +116,9 @@ export function Stops(l, highlight) {
         } else ui.bind([search], this.tree)
     }
 
-    ui.listen('lang', () => this.name = l.str.stops)
+    // Update nav title and clear tree when lang changes
+    ui.listen('lang', () => {
+        this.name = l.str.stops
+        this.tree.innerHTML = ''
+    })
 }
