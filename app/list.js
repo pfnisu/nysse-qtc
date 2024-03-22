@@ -14,9 +14,9 @@ export function List(l) {
                     'language text}alertHash alertSeverityLevel}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
-        this.tree.innerHTML = '<div></div><table><tbody></tbody></table>'
-        let html = ''
         if (json) {
+            this.tree.innerHTML = '<div></div><table><tbody></tbody></table>'
+            let html = ''
             // Remove duplicate alerts
             const set = [...new Map(json.data.alerts.map(a => [
                 a.alertHash, [
@@ -33,7 +33,7 @@ export function List(l) {
                     `<tr><th class="route">${route.shortName}</th>` +
                         `<td><a href="#p=0;route=${route.shortName}">` +
                             `${route.longName}</a></td></tr>`
-        } else html = `<tr><td>${l.str.error}</td></tr>`
-        $('tbody', this).innerHTML = html
+            $('tbody', this).innerHTML = html
+        } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
 }

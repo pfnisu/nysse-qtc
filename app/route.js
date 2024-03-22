@@ -9,13 +9,15 @@ export function Route(l) {
     let pid, title
 
     this.start = () => {
-        document.title = title
-        $('[disabled]', this)?.removeAttribute('disabled')
-        const h = pid ? $(`[data-h="${pid}"]`, this) : $('h2', this)
-        h.after(jump)
-        if (pid) {
-            $(`[data-b="${pid}"]`, this).setAttribute('disabled', '')
-            h.scrollIntoView()
+        if (title) {
+            document.title = title
+            $('[disabled]', this)?.removeAttribute('disabled')
+            const h = pid ? $(`[data-h="${pid}"]`, this) : $('h2', this)
+            h.after(jump)
+            if (pid) {
+                $(`[data-b="${pid}"]`, this).setAttribute('disabled', '')
+                h.scrollIntoView()
+            }
         }
     }
 
@@ -28,6 +30,7 @@ export function Route(l) {
                 'patterns{stops{gtfsId name zoneId}headsign code}longName}}'
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
+        title = null
         if (json?.data.route) {
             title = `${rid} ${json.data.route.longName} | ${document.title}`
             let list = ''
