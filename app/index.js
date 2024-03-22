@@ -3,6 +3,7 @@ import request from './lib/request.js'
 import {Lines} from './lines.js'
 import {Stops} from './stops.js'
 import {Settings} from './settings.js'
+import {Route} from './route.js'
 
 const main = async () => {
     // Language object
@@ -26,7 +27,7 @@ const main = async () => {
     }
 
     ui.bind(
-        [new Lines(l), new Stops(l, highlight), new Settings(l)],
+        [new Lines(l, new Route(l)), new Stops(l, highlight), new Settings(l)],
         $('main'),
         $('nav'),
         ' | ' + document.title)
