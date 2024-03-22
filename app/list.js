@@ -15,8 +15,16 @@ export function List(l) {
         }
         const json = await request.http(env.uri, 'POST', query, env.key)
         if (json) {
-            this.tree.innerHTML = '<div></div><table><tbody></tbody></table>'
-            let html = ''
+            let html = '<div></div><table><tbody>'
+            json.data.routes.sort((a, b) =>
+                parseInt(a.shortName) - parseInt(b.shortName))
+            for (const route of json.data.routes)
+                html +=
+                    `<tr><th class="route">${route.shortName}</th>` +
+                        `<td><a href="#p=0;route=${route.shortName}">` +
+                            `${route.longName}</a></td></tr>`
+            this.tree.innerHTML = `${html}</tbody></table>`
+
             // Remove duplicate alerts
             const set = [...new Map(json.data.alerts.map(a => [
                 a.alertHash, [
@@ -25,15 +33,6 @@ export function List(l) {
                 ]
             ])).values()]
             ui.bind([new Alerts(l, set)], $('div', this))
-
-            json.data.routes.sort((a, b) =>
-                parseInt(a.shortName) - parseInt(b.shortName))
-            for (const route of json.data.routes)
-                html +=
-                    `<tr><th class="route">${route.shortName}</th>` +
-                        `<td><a href="#p=0;route=${route.shortName}">` +
-                            `${route.longName}</a></td></tr>`
-            $('tbody', this).innerHTML = html
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
 }
