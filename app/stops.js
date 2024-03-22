@@ -5,7 +5,7 @@ import {Arrivals} from './arrivals.js'
 import {Search} from './search.js'
 
 // Timetables for a stop. Parent view of Arrivals and Search
-export function Stops(l, highlight) {
+export function Stops(l) {
     ui.init(this, l.str.stops, 0)
     const arrivals = new Arrivals(l)
     const search = new Search(l)
@@ -46,6 +46,14 @@ export function Stops(l, highlight) {
             html += '</td></tr>'
         }
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
+    }
+
+    // Toggle highlight for matching route shortNames
+    const highlight = (ev) => {
+        const rid = ev ? ev.detail : request.cookie('highlight')
+        for (const s of $('span', this, true))
+            if (s.textContent === rid || s.classList.contains('hl'))
+                s.classList.toggle('hl')
     }
 
     // Handle focus for Search input
@@ -121,4 +129,6 @@ export function Stops(l, highlight) {
         this.name = l.str.stops
         this.tree.innerHTML = ''
     })
+
+    ui.listen('hl', highlight)
 }
