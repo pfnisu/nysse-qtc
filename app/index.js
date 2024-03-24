@@ -20,7 +20,7 @@ const main = async () => {
         $('nav'),
         ' | ' + document.title)
 
-    // Set highlighted route shortName to cookie (in Arrivals, List and Stops)
+    // Set route highlight to cookie (in Arrivals, List and Stops)
     document.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('route')) {
             const rid = ev.target.textContent

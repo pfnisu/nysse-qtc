@@ -36,7 +36,7 @@ export function Route(l) {
             let list = ''
             let html = ''
             for (const pat of json.data.route.patterns) {
-                // Generate jump anchors to pattern headings
+                // Generate jump list to pattern headings
                 list +=
                     `<li><button data-b="${pat.code}">` +
                     `&#10141; ${pat.headsign}</button></li>`
