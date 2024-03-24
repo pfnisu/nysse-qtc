@@ -42,6 +42,6 @@ export function Arrivals(l) {
 
     // Notify with pattern data
     this.tree.addEventListener('click', (ev) => {
-        if (ev.target.dataset.p) ui.notify('pattern', ev.target.dataset.p)
+        if (ev.target.dataset.p) ui.notify('pid', ev.target.dataset.p)
     })
 }

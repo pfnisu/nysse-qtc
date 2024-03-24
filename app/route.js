@@ -63,5 +63,5 @@ export function Route(l) {
         } else this.tree.innerHTML = `<h2>${json ? l.str.badRoute : l.str.error}</h2>`
     }
 
-    ui.listen('pattern', (ev) => pid = ev.detail)
+    ui.listen('pid', (ev) => pid = ev.detail)
 }
