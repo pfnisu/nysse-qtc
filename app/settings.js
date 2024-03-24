@@ -7,7 +7,7 @@ export function Settings(l) {
     // Track previous change
     let prev
 
-    this.compose = async () => {
+    this.load = async () => {
         const lang = request.cookie('lang') || 'fi'
         const size = request.cookie('size') || '10px'
         this.tree.innerHTML =
@@ -43,11 +43,11 @@ export function Settings(l) {
             ui.notify('lang')
             // Force update nav titles
             window.dispatchEvent(new Event('popstate'))
-            this.compose()
+            this.load()
         } else if (prev.s) {
             request.cookie('size', prev.s)
             document.documentElement.style.setProperty('--size', prev.s)
-            this.compose()
+            this.load()
         }
     }, true)
 }

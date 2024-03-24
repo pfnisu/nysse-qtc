@@ -7,7 +7,7 @@ const start = (view, root) => {
             view.tree.innerHTML = ''
         root.replaceChildren(view.tree)
         if (!view.tree.innerHTML || view.live || view._prev == null) {
-            await view.compose()
+            await view.load()
             view._prev = window.location.hash
         }
         view.start?.()
@@ -71,13 +71,13 @@ export default {
     },
 
     // init()   Construct a composable view
-    // target   Target object, required to have target.compose().
+    // target   Target object, required to have target.load().
     //          Optional methods target.start() and target.stop()
     //          are called on every view start/stop.
     // name     Unique string used as view id and title in menu
     // live     Optional integer to construct a static or live view:
     //          default = null (static), 0 = on demand, >0 = interval (ms).
-    //          Static view is composed only once.
+    //          Static view is loaded only once.
     // tag      Optional tagName to use as container element of target.tree:
     //          default = div.
     init: (target, name, live = null, tag = 'div') => {

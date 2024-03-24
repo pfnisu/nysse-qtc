@@ -7,7 +7,7 @@ export function Search(l) {
     // Static view, latest search persists
     ui.init(this, 'search')
 
-    this.compose = async () => {
+    this.load = async () => {
         this.tree.innerHTML =
             `<h2>${l.str.searchHead}</h2>` +
             '<form><input type="text"/>' +
@@ -39,5 +39,5 @@ export function Search(l) {
         })
     }
 
-    ui.listen('lang', this.compose)
+    ui.listen('lang', this.load)
 }

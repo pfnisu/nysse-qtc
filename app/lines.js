@@ -5,7 +5,7 @@ import {List} from './list.js'
 export function Lines(l, route) {
     ui.init(this, l.str.lines)
 
-    this.compose = async () => {
+    this.load = async () => {
         ui.bind([new List(l), route], this.tree)
     }
 

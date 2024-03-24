@@ -5,7 +5,7 @@ import request from './lib/request.js'
 export function Alerts(l, set) {
     ui.init(this, 'alerts')
 
-    this.compose = async () => {
+    this.load = async () => {
         const state = request.cookie('alerts')
         const lang = request.cookie('lang') || 'fi'
         const hid = request.cookie('home')
@@ -31,7 +31,7 @@ export function Alerts(l, set) {
             (did
                 ? `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>`
                 : '')
-        // Tree gets overwritten on re-compose, listener can be GC'd
+        // Tree gets overwritten on reload, listener can be GC'd
         $('button', this)?.addEventListener('click', (ev) => {
             alerts.classList.toggle('hidden')
             ev.target.innerHTML = alerts.classList.contains('hidden')
@@ -42,6 +42,6 @@ export function Alerts(l, set) {
     }
 
     // Listen for lang and favorite stop change notifications
-    ui.listen('lang', this.compose)
-    ui.listen('fav', this.compose)
+    ui.listen('lang', this.load)
+    ui.listen('fav', this.load)
 }

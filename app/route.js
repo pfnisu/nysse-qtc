@@ -23,7 +23,7 @@ export function Route(l) {
 
     this.stop = () => pid = null
 
-    this.compose = async () => {
+    this.load = async () => {
         const rid = request.hash(this.name)
         const query = {
             'query': `{route(id:"${env.feed}:${rid}"){` +

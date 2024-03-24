@@ -7,7 +7,7 @@ import {Alerts} from './alerts.js'
 export function List(l) {
     ui.init(this, 'list')
 
-    this.compose = async () => {
+    this.load = async () => {
         const query = {
             'query': `{routes(feeds:"${env.feed}"){shortName longName}` +
                 `alerts(feeds:"${env.feed}"){alertDescriptionTextTranslations{` +

@@ -66,7 +66,7 @@ export function Stops(l) {
         }
     }
 
-    this.compose = async () => {
+    this.load = async () => {
         const sid = request.hash('stop')
         title = null
         if (sid) {

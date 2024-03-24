@@ -7,7 +7,7 @@ export function Arrivals(l) {
     // Compose UI every 30 sec
     ui.init(this, 'arrivals', 30000, 'tbody')
 
-    this.compose = async () => {
+    this.load = async () => {
         const sid = request.hash('stop')
         const query = {
             'query': `{stop(id:"${env.feed}:${sid}"){stoptimesWithoutPatterns(`+
