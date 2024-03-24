@@ -58,15 +58,17 @@ export function Stops(l) {
 
     // Handle focus for Search input
     this.start = () => {
-        const input = $('input', this)
-        if (input) {
+        if (title) document.title = title
+        else {
+            const input = $('input', this)
             input.value = ''
             input.focus()
-        } else document.title = title
+        }
     }
 
     this.compose = async () => {
         const sid = request.hash('stop')
+        title = null
         if (sid) {
             // Using aliases to get everything in one query
             const query = {
