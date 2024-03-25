@@ -29,7 +29,7 @@ export function Settings(l) {
             b.setAttribute('disabled', '')
             // Needs innerHTML to parse entity
             b.innerHTML += ' &#10003;'
-            if (!prev || !(Object.keys(prev)[0] in b.dataset)) b.className = 'idle'
+            if (!(prev && Object.keys(prev)[0] in b.dataset)) b.className = 'idle'
         }
     }
 
