@@ -25,11 +25,10 @@ export function Route(l) {
 
     this.load = async () => {
         const rid = request.hash(this.name)
-        const query = {
+        const json = await request.http(env.uri, 'POST', {
             'query': `{route(id:"${env.feed}:${rid}"){` +
                 'patterns{stops{gtfsId name zoneId}headsign code}longName}}'
-        }
-        const json = await request.http(env.uri, 'POST', query, env.key)
+        }, env.key)
         title = null
         if (json?.data.route) {
             title = `${rid} ${json.data.route.longName} | ${document.title}`

@@ -15,12 +15,11 @@ export function Search(l) {
             '</form><table><tbody></tbody></table>'
         $('#search', this).addEventListener('click', async (ev) => {
             ev.preventDefault()
-            const query = {
+            const json = await request.http(env.uri, 'POST', {
                 'query': `{stops(feeds:"${env.feed}",maxResults:30,` +
                     `name:"${$('input', this).value}")` +
                         '{gtfsId name zoneId}}'
-            }
-            const json = await request.http(env.uri, 'POST', query, env.key)
+            }, env.key)
             let html = ''
             if (json) {
                 // Sort results 1st by zone, 2nd by stop

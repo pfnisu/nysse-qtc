@@ -71,7 +71,7 @@ export function Stops(l) {
         title = null
         if (sid) {
             // Using aliases to get everything in one query
-            const query = {
+            const json = await request.http(env.uri, 'POST', {
                 'query': `{stop(id:"${env.feed}:${sid}"){` +
                     `mon:stoptimesForServiceDate(date:"${dates.mon}"){` +
                         'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
@@ -80,8 +80,7 @@ export function Stops(l) {
                     `sun:stoptimesForServiceDate(date:"${dates.sun}"){` +
                         'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
                     'name zoneId}}'
-            }
-            const json = await request.http(env.uri, 'POST', query, env.key)
+            }, env.key)
             if (json?.data.stop) {
                 title =
                     `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +

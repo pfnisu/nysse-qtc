@@ -8,12 +8,11 @@ export function List(l) {
     ui.init(this, 'list')
 
     this.load = async () => {
-        const query = {
+        const json = await request.http(env.uri, 'POST', {
             'query': `{routes(feeds:"${env.feed}"){shortName longName}` +
                 `alerts(feeds:"${env.feed}"){alertDescriptionTextTranslations{` +
                     'language text}alertHash alertSeverityLevel}}'
-        }
-        const json = await request.http(env.uri, 'POST', query, env.key)
+        }, env.key)
         if (json) {
             let html = '<div></div><table><tbody>'
             json.data.routes.sort((a, b) =>
