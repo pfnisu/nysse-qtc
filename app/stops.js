@@ -58,10 +58,10 @@ export function Stops(l) {
                 s.classList.toggle('hl')
     }
 
-    // Handle focus for Search input
     this.start = () => {
         if (title) document.title = title
         else {
+            // Handle focus for Search input
             const input = $('input', this)
             input.value = ''
             input.focus()
