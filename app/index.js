@@ -20,14 +20,10 @@ const main = async () => {
         $('nav'),
         ' | ' + document.title)
 
-    // Set route highlight to cookie (in Arrivals, List and Stops)
+    // Notify route highlight events (in Arrivals, List and Stops)
     document.addEventListener('click', (ev) => {
-        if (ev.target.classList.contains('route')) {
-            const rid = ev.target.textContent
-            if (rid === request.cookie('highlight')) request.cookie('highlight', '')
-            else request.cookie('highlight', rid)
-            ui.notify('hl', rid)
-        }
+        if (ev.target.classList.contains('route'))
+            ui.notify('hl', ev.target.textContent)
     }, true)
 }
 main()

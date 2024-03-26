@@ -48,11 +48,13 @@ export function Stops(l) {
         root.innerHTML = html || `<tr><th>${l.str.noTrips}</th></tr>`
     }
 
-    // Toggle highlight for matching route shortNames
+    // Toggle highlight for matching route shortNames and set cookie
     const highlight = (ev) => {
-        const rid = ev ? ev.detail : request.cookie('highlight')
-        for (const s of $('span', this, true))
-            if (s.textContent === rid || s.classList.contains('hl'))
+        const next = ev && ev.detail
+        const prev = request.cookie('highlight')
+        if (next) request.cookie('highlight', next === prev ? '' : next)
+        if (next || prev) for (const s of $('span', this, true))
+            if (s.textContent === next || s.textContent === prev)
                 s.classList.toggle('hl')
     }
 
