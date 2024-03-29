@@ -25,7 +25,7 @@ export function Stops(l) {
     // Generate sorted timetable from route timestamps
     const timetable = (data, root) => {
         let table = new Array(24)
-        for (const route of data) {
+        for (const route of data)
             for (const time of route.stoptimes) {
                 const dt = new Date(time.scheduledArrival * 1000).toUTCString()
                 const hour = parseInt(dt.substring(17, 19))
@@ -35,7 +35,6 @@ export function Stops(l) {
                     route: route.pattern.route.shortName
                 })
             }
-        }
         let html = ''
         // Sparse array, iterating as object
         for (const hour in table) {
@@ -53,9 +52,10 @@ export function Stops(l) {
         const next = ev && ev.detail
         const prev = request.cookie('highlight')
         if (next) request.cookie('highlight', next === prev ? '' : next)
-        if (next || prev) for (const s of $('span', this, true))
-            if (s.textContent === next || s.textContent === prev)
-                s.classList.toggle('hl')
+        if (next || prev)
+            for (const s of $('span', this, true))
+                if (s.textContent === next || s.textContent === prev)
+                    s.classList.toggle('hl')
     }
 
     this.start = () => {
