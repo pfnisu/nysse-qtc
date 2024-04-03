@@ -9,6 +9,7 @@ export function Route(l) {
     let pid, title
 
     this.start = () => {
+        // Update jump list and position only with valid API response
         if (title) {
             document.title = title
             $('[disabled]', this)?.removeAttribute('disabled')

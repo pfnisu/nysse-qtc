@@ -19,6 +19,7 @@ export function Arrivals(l) {
             let html = ''
             for (const dep of json.data.stop.stoptimesWithoutPatterns) {
                 const rid = dep.trip.pattern.code.split(':')[1]
+                // Pattern code is used as pid
                 let sign =
                     `&#10141;<a href="#p=0;route=${rid}" ` +
                     `data-p="${dep.trip.pattern.code}">${dep.headsign}</a>`
