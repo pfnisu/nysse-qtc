@@ -30,14 +30,16 @@ nav a {
 nav a,li a {
     text-decoration:none;
 }
-nav a:hover,.route,th.zone,td span.hl {
+nav a:hover,.active,.route,th.zone,td span.hl {
     background:#61dafb;
     color:#282c34;
 }
-nav a:active,nav a:hover.active,.active {
+nav a:hover.active,.active {
     z-index:1;
     background:#fff;
-    color:#282c34;
+}
+nav a:active {
+    margin:2px 4px -2px 0;
 }
 main {
     position:relative;
