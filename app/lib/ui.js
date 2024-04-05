@@ -59,7 +59,7 @@ export default {
                 nav.innerHTML = views.reduce((cat, v, i) =>
                     `${cat}<a href="#${nav.id}=${i}">${v.name}</a>`, '')
                 const index = request.hash(nav.id) ?? 0
-                nav.children[index].className = 'active'
+                nav.children[index].className = 'focus'
                 window.scroll(0, 0)
                 if (title) document.title = `${views[index].name}${title}`
                 start(views[index], root)
