@@ -38,9 +38,6 @@ nav a.focus {
     z-index:1;
     background:#fff;
 }
-nav a:active {
-    margin:2px 4px -2px 0;
-}
 main {
     position:relative;
     margin:0 8px 8px;
@@ -65,7 +62,7 @@ table a,th,input,button,li a,#alert p {
 table a,th,#alert p {
     color:#282c34;
 }
-table a:link:active,table a:link:hover,span.route,#alert .severe {
+table a:link:hover,span.route,#alert .severe {
     background:#cff3fd;
 }
 #alert {
