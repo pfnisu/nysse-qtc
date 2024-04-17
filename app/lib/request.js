@@ -5,7 +5,8 @@ export default {
     //          Returns value string if cookie is found or set,
     //          otherwise null.
     // key      Cookie name
-    // value    Get cookie value if null, else set cookie to value
+    // value    Optional cookie value:
+    //          Get value if null, else set cookie to value.
     // age      Max-age in seconds, default = 60*60*24*365
     cookie: (key, value = null, age = 31536000) => {
         let match = ['', value]
@@ -19,9 +20,8 @@ export default {
     // hash()   Get or set parameters in URL hash:
     //          Returns value string or null.
     // key      Param name
-    // value    Get param value if null,
-    //          remove param if empty string,
-    //          else set param to value.
+    // value    Optional param value:
+    //          Get value if null, remove param if empty string, else set value.
     // clear    Optional boolean to remove all previous params
     hash: (key, value = null, clear = false) => {
         let hash = clear ? '' : window.location.hash
@@ -37,8 +37,8 @@ export default {
     // http()   Fetch as json, null on error
     // resource URI to fetch from
     // method   Optional method type, default = GET
-    // data     JSON payload to send in the request body
-    // head     HTTP headers as object, default Content-type = JSON
+    // data     Optional JSON payload to send in the request body
+    // head     Optional HTTP headers as object, default Content-type = JSON
     http: async (resource, method = 'GET', data = null, head = {}) => {
         head['Content-type'] ??= 'application/json'
         try {
