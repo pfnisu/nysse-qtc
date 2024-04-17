@@ -12,8 +12,8 @@ export function Stops(l) {
     let title
 
     // Format a day offset as YYYYMMDD
-    // 0...6 = Sunday - Saturday, null = Closest weekday
-    const day = (offset = null) => {
+    // 0...6 = Sunday - Saturday, nullish = Closest weekday
+    const day = (offset) => {
         let dt = new Date()
         const today = dt.getUTCDay() || 7
         offset ??= today < 6 ? today : 8
@@ -48,6 +48,7 @@ export function Stops(l) {
     }
 
     // Toggle highlight for matching route shortNames and set cookie
+    // using detail data from Event object
     const highlight = (ev) => {
         const next = ev && ev.detail
         const prev = request.cookie('highlight')
