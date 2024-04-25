@@ -15,6 +15,8 @@ export function Route(l) {
             $('[disabled]', this)?.removeAttribute('disabled')
             const h = pid ? $(`[data-h="${pid}"]`, this) : $('h2', this)
             h.after(jump)
+            // Pattern id is set via notification or click event and
+            // used to scroll to matching heading
             if (pid) {
                 $(`[data-b="${pid}"]`, this).setAttribute('disabled', '')
                 h.scrollIntoView()
