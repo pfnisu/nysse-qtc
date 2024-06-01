@@ -14,6 +14,8 @@ const main = async () => {
     const size = request.cookie('size')
     if (size) document.documentElement.style.setProperty('--size', size)
 
+    // Route is initialized here so that pid listener works
+    // with every app entry point
     ui.bind(
         [new Lines(l, new Route(l)), new Stops(l), new Settings(l)],
         $('main'),
