@@ -21,7 +21,7 @@ export function Search(l) {
                         '{gtfsId name zoneId}}'
             }, env.key)
             let html = ''
-            if (json) {
+            if (json?.data.stops.length) {
                 // Sort results 1st by zone, 2nd by stop
                 json.data.stops.sort((a, b) =>
                     a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
@@ -33,7 +33,7 @@ export function Search(l) {
                             `<th class="stop">${sid}</th>` +
                             `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
                 }
-            } else html = `<tr><td>${l.str.error}</td></tr>`
+            } else html = `<tr><td>${json ? l.str.noStops : l.str.error}</td></tr>`
             $('tbody', this).innerHTML = html
         })
     }
