@@ -10,6 +10,7 @@
     "badRoute": "Virheellinen linjanumero",
     "searchHead": "Etsi pysäkkejä nimellä tai numerolla",
     "search": "Etsi",
+    "noStops": "Ei tuloksia",
     "setHome": "Aseta kotipysäkki",
     "setDest": "Aseta kohdepysäkki",
     "home": "&#10003; Kotipysäkki",

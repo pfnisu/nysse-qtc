@@ -10,6 +10,7 @@
     "badRoute": "Invalid route number",
     "searchHead": "Search for stops by name or number",
     "search": "Search",
+    "noStops": "No matches",
     "setHome": "Set home stop",
     "setDest": "Set target stop",
     "home": "&#10003; Home stop",
