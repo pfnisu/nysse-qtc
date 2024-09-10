@@ -16,8 +16,8 @@ export function List(l) {
         if (json) {
             let html = '<div></div><table><tbody>'
             // Sort route list alphanumerically
-            json.data.routes.sort((a, b) =>
-                a.shortName.localeCompare(b.shortName, 'en', { numeric: true }))
+            const comp = new Intl.Collator('fi', { numeric: true }).compare
+            json.data.routes.sort((a, b) => comp(a.shortName, b.shortName))
             for (const route of json.data.routes)
                 html +=
                     `<tr><th class="route">${route.shortName}</th>` +
