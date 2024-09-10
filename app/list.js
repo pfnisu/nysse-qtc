@@ -15,8 +15,9 @@ export function List(l) {
         }, env.key)
         if (json) {
             let html = '<div></div><table><tbody>'
+            // Sort route list alphanumerically
             json.data.routes.sort((a, b) =>
-                parseInt(a.shortName) - parseInt(b.shortName))
+                a.shortName.localeCompare(b.shortName, 'en', { numeric: true }))
             for (const route of json.data.routes)
                 html +=
                     `<tr><th class="route">${route.shortName}</th>` +
