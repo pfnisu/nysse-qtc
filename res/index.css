@@ -46,7 +46,7 @@ main {
     padding:16px 0.4em 8px;
     background:#fff;
 }
-main :not(div) {
+main :not(div,button) {
     margin:0 0 8px;
 }
 h2 {
@@ -112,13 +112,12 @@ button,li a {
     border-radius:0 6px 6px 0;
 }
 ul {
-    position:absolute;
-    right:0.4em;
+    padding:0;
     list-style:none;
 }
-li * {
-    float:right;
-    clear:right;
+li {
+    display:inline;
+    padding:0 4px 0 0;
 }
 input:focus,button:enabled:hover,li a:hover {
     outline:2px solid #61dafb;
@@ -136,7 +135,18 @@ button:enabled:active,li a:active,:disabled {
 :disabled:not(.idle) {
     animation:0.3s flip;
 }
-@media (min-width:640px) {
+@media (min-width:560px) {
+    ul {
+        position:absolute;
+        right:0.4em;
+    }
+    li * {
+        float:right;
+        clear:right;
+        margin:0 0 8px;
+    }
+}
+@media (min-width:720px) {
     nav a {
         width:auto;
         padding:12px 3vw;
