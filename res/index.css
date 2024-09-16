@@ -46,7 +46,7 @@ main {
     padding:16px 0.4em 8px;
     background:#fff;
 }
-main :not(div,button) {
+main :not(div,ul) {
     margin:0 0 8px;
 }
 h2 {
@@ -143,7 +143,6 @@ button:enabled:active,li a:active,:disabled {
     li * {
         float:right;
         clear:right;
-        margin:0 0 8px;
     }
 }
 @media (min-width:720px) {
