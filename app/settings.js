@@ -1,7 +1,7 @@
 import ui, {$} from './lib/ui.js'
 import request from './lib/request.js'
 
-// Language setting and project info
+// Language and text size settings plus project info
 export function Settings(l) {
     ui.init(this, l.str.settings)
     // Track previous change
@@ -29,6 +29,7 @@ export function Settings(l) {
             b.setAttribute('disabled', '')
             // Needs innerHTML to parse entity
             b.innerHTML += ' &#10003;'
+            // Needs double-negative so flip works in other views too
             if (!(prev && Object.keys(prev)[0] in b.dataset)) b.className = 'idle'
         }
     }
