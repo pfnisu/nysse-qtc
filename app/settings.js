@@ -27,8 +27,7 @@ export function Settings(l) {
         for (const b of
             $(`[data-l="${lang}"],[data-s="${size}"]`, this, true)) {
             b.setAttribute('disabled', '')
-            // Needs innerHTML to parse entity
-            b.innerHTML += ' &#10003;'
+            b.textContent += ' \u2713'
             // Needs double-negative so flip works in other views too
             if (!(prev && Object.keys(prev)[0] in b.dataset)) b.className = 'idle'
         }
