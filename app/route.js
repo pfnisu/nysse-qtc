@@ -41,10 +41,10 @@ export function Route(l) {
                 // Generate jump list to pattern headings
                 list +=
                     `<li><button data-b="${pat.code}">` +
-                    `&#10141; ${pat.headsign}</button></li>`
+                    `\u279d ${pat.headsign}</button></li>`
                 html +=
                     `<h2 data-h="${pat.code}">` +
-                    `${rid} &#10141; ${pat.headsign}</h2><table><tbody>`
+                    `${rid} \u279d ${pat.headsign}</h2><table><tbody>`
                 for (const stop of pat.stops) {
                     const sid = stop.gtfsId.split(':')[1]
                     html +=

@@ -22,10 +22,10 @@ export function Arrivals(l) {
                 const rid = dep.trip.pattern.code.split(':')[1]
                 // Pattern code is used as pid
                 let sign =
-                    `&#10141;<a href="#p=0;route=${rid}" ` +
+                    `\u279d<a href="#p=0;route=${rid}" ` +
                     `data-p="${dep.trip.pattern.code}">${dep.headsign}</a>`
                 if (dep.realtimeState == 'CANCELED')
-                    sign = `&#10005;<a>${l.str.canceled}</a>`
+                    sign = `\u2715<a>${l.str.canceled}</a>`
                 const dt = new Date(dep.scheduledArrival * 1000)
                 const diff =
                     Math.round((dep.realtimeArrival - dep.scheduledArrival) / 60)
