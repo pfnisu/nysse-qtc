@@ -11,16 +11,20 @@ export function Stops(l) {
     const search = new Search(l)
     let title
 
-    // Format a day offset as YYYYMMDD
-    // 0...6 = Sunday - Saturday, nullish = Closest weekday
-    const day = (offset) => {
-        let dt = new Date()
+    // Set YYYYMMDD dates for current or next weekday, sat and sun
+    const week = (() => {
+        const dt = new Date()
         const today = dt.getUTCDay() || 7
-        offset ??= today < 6 ? today : 8
-        dt.setUTCDate(dt.getUTCDate() + offset - today)
-        return dt.toJSON().split('T')[0].replaceAll('-', '')
-    }
-    const dates = { mon: day(), sat: day(6), sun: day(7) }
+        // Calculate offsets for stepping days of the Date object
+        const [wkd, sat, sun] = today < 6 ?
+            [0, 6 - today, 1] : today < 7 ?
+                [8 - today, -2, 1] : [1, 5, -6]
+        const format = (offset) => {
+            dt.setUTCDate(dt.getUTCDate() + offset)
+            return dt.toJSON().split('T')[0].replaceAll('-', '')
+        }
+        return { wkd: format(wkd), sat: format(sat), sun: format(sun) }
+    })()
 
     // Generate sorted timetable from route timestamps
     const timetable = (data, root) => {
@@ -76,11 +80,11 @@ export function Stops(l) {
             // Using aliases to get everything in one query
             const json = await request.http(env.uri, 'POST', {
                 'query': `{stop(id:"${env.feed}:${sid}"){` +
-                    `mon:stoptimesForServiceDate(date:"${dates.mon}",omitNonPickups:true){` +
+                    `wkd:stoptimesForServiceDate(date:"${week.wkd}",omitNonPickups:true){` +
                         'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
-                    `sat:stoptimesForServiceDate(date:"${dates.sat}",omitNonPickups:true){` +
+                    `sat:stoptimesForServiceDate(date:"${week.sat}",omitNonPickups:true){` +
                         'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
-                    `sun:stoptimesForServiceDate(date:"${dates.sun}",omitNonPickups:true){` +
+                    `sun:stoptimesForServiceDate(date:"${week.sun}",omitNonPickups:true){` +
                         'pattern{route{shortName}}stoptimes{scheduledArrival}}' +
                     'name zoneId}}'
             }, env.key)
@@ -91,7 +95,7 @@ export function Stops(l) {
                 this.tree.innerHTML =
                     `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
                     '<table></table>' +
-                    `<h2>${l.str.monFri}</h2><table id="mon"><tbody></tbody></table>` +
+                    `<h2>${l.str.monFri}</h2><table id="wkd"><tbody></tbody></table>` +
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
                 const fav = document.createElement('ul')
@@ -120,7 +124,7 @@ export function Stops(l) {
                 // Arrivals is a live view, updating separately
                 ui.bind([arrivals], $('table', this))
 
-                timetable(json.data.stop.mon, $('#mon>tbody', this))
+                timetable(json.data.stop.wkd, $('#wkd>tbody', this))
                 timetable(json.data.stop.sat, $('#sat>tbody', this))
                 timetable(json.data.stop.sun, $('#sun>tbody', this))
                 highlight()
