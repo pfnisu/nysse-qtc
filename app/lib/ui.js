@@ -31,7 +31,7 @@ const stop = (view) => {
 // $()      JQuery-style convenience wrapper for querySelector
 // query    Query string
 // target   Optional target object which tree is queried,
-//          dafault = document tree.
+//          default = document tree.
 // all      Optional boolean to match all or first element,
 //          default = first.
 export const $ = (query, target = null, all = false) => {
