@@ -14,11 +14,11 @@ export function Stops(l) {
     // Set YYYYMMDD dates for current or next weekday, sat and sun
     const week = (() => {
         const dt = new Date()
-        const today = dt.getDay() || 7
+        const today = dt.getDay()
         // Calculate offsets for stepping days of the Date object
-        const [wkd, sat, sun] = today < 6 ?
-            [0, 6 - today, 1] : today < 7 ?
-                [8 - today, -2, 1] : [1, 5, -6]
+        const [wkd, sat, sun] = today ?
+            today < 6 ? [0, 6 - today, 1] : [8 - today, -2, 1] :
+            [1, 5, -6]
         const format = (offset) => {
             dt.setDate(dt.getDate() + offset)
             return dt.getFullYear() +
