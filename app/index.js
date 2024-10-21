@@ -5,7 +5,7 @@ import {Route} from './route.js'
 import {Stops} from './stops.js'
 import {Settings} from './settings.js'
 
-const main = async () => {
+(async () => {
     // Language object
     const l = {
         str: await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
@@ -27,5 +27,4 @@ const main = async () => {
         if (ev.target.classList.contains('route'))
             ui.notify('hl', ev.target.textContent)
     }, true)
-}
-main()
+})()
