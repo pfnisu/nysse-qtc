@@ -67,7 +67,7 @@ table a:link:hover,span.route,#alert .severe {
 }
 #alert {
     overflow:hidden;
-    max-height:200vh;
+    max-height:300vmax;
     transition:max-height 1s cubic-bezier(1, 0, 0, 1);
 }
 #alert.hidden {
