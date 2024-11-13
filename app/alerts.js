@@ -17,7 +17,7 @@ export function Alerts(l, set) {
         const alerts = $('#alert', this)
         // Generate alerts content for selected lang
         alerts.innerHTML = set.reduce((cat, a) => {
-            const severity = a[a.length - 1] === 'SEVERE' ? ' class="severe"' : ''
+            const severity = a[0] === 'SEVERE' ? ' class="severe"' : ''
             const t = a.find((t) => t.language === lang)
             // Skip alerts with no description
             return t?.text ? `${cat}<p${severity}>${t.text}</p>` : cat

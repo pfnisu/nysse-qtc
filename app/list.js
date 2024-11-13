@@ -29,11 +29,11 @@ export function List(l) {
             const order = ['INFO', 'WARNING', 'SEVERE']
             const set = [...new Map(json.data.alerts.map(a => [
                 a.alertHash, [
-                    ...a.alertDescriptionTextTranslations,
-                    a.alertSeverityLevel
+                    a.alertSeverityLevel,
+                    ...a.alertDescriptionTextTranslations
                 ]
             ])).values()].sort((a, b) =>
-                order.indexOf(a[a.length - 1]) < order.indexOf(b[b.length - 1]))
+                order.indexOf(a[0]) < order.indexOf(b[0]))
             ui.bind([new Alerts(l, set)], $('div', this))
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
