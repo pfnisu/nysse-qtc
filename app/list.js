@@ -25,13 +25,15 @@ export function List(l) {
                             `${route.longName}</a></td></tr>`
             this.tree.innerHTML = `${html}</tbody></table>`
 
-            // Remove duplicate alerts
+            // Remove duplicate alerts and sort by severity
+            const order = ['INFO', 'WARNING', 'SEVERE']
             const set = [...new Map(json.data.alerts.map(a => [
                 a.alertHash, [
                     ...a.alertDescriptionTextTranslations,
                     a.alertSeverityLevel
                 ]
-            ])).values()]
+            ])).values()].sort((a, b) =>
+                order.indexOf(a[a.length - 1]) < order.indexOf(b[b.length - 1]))
             ui.bind([new Alerts(l, set)], $('div', this))
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
