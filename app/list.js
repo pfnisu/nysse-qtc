@@ -26,14 +26,14 @@ export function List(l) {
             this.tree.innerHTML = `${html}</tbody></table>`
 
             // Remove duplicate alerts and sort by severity
-            const order = ['INFO', 'WARNING', 'SEVERE']
-            const set = [...new Map(json.data.alerts.map(a => [
+            const order = ['SEVERE', 'WARNING', 'INFO']
+            const set = [...new Map(json.data.alerts.map((a) => [
                 a.alertHash, [
                     a.alertSeverityLevel,
                     ...a.alertDescriptionTextTranslations
                 ]
             ])).values()].sort((a, b) =>
-                order.indexOf(a[0]) < order.indexOf(b[0]))
+                order.indexOf(a[0]) - order.indexOf(b[0]))
             ui.bind([new Alerts(l, set)], $('div', this))
         } else this.tree.innerHTML = `<h2>${l.str.error}</h2>`
     }
