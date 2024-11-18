@@ -7,7 +7,7 @@
     line-height:1.2;
     color:#000;
 }
-html,table[id] tr:nth-child(odd) > *,th.diff,#alert p {
+html,table[id] tr:nth-child(odd) > *,th.diff,.warning {
     background:#f6f5f4;
 }
 nav {
@@ -62,7 +62,7 @@ table a,th,input,button,li a,#alert p {
 table a,th,#alert p {
     color:#282c34;
 }
-table a:link:hover,span.route,#alert .severe {
+table a:link:hover,span.route,.severe {
     background:#cff3fd;
 }
 #alert {
@@ -94,7 +94,7 @@ td p,span.route {
     display:inline-block;
     margin:1px;
 }
-input,button,li a {
+input,button,li a,.info {
     border:1px solid #484c54;
 }
 input {
