@@ -22,21 +22,21 @@ export function Alerts(l, set) {
             return t?.text ? `${cat}<p class="${a[0].toLowerCase()}">${t.text}</p>` : cat
         }, '')
         $('ul', this).innerHTML =
-            (alerts.innerHTML
-                ? `<li><button>${state ? l.str.open : l.str.close}</button></li>`
-                : '') +
-            (hid
-                ? `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>`
-                : '') +
-            (did
-                ? `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>`
-                : '')
+            (alerts.innerHTML ?
+                `<li><button>${state ? l.str.open : l.str.close}</button></li>` :
+                '') +
+            (hid ?
+                `<li><a href="#p=1;stop=${hid}">${l.str.goHome}</a></li>` :
+                '') +
+            (did ?
+                `<li><a href="#p=1;stop=${did}">${l.str.goDest}</a></li>` :
+                '')
         // Tree gets overwritten on reload, listener can be GC'd
         $('button', this)?.addEventListener('click', (ev) => {
             alerts.classList.toggle('hidden')
-            ev.target.innerHTML = alerts.classList.contains('hidden')
-                ? l.str.open
-                : l.str.close
+            ev.target.innerHTML = alerts.classList.contains('hidden') ?
+                l.str.open :
+                l.str.close
             request.cookie('alerts', alerts.className)
         })
     }
