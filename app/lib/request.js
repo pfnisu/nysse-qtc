@@ -48,7 +48,7 @@ export default {
                 body: data && JSON.stringify(data),
             })
             if (resp.ok) return await resp.json()
-        } catch(e) {
+        } catch {
             return null
         }
     }
