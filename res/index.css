@@ -7,7 +7,7 @@
     line-height:1.2;
     color:#000;
 }
-html,table[id] tr:nth-child(odd) > *,th.diff,.warning {
+html,table[id] tr:nth-child(odd) > *,.diff,.warning {
     background:#f6f5f4;
 }
 nav {
@@ -16,7 +16,7 @@ nav {
     padding:4px 4px 0 8px;
     background:#282c34;
 }
-nav a,th.stop,.route:active {
+nav a,.stop,.route:active {
     background:#484c54;
     color:#61dafb;
 }
@@ -30,7 +30,7 @@ nav a {
 nav a,li a {
     text-decoration:none;
 }
-nav a:hover,.focus,.route,th.zone,td span.hl {
+nav a:hover,.focus,.route,.zone,td span.hl {
     background:#61dafb;
     color:#282c34;
 }
@@ -82,7 +82,7 @@ table[id] {
     table-layout:fixed;
     width:calc(100% + 4px);
 }
-table[id] th,th.stop,th.diff,.route {
+table[id] th,.stop,.diff,.route {
     width:3em;
     text-align:center;
 }
