@@ -103,6 +103,7 @@ input {
     padding-right:5em;
 }
 button,li a {
+    display:inline-block;
     background:linear-gradient(#f6f5f4, #e6e5e4);
     text-shadow:2px 2px 2px #fff;
 }
