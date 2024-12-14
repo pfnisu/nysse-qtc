@@ -11,6 +11,9 @@ import {Settings} from './settings.js'
         str: await request.http(`lang/${request.cookie('lang') || 'fi'}.json`)
     }
 
+    const theme = request.cookie('theme')
+    if (theme) document.documentElement.className = theme
+
     const size = request.cookie('size')
     if (size) document.documentElement.style.setProperty('--size', size)
 

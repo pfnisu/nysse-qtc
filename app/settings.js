@@ -10,11 +10,14 @@ export function Settings(l) {
     this.load = async () => {
         const lang = request.cookie('lang') || 'fi'
         const size = request.cookie('size') || '10px'
+        const theme = request.cookie('theme') || ''
         this.tree.innerHTML =
             '<h2>Kieli/Language</h2>' +
             '<p><button data-l="fi">suomi</button> <button data-l="en">english</button></p>' +
             `<h2>${l.str.size}</h2>` +
             `<p><button data-s="9px">${l.str.small}</button> <button data-s="10px">${l.str.medium}</button> <button data-s="11px">${l.str.large}</button></p>` +
+            `<h2>${l.str.theme}</h2>` +
+            `<p><button data-t="">${l.str.light}</button> <button data-t="dark">${l.str.dark}</button></p>` +
             `<h2>${l.str.dev}</h2>` +
             `<p>${l.str.src}: <a href="https://github.com/pfnisu/nysse-qtc/">https://github.com/pfnisu/nysse-qtc/</a></p>` +
             `<p>${l.str.api}: \u00a9 2024 <a href="https://digitransit.fi/en/developers/apis/6-terms-of-use/">Digitransit</a></p>` +
@@ -25,7 +28,7 @@ export function Settings(l) {
             '<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>'
         // Mark current settings and previous change
         for (const b of
-            $(`[data-l="${lang}"],[data-s="${size}"]`, this, true)) {
+            $(`[data-l="${lang}"],[data-s="${size}"],[data-t="${theme}"]`, this, true)) {
             b.setAttribute('disabled', '')
             b.textContent += ' \u2713'
             // Needs double-negative so flip works in other views too
@@ -47,6 +50,10 @@ export function Settings(l) {
         } else if (prev.s) {
             request.cookie('size', prev.s)
             document.documentElement.style.setProperty('--size', prev.s)
+            this.load()
+        } else if ('t' in prev) {
+            request.cookie('theme', prev.t)
+            document.documentElement.className = prev.t
             this.load()
         }
     }, true)
