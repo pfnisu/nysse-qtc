@@ -97,7 +97,7 @@ td p,span.route {
 input,button,li a,.info {
     border:1px solid #484c54;
 }
-input {
+main input {
     width:100%;
     border-right:0;
     padding-right:5em;
@@ -160,7 +160,7 @@ button:enabled:active,li a:active,:disabled {
     table a,th,input,button,li a,#alert p {
         padding:8px;
     }
-    input {
+    main input {
         width:50%;
     }
     ul {
