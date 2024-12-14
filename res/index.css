@@ -1,3 +1,18 @@
+html {
+    background:#f6f5f4;
+    --main:#fff;
+    --hover:#cff3fd;
+    --text:#000;
+    --link:#282c34;
+}
+html.dark {
+    background:#484c54;
+    --main:#000;
+    --hover:#484c54;
+    --text:#fff;
+    --link:#f6f5f4;
+    --odd:#282c34;
+}
 * {
     box-sizing:border-box;
     margin:0;
@@ -5,10 +20,10 @@
     font-family:sans-serif;
     font-size:calc(var(--size, 10px) + 0.5vw);
     line-height:1.2;
-    color:#000;
+    color:var(--text);
 }
-html,table[id] tr:nth-child(odd) > *,.diff,.warning {
-    background:#f6f5f4;
+table[id] tr:nth-child(odd) > *,.diff,.warning {
+    background:var(--odd, #f6f5f4);
 }
 nav {
     display:flex;
@@ -36,7 +51,8 @@ nav a:hover,.focus,.route,.zone,td span.hl {
 }
 nav a.focus {
     z-index:1;
-    background:#fff;
+    background:var(--main);
+    color:var(--link);
 }
 main {
     position:relative;
@@ -44,7 +60,7 @@ main {
     box-shadow:1px 1px 4px #484c54;
     border-radius:0 0 6px 6px;
     padding:16px 0.4em 8px;
-    background:#fff;
+    background:var(--main);
 }
 main :not(div,ul) {
     margin:0 0 8px;
@@ -60,10 +76,10 @@ table a,th,input,button,li a,#alert p {
     padding:8px 4px;
 }
 table a,th,#alert p {
-    color:#282c34;
+    color:var(--link);
 }
 table a:link:hover,span.route,.severe {
-    background:#cff3fd;
+    background:var(--hover);
 }
 #alert {
     overflow:hidden;
@@ -93,9 +109,11 @@ td,a {
 td p,span.route {
     display:inline-block;
     margin:1px;
+    color:var(--link);
 }
 input,button,li a,.info {
     border:1px solid #484c54;
+    color:#282c34;
 }
 main input {
     width:100%;
