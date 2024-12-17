@@ -24,9 +24,6 @@ html.dark {
 :not(input,#search) {
     line-height:1.2;
 }
-table[id] tr:nth-child(odd) > *,.diff,.warning {
-    background:var(--odd, #f6f5f4);
-}
 nav {
     display:flex;
     justify-content:center;
@@ -70,6 +67,9 @@ main :not(div,ul) {
 h2 {
     border-bottom:1px solid #484c54;
     font-size:1.3em;
+}
+table[id] tr:nth-child(odd) > *,.diff,.warning {
+    background:var(--odd, #f6f5f4);
 }
 table a,th,td,input,button,li a,#alert p,.route {
     border-radius:6px;
