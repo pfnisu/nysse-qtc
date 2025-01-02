@@ -33,8 +33,7 @@ export function Alerts(l, set) {
                 '')
         // Tree gets overwritten on reload, listener can be GC'd
         $('button', this)?.addEventListener('click', (ev) => {
-            alerts.classList.toggle('hidden')
-            ev.target.innerHTML = alerts.classList.contains('hidden') ?
+            ev.target.textContent = alerts.classList.toggle('hidden') ?
                 l.str.open :
                 l.str.close
             request.cookie('alerts', alerts.className)
