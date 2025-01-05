@@ -20,9 +20,9 @@ export function Settings(l) {
             `<p><button data-t="">${l.str.light}</button> <button data-t="dark">${l.str.dark}</button></p>` +
             `<h2>${l.str.dev}</h2>` +
             `<p>${l.str.src}: <a href="https://github.com/pfnisu/nysse-qtc/">https://github.com/pfnisu/nysse-qtc/</a></p>` +
-            `<p>${l.str.api}: \u00a9 2024 <a href="https://digitransit.fi/en/developers/apis/6-terms-of-use/">Digitransit</a></p>` +
+            `<p>${l.str.api}: \u00a9 2025 <a href="https://digitransit.fi/en/developers/apis/7-terms-of-use/">Digitransit</a></p>` +
             `<h2>${l.str.license}</h2>` +
-            '<p>Copyright \u00a9 2023-2024 Niko Suoniemi &lt;niko@tamperelainen.org&gt;</p>' +
+            '<p>Copyright \u00a9 2023-2025 Niko Suoniemi &lt;pfnisu@outlook.com&gt;</p>' +
             '<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3.</p>' +
             '<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</p>' +
             '<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>'

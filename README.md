@@ -6,7 +6,7 @@ Fast, mobile-first UI for checking stop timetables and arrival estimates of Tamp
 
 ## Author
 
-Niko Suoniemi <niko@tamperelainen.org>
+Niko Suoniemi <pfnisu@outlook.com>
 
 ## App URL
 
@@ -26,7 +26,7 @@ App deployed at: <https://nysse-qtc.onrender.com/>
 
 ## License
 
-Copyright (C) 2023-2024 Niko Suoniemi <niko@tamperelainen.org>
+Copyright (C) 2023-2025 Niko Suoniemi <pfnisu@outlook.com>
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3.
 
