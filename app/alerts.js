@@ -31,10 +31,7 @@ export function Alerts(l) {
     }
 
     this.load = async () => {
-        this.tree.innerHTML =
-            `<h2>${l.str.listHead}</h2>` +
-            `<div${request.cookie('alerts') ? ' class="hidden"' : ''} id="alert"></div>` +
-            '<ul></ul>'
+        let html = ''
         const json = await request.http(env.uri, 'POST', {
             'query': `{alerts(feeds:"${env.feed}"){` +
                 `alertDescriptionText(language:"${request.cookie('lang') || 'fi'}")` +
@@ -46,14 +43,18 @@ export function Alerts(l) {
             json.data.alerts.sort((a, b) =>
                 order.indexOf(a.alertSeverityLevel) - order.indexOf(b.alertSeverityLevel))
             // Generate alerts content for selected lang
-            $('#alert', this).innerHTML = json.data.alerts.reduce((cat, a) => {
+            html = json.data.alerts.reduce((cat, a) => {
                 // Skip alerts with no description
                 return a.alertDescriptionText ?
                     `${cat}<p class="${a.alertSeverityLevel.toLowerCase()}">` +
                         `${a.alertDescriptionText}</p>` :
                     cat
             }, '')
-        }
+        } else html = `<p class="warning">${l.str.error}</p>`
+        this.tree.innerHTML =
+            `<h2>${l.str.listHead}</h2>` +
+            `<div${request.cookie('alerts') ? ' class="hidden"' : ''} id="alert">${html}</div>` +
+            '<ul></ul>'
         menu()
     }
 
