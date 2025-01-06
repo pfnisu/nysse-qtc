@@ -101,23 +101,21 @@ export function Stops(l) {
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
                 const fav = document.createElement('ul')
-                // Generate favorite list based on cookie matches
-                const list = () => {
-                    const hid = request.cookie('home')
-                    const did = request.cookie('dest')
-                    if (sid === hid)
+                // Generate favorite controls based on cookie matches
+                const controls = () => {
+                    if (sid === request.cookie('home'))
                         return `<li><button id="home">${l.str.home}</button></li>`
-                    else if (sid === did)
+                    else if (sid === request.cookie('dest'))
                         return `<li><button id="dest">${l.str.dest}</button></li>`
                     return `<li><button id="home">${l.str.setHome}</button></li>` +
                         `<li><button id="dest">${l.str.setDest}</button></li>`
                 }
-                fav.innerHTML = list()
+                fav.innerHTML = controls()
                 fav.addEventListener('click', (ev) => {
                     request.cookie(
                         ev.target.id,
                         sid === request.cookie(ev.target.id) ? '' : sid)
-                    fav.innerHTML = list()
+                    fav.innerHTML = controls()
                     // Notify listeners when favorite stop is set
                     ui.notify('fav')
                 })
