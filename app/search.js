@@ -19,16 +19,17 @@ export function Search(l) {
             if (/^[0-9]{4}$/.test(str)) request.hash('stop', str)
             else {
                 const json = await request.http(env.uri, 'POST', {
-                    'query': `{stops(feeds:"${env.feed}",maxResults:30,name:"${str}")` +
-                        '{gtfsId name zoneId}}'
+                    'query': `{stops(name:"${str}"){gtfsId name zoneId}}`
                 }, env.key)
                 let html = ''
                 if (json?.data.stops.length) {
+                    // Exclude stops from other feeds
+                    let stops = json.data.stops.filter((s) => s.gtfsId.startsWith(env.feed))
                     // Sort results 1st by zone, 2nd by stop
-                    json.data.stops.sort((a, b) =>
+                    stops.sort((a, b) =>
                         a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
                             a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
-                    for (const stop of json.data.stops) {
+                    for (const stop of stops) {
                         const sid = stop.gtfsId.split(':')[1]
                         html +=
                             `<tr><th class="zone">${stop.zoneId}</th>` +
