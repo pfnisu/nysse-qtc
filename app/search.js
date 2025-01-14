@@ -15,26 +15,29 @@ export function Search(l) {
             '</form><table><tbody></tbody></table>'
         $('#search', this).addEventListener('click', async (ev) => {
             ev.preventDefault()
-            const json = await request.http(env.uri, 'POST', {
-                'query': `{stops(feeds:"${env.feed}",maxResults:30,` +
-                    `name:"${$('input', this).value}")` +
+            const str = $('input', this).value
+            if (/^[0-9]{4}$/.test(str)) request.hash('stop', str)
+            else {
+                const json = await request.http(env.uri, 'POST', {
+                    'query': `{stops(feeds:"${env.feed}",maxResults:30,name:"${str}")` +
                         '{gtfsId name zoneId}}'
-            }, env.key)
-            let html = ''
-            if (json?.data.stops.length) {
-                // Sort results 1st by zone, 2nd by stop
-                json.data.stops.sort((a, b) =>
-                    a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
-                        a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
-                for (const stop of json.data.stops) {
-                    const sid = stop.gtfsId.split(':')[1]
-                    html +=
-                        `<tr><th class="zone">${stop.zoneId}</th>` +
-                            `<th class="stop">${sid}</th>` +
-                            `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
-                }
-            } else html = `<tr><td>${json ? l.str.noStops : l.str.error}</td></tr>`
-            $('tbody', this).innerHTML = html
+                }, env.key)
+                let html = ''
+                if (json?.data.stops.length) {
+                    // Sort results 1st by zone, 2nd by stop
+                    json.data.stops.sort((a, b) =>
+                        a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
+                            a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
+                    for (const stop of json.data.stops) {
+                        const sid = stop.gtfsId.split(':')[1]
+                        html +=
+                            `<tr><th class="zone">${stop.zoneId}</th>` +
+                                `<th class="stop">${sid}</th>` +
+                                `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
+                    }
+                } else html = `<tr><td>${json ? l.str.noStops : l.str.error}</td></tr>`
+                $('tbody', this).innerHTML = html
+            }
         })
     }
 
