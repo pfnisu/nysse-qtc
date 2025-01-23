@@ -53,7 +53,8 @@ export function Alerts(l) {
         } else html = `<p class="warning">${l.str.error}</p>`
         this.tree.innerHTML =
             `<h2>${l.str.listHead}</h2>` +
-            `<div${request.cookie('alerts') ? ' class="hidden"' : ''} id="alert">${html}</div>` +
+            `<div${request.cookie('alerts') ? ' class="hidden"' : ''} ` +
+                `id="alert">${html}</div>` +
             '<ul></ul>'
         menu()
     }
