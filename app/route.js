@@ -69,5 +69,5 @@ export function Route(l) {
     ui.listen('pid', (ev) => pid = ev.detail)
 
     // Update title on lang change
-    ui.listen('lang', () => title = title.replace(/\|.*\|/, `| ${l.str.lines} |`))
+    ui.listen('lang', () => title = title?.replace(/\|.*\|/, `| ${l.str.lines} |`))
 }
