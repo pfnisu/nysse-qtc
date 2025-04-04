@@ -17,7 +17,7 @@ export function Search(l) {
             ev.preventDefault()
             const input = $('input', this).value
             if (/^[0-9]{4}$/.test(input)) request.hash('stop', input)
-            else {
+            else if (input) {
                 const json = await request.http(env.uri, 'POST', {
                     'query': `{stops(name:"${input}"){gtfsId name zoneId}}`
                 }, env.key)
