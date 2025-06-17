@@ -79,6 +79,14 @@ export function Stops(l) {
         const sid = request.hash('stop')
         title = null
         if (sid) {
+            this.tree.innerHTML =
+                '<h2></h2><table></table>' +
+                `<h2>${l.str.monFri}</h2><table id="wkd"><tbody></tbody></table>` +
+                `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
+                `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
+            // Arrivals is a live view, updating separately
+            ui.bind([arrivals], $('table', this))
+
             // Using aliases to get everything in one query
             const json = await request.http(env.uri, 'POST', {
                 'query': `{stop(id:"${env.feed}:${sid}"){` +
@@ -92,11 +100,7 @@ export function Stops(l) {
             }, env.key)
             if (json?.data.stop) {
                 title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}`
-                this.tree.innerHTML =
-                    `<h2>${title}</h2><table></table>` +
-                    `<h2>${l.str.monFri}</h2><table id="wkd"><tbody></tbody></table>` +
-                    `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
-                    `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
+                $('h2', this).textContent = title
                 const fav = document.createElement('ul')
                 // Generate favorite controls based on cookie matches
                 const controls = () => {
@@ -117,9 +121,6 @@ export function Stops(l) {
                     ui.notify('fav')
                 })
                 $('h2', this).after(fav)
-
-                // Arrivals is a live view, updating separately
-                ui.bind([arrivals], $('table', this))
 
                 timetable(json.data.stop.wkd, $('#wkd>tbody', this))
                 timetable(json.data.stop.sat, $('#sat>tbody', this))
