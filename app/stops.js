@@ -66,7 +66,7 @@ export function Stops(l) {
     }
 
     this.start = () => {
-        if (title) document.title = title
+        if (title) document.title = `${title} | ${document.title}`
         else {
             // Handle focus for Search input
             const input = $('input', this)
@@ -91,12 +91,9 @@ export function Stops(l) {
                     'name zoneId}}'
             }, env.key)
             if (json?.data.stop) {
-                title =
-                    `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}` +
-                    ` | ${document.title}`
+                title = `${json.data.stop.zoneId} ${sid} ${json.data.stop.name}`
                 this.tree.innerHTML =
-                    `<h2>${json.data.stop.zoneId} ${sid} ${json.data.stop.name}</h2>` +
-                    '<table></table>' +
+                    `<h2>${title}</h2><table></table>` +
                     `<h2>${l.str.monFri}</h2><table id="wkd"><tbody></tbody></table>` +
                     `<h2>${l.str.sat}</h2><table id="sat"><tbody></tbody></table>` +
                     `<h2>${l.str.sun}</h2><table id="sun"><tbody></tbody></table>`
