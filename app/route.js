@@ -6,7 +6,7 @@ import env from '../.env.js'
 export function Route(l) {
     ui.init(this, 'route', 0)
     const jump = document.createElement('ul')
-    let pid, title
+    let title, pid, hl
 
     this.start = () => {
         // Update jump list and position only with valid API response
@@ -20,6 +20,13 @@ export function Route(l) {
             if (pid) {
                 $(`[data-b="${pid}"]`, this).setAttribute('disabled', '')
                 h.scrollIntoView()
+            }
+            // Highlight matching stop ids
+            if (hl) {
+                for (const stop of $('th.stop', this, true)) {
+                    stop.classList.remove('hl')
+                    if (stop.textContent === hl) stop.classList.add('hl')
+                }
             }
         }
     }
@@ -67,6 +74,9 @@ export function Route(l) {
 
     // Listen for pattern id from Arrivals
     ui.listen('pid', (ev) => pid = ev.detail)
+
+    // Set highlight to the last loaded stop id
+    ui.listen('sid', (ev) => hl = ev.detail)
 
     // Update title on lang change
     ui.listen('lang', () => title = title?.replace(/\|.*\|/, `| ${l.str.lines} |`))

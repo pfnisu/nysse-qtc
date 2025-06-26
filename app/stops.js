@@ -77,6 +77,8 @@ export function Stops(l) {
 
     this.load = async () => {
         const sid = request.hash('stop')
+        // Notify latest stop id to Route
+        ui.notify('sid', sid)
         title = null
         if (sid) {
             this.tree.innerHTML =
