@@ -22,11 +22,13 @@ export function Route(l) {
                 h.scrollIntoView()
             }
             // Highlight matching stop ids
-            if (hl) {
-                for (const stop of $('th.stop', this, true)) {
-                    stop.classList.remove('hl')
-                    if (stop.textContent === hl) stop.classList.add('hl')
-                }
+            const hid = request.cookie('home')
+            const did = request.cookie('dest')
+            for (const stop of $('th.stop', this, true)) {
+                stop.classList.remove('hl', 'fav')
+                if (stop.textContent === hl) stop.classList.add('hl')
+                else if (stop.textContent === hid || stop.textContent === did)
+                    stop.classList.add('fav')
             }
         }
     }

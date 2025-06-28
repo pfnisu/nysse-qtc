@@ -44,7 +44,7 @@ nav a {
 nav a,li a {
     text-decoration:none;
 }
-nav a:hover,.focus,.route,.zone,td span.hl {
+nav a:hover,.focus,.route,.zone,td span.hl,th.fav {
     background:#61dafb;
     color:#282c34;
 }
