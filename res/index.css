@@ -30,7 +30,7 @@ nav {
     padding:4px 4px 0 8px;
     background:#282c34;
 }
-nav a,.route:active,th.hl {
+nav a,.stop,.route:active {
     background:#484c54;
     color:#61dafb;
 }
@@ -44,9 +44,12 @@ nav a {
 nav a,li a {
     text-decoration:none;
 }
-nav a:hover,.focus,.route,.zone,td span.hl,th.fav {
+nav a:hover,.focus,.route,.zone,main tr .hl,.fav {
     background:#61dafb;
     color:#282c34;
+}
+.fav {
+    background:#cff3fd;
 }
 nav a.focus {
     z-index:1;
@@ -80,7 +83,7 @@ table a,th,input,button,li a,#alert p {
 table a,th,#alert p {
     color:var(--link);
 }
-table a:link:hover,span.route,.stop,.severe {
+table a:link:hover,span.route,.severe {
     background:var(--hover);
 }
 #alert {
