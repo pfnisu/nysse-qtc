@@ -14,10 +14,10 @@ export function Search(l) {
             const s2 = request.cookie('search2')
             $('div', this).innerHTML =
                 (s1 ?
-                    `<button data-h="${s1}">&#10226; ${s1}</button> ` :
+                    `<button data-h="${s1}">\u279d ${s1}</button> ` :
                     '') +
                 (s2 ?
-                    `<button data-h="${s2}">&#10226; ${s2}</button>` :
+                    `<button data-h="${s2}">\u279d ${s2}</button>` :
                     '')
         }
     }
