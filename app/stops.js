@@ -72,6 +72,7 @@ export function Stops(l) {
             const input = $('input', this)
             input.value = ''
             input.focus()
+            search.start(true)
         }
     }
 
