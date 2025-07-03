@@ -30,38 +30,35 @@ export function Search(l) {
             '</form><table><tbody></tbody></table>'
         $('form', this).addEventListener('click', async (ev) => {
             ev.preventDefault()
-            if (ev.target.tagName === 'BUTTON') {
-                const input = $('input', this).value
-                if (/^[0-9]{4}$/.test(input)) request.hash('stop', input)
-                else if (input || ev.target.dataset.h) {
-                    // Rotate search history cookies
-                    if(ev.target.id) {
-                        request.cookie('search2', request.cookie('search1'))
-                        request.cookie('search1', input)
-                    }
-                    const json = await request.http(env.uri, 'POST', {
-                        'query': `{stops(name:"${input || ev.target.dataset.h}")` +
-                            '{gtfsId name zoneId}}'
-                    }, env.key)
-                    let html = ''
-                    if (json?.data.stops.length) {
-                        // Exclude stops from other feeds
-                        const stops = json.data.stops.filter((s) =>
-                             s.gtfsId.startsWith(env.feed))
-                        // Sort results 1st by zone, 2nd by stop id
-                        stops.sort((a, b) =>
-                           a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
-                               a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
-                        for (const stop of stops) {
-                            const sid = stop.gtfsId.split(':')[1]
-                            html +=
-                                `<tr><th class="zone">${stop.zoneId}</th>` +
-                                    `<th class="stop">${sid}</th>` +
-                                    `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
-                        }
-                    } else html = `<tr><td>${json ? l.str.noStops : l.str.error}</td></tr>`
-                    $('tbody', this).innerHTML = html
+            const input = ev.target.id ? $('input', this).value : ev.target.dataset.h
+            if (/^[0-9]{4}$/.test(input)) request.hash('stop', input)
+            else if (input) {
+                // Rotate search history cookies
+                if (ev.target.id) {
+                    request.cookie('search2', request.cookie('search1'))
+                    request.cookie('search1', input)
                 }
+                const json = await request.http(env.uri, 'POST', {
+                    'query': `{stops(name:"${input}"){gtfsId name zoneId}}`
+                }, env.key)
+                let html = ''
+                if (json?.data.stops.length) {
+                    // Exclude stops from other feeds
+                    const stops = json.data.stops.filter((s) =>
+                        s.gtfsId.startsWith(env.feed))
+                    // Sort results 1st by zone, 2nd by stop id
+                    stops.sort((a, b) =>
+                        a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
+                            a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
+                    for (const stop of stops) {
+                        const sid = stop.gtfsId.split(':')[1]
+                        html +=
+                            `<tr><th class="zone">${stop.zoneId}</th>` +
+                                `<th class="stop">${sid}</th>` +
+                                `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
+                    }
+                } else html = `<tr><td>${json ? l.str.noStops : l.str.error}</td></tr>`
+                $('tbody', this).innerHTML = html
             }
         })
     }
