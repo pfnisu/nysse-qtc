@@ -1,4 +1,4 @@
-const re = (key) => new RegExp(`\\b${key}=([\\w]+)`)
+const re = (key) => new RegExp(`\\b${key}=([^;]+)`)
 
 export default {
     // cookie() Get or set cookie:
