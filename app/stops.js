@@ -67,13 +67,10 @@ export function Stops(l) {
 
     this.start = () => {
         if (title) document.title = `${title} | ${document.title}`
-        else {
-            // Handle focus for Search input
-            const input = $('input', this)
-            input.value = ''
-            input.focus()
-            search.start(true)
-        }
+        // Workaround to run when Search starts
+        // (problem in the ui load/start heuristic prevents
+        // correct lifecycle for singular child views)
+        else search.reset()
     }
 
     this.load = async () => {

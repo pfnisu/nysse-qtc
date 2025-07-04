@@ -7,19 +7,20 @@ export function Search(l) {
     // Static view, latest search persists
     ui.init(this, 'search')
 
-    this.start = (clear = false) => {
-        // Update search history only when previous search is cleared
-        if (clear) {
-            const s1 = request.cookie('search1')
-            const s2 = request.cookie('search2')
-            $('div', this).innerHTML =
-                (s1 ?
-                    `<button data-h="${s1}">\u279d ${s1}</button> ` :
-                    '') +
-                (s2 ?
-                    `<button data-h="${s2}">\u279d ${s2}</button>` :
-                    '')
-        }
+    // Clear previous input and update search history
+    this.reset = () => {
+        const input = $('input', this)
+        input.value = ''
+        input.focus()
+        const s1 = request.cookie('search1')
+        const s2 = request.cookie('search2')
+        $('div', this).innerHTML =
+            (s1 ?
+                `<button data-h="${s1}">\u279d ${s1}</button> ` :
+                '') +
+            (s2 ?
+                `<button data-h="${s2}">\u279d ${s2}</button>` :
+                '')
     }
 
     this.load = async () => {
