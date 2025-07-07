@@ -122,7 +122,7 @@ export function Timetable(l) {
         } else this.tree.innerHTML = `<h2>${json ? l.str.badStop : l.str.error}</h2>`
     }
 
-    // Update nav title and clear tree when lang changes
+    // Clear tree when lang changes (no unnecessary load)
     ui.listen('lang', () => this.tree.innerHTML = '')
 
     ui.listen('hl', highlight)
