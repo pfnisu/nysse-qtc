@@ -8,7 +8,7 @@ export function Search(l) {
     ui.init(this, 'search')
 
     // Clear previous input and update search history
-    this.reset = () => {
+    this.start = () => {
         const input = $('input', this)
         input.value = ''
         input.focus()
