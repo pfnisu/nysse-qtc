@@ -43,22 +43,25 @@ export function Search(l) {
                     'query': `{stops(name:"${input}"){gtfsId name zoneId}}`
                 }, env.key)
                 let html = ''
-                if (json?.data.stops.length) {
+                if (json) {
                     // Exclude stops from other feeds
                     const stops = json.data.stops.filter((s) =>
                         s.gtfsId.startsWith(env.feed))
-                    // Sort results 1st by zone, 2nd by stop id
-                    stops.sort((a, b) =>
-                        a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
-                            a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
-                    for (const stop of stops) {
-                        const sid = stop.gtfsId.split(':')[1]
-                        html +=
-                            `<tr><th class="zone">${stop.zoneId}</th>` +
-                                `<th class="stop">${sid}</th>` +
-                                `<td><a href="#p=1;stop=${sid}">${stop.name}</a></td></tr>`
-                    }
-                } else html = `<tr><td>${json ? l.str.noStops : l.str.error}</td></tr>`
+                    if (stops.length) {
+                        // Sort results 1st by zone, 2nd by stop id
+                        stops.sort((a, b) =>
+                            a.zoneId.charCodeAt() - b.zoneId.charCodeAt() ||
+                                a.gtfsId.split(':')[1] - b.gtfsId.split(':')[1])
+                        for (const stop of stops) {
+                            const sid = stop.gtfsId.split(':')[1]
+                            html +=
+                                `<tr><th class="zone">${stop.zoneId}</th>` +
+                                    `<th class="stop">${sid}</th>` +
+                                    `<td><a href="#p=1;stop=${sid}">` +
+                                        `${stop.name}</a></td></tr>`
+                        }
+                    } else html = `<tr><td>${l.str.noStops}</td></tr>`
+                } else html = `<tr><td>${l.str.error}</td></tr>`
                 $('tbody', this).innerHTML = html
             }
         })
