@@ -55,15 +55,17 @@ export default {
         // Switch to view that matches hash
         const setView = () => {
             for (const v of views) if (v._started) stop(v)
-            if (nav) {
-                nav.innerHTML = views.reduce((cat, v, i) =>
-                    `${cat}<a href="#${nav.id}=${i}">${v.name}</a>`, '')
-                const index = request.hash(nav.id) || 0
-                nav.children[index].className = 'focus'
-                window.scroll(0, 0)
-                if (title) document.title = `${views[index].name}${title}`
-                start(views[index], root)
-            } else start(views.find((v) => request.hash(v.name)) || views[0], root)
+            if (root.getClientRects().length) {
+                if (nav) {
+                    nav.innerHTML = views.reduce((cat, v, i) =>
+                        `${cat}<a href="#${nav.id}=${i}">${v.name}</a>`, '')
+                    const index = request.hash(nav.id) || 0
+                    nav.children[index].className = 'focus'
+                    window.scroll(0, 0)
+                    if (title) document.title = `${views[index].name}${title}`
+                    start(views[index], root)
+                } else start(views.find((v) => request.hash(v.name)) || views[0], root)
+            }
         }
         // Change view when history changes
         if (views.length > 1) window.addEventListener('popstate', setView)
