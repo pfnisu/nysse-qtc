@@ -42,7 +42,9 @@ export const $ = (query, target = null, all = false) => {
 
 export default {
     // bind()   Bind an array of views to a root element
-    // views    Array of unique objects constructed with init()
+    // views    Array of unique objects constructed with init().
+    //          With array length 1 the view isn't bound to a lifecycle,
+    //          except initial start().
     // root     Root element
     // nav      Optional navigation element for generating a menu:
     //          Required to have id (i.e. hash param) to allow multiple menus.
