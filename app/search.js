@@ -35,8 +35,9 @@ export function Search(l) {
             if (/^[0-9]{4}$/.test(input)) request.hash('stop', input)
             else if (input) {
                 // Rotate search history cookies
-                if (ev.target.id) {
-                    request.cookie('search2', request.cookie('search1'))
+                const prev = request.cookie('search1')
+                if (input !== prev) {
+                    request.cookie('search2', prev)
                     request.cookie('search1', input)
                 }
                 const json = await request.http(env.uri, 'POST', {
