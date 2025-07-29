@@ -29,11 +29,10 @@ import {Settings} from './settings.js'
     // and set cookie
     document.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('route')) {
-            const route = ev.target.textContent
-            ui.notify('hl', route)
-            request.cookie(
-                'highlight',
-                route === request.cookie('highlight') ? '' : route)
+            const prev = request.cookie('highlight')
+            const next = ev.target.textContent
+            ui.notify('hl', [prev, next])
+            request.cookie('highlight', next === prev ? '' : next)
         }
     }, true)
 })()

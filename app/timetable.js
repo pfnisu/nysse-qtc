@@ -54,11 +54,10 @@ export function Timetable(l) {
     // Toggle highlight for route shortNames matching cookie or
     // detail data from Event object
     const highlight = (ev) => {
-        const next = ev && ev.detail
-        const prev = request.cookie('highlight')
-        if (next || prev)
+        const [prev, next] = ev ? ev.detail : [request.cookie('highlight')]
+        if (prev || next)
             for (const s of $('span', this, true))
-                if (s.textContent === next || s.textContent === prev)
+                if (s.textContent === prev || s.textContent === next)
                     s.classList.toggle('hl')
     }
 
