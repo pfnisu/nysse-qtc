@@ -44,7 +44,7 @@ export default {
     // bind()   Bind an array of views to a root element
     // views    Array of unique objects constructed with init().
     //          With array length 1 the view isn't bound to a lifecycle,
-    //          except initial start().
+    //          except initial view.start().
     // root     Root element
     // nav      Optional navigation element for generating a menu:
     //          Required to have id (i.e. hash param) to allow multiple menus.
@@ -75,19 +75,19 @@ export default {
     },
 
     // init()   Construct a composable view
-    // target   Target object, required to have target.load().
-    //          Optional methods target.start() and target.stop()
-    //          are called on every view start/stop.
+    // view     Target object, required to have view.load().
+    //          Optional methods view.start() and view.stop()
+    //          are called on every corresponding view lifecycle stage.
     // name     Unique string used as view id and title in menu
     // live     Optional integer to construct a static or live view:
     //          default = null (static), 0 = on demand, >0 = interval (ms).
     //          Static view is loaded only once.
     // tag      Optional tagName to use as container element of target.tree:
     //          default = div.
-    init: (target, name, live = null, tag = 'div') => {
-        target.name = name
-        if (live !== null) target.live = live
-        target.tree = document.createElement(tag)
+    init: (view, name, live = null, tag = 'div') => {
+        view.name = name
+        if (live !== null) view.live = live
+        view.tree = document.createElement(tag)
     },
 
     // listen() Listen for notifications
