@@ -14,12 +14,16 @@ export function Search(l) {
         input.focus()
         const s1 = request.cookie('search1')
         const s2 = request.cookie('search2')
+        const s3 = request.cookie('search3')
         $('div', this).innerHTML =
             (s1 ?
                 `<button data-h="${s1}">\u279d ${s1}</button> ` :
                 '') +
             (s2 ?
-                `<button data-h="${s2}">\u279d ${s2}</button>` :
+                `<button data-h="${s2}">\u279d ${s2}</button> ` :
+                '') +
+            (s3 ?
+                `<button data-h="${s3}">\u279d ${s3}</button>` :
                 '')
     }
 
@@ -36,9 +40,13 @@ export function Search(l) {
             else if (input) {
                 // Rotate search history cookies
                 const prev = request.cookie('search1')
+                const prev2 = request.cookie('search2')
                 if (input !== prev) {
                     request.cookie('search2', prev)
-                    request.cookie('search1', input)
+                    if (input !== prev2) {
+                        request.cookie('search3', prev2)
+                        request.cookie('search1', input)
+                    } else request.cookie('search1', prev2)
                 }
                 const json = await request.http(env.uri, 'POST', {
                     'query': `{stops(name:"${input}"){gtfsId name zoneId}}`
