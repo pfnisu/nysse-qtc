@@ -25,7 +25,7 @@ import {Settings} from './settings.js'
         $('nav'),
         ' | ' + document.title)
 
-    // Notify route highlight events (in Arrivals, List and Stops)
+    // Notify route highlight events (from Arrivals, List or Timetable)
     // and set cookie
     document.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('route')) {
