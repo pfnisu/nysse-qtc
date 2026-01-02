@@ -4,8 +4,8 @@ import env from '../.env.js'
 
 // Realtime trip arrivals for a stop
 export function Arrivals(l) {
-    // Reload view every 30 sec
-    ui.init(this, 'arrivals', 30000, 'tbody')
+    // Reload view every 20 sec
+    ui.init(this, 'arrivals', 20000, 'tbody')
 
     this.load = async () => {
         const sid = request.hash('stop')
