@@ -40,9 +40,9 @@ export function Search(l) {
             else if (input) {
                 // Rotate search history cookies
                 const prev1 = request.cookie('search1')
-                const prev2 = request.cookie('search2')
                 if (input !== prev1) {
                     request.cookie('search1', input)
+                    const prev2 = request.cookie('search2')
                     request.cookie('search2', prev1)
                     if (input !== prev2) request.cookie('search3', prev2)
                 }
