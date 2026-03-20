@@ -32,6 +32,7 @@ export function Alerts(l) {
 
     this.load = async () => {
         let html = ''
+        // Get alerts in selected lang, stored in cookie
         const json = await request.http(env.uri, 'POST', {
             'query': `{alerts(feeds:"${env.feed}"){` +
                 `alertDescriptionText(language:"${request.cookie('lang') || 'fi'}")` +
@@ -42,9 +43,8 @@ export function Alerts(l) {
             const order = ['SEVERE', 'WARNING', 'INFO']
             json.data.alerts.sort((a, b) =>
                 order.indexOf(a.alertSeverityLevel) - order.indexOf(b.alertSeverityLevel))
-            // Generate alerts content for selected lang
+            // Generate contents from alerts with non-empty descriptions
             html = json.data.alerts.reduce((cat, a) => {
-                // Skip alerts with no description
                 return a.alertDescriptionText ?
                     `${cat}<p class="${a.alertSeverityLevel.toLowerCase()}">` +
                         `${a.alertDescriptionText}</p>` :
